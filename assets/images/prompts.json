@@ -1,0 +1,42 @@
+{
+  "tool": "Built-in ImageGen",
+  "use": "Illustrative educational website photos; not photographs of the actual school or students.",
+  "assets": [
+    {
+      "id": "library",
+      "web_asset": "library.webp",
+      "mobile_asset": "library-small.webp",
+      "prompt_brief": "Landscape 3:2, photorealistic editorial Omani education photography. Authentic Omani school clothing: white dishdasha and embroidered kumma. Natural hands, warm daylight, calm cream and muted sage environment, no text, logos, or watermarks. Omani teenage boy reading a hardcover book in a modern quiet school library. Candid, student placed towards right, architectural surroundings visible."
+    },
+    {
+      "id": "presentations",
+      "web_asset": "presentations.webp",
+      "mobile_asset": "presentations-small.webp",
+      "prompt_brief": "Landscape 3:2, photorealistic editorial Omani education photography. Authentic Omani school clothing: white dishdasha and embroidered kumma. Natural hands, warm daylight, calm cream and muted sage environment, no text, logos, or watermarks. Omani teacher guiding two teenage boys viewing a large screen showing Omani mountain coastline imagery."
+    },
+    {
+      "id": "play",
+      "web_asset": "play.webp",
+      "mobile_asset": "play-small.webp",
+      "prompt_brief": "Landscape 3:2, photorealistic editorial Omani education photography. Authentic Omani school clothing: white dishdasha and embroidered kumma. Natural hands, warm daylight, calm cream and muted sage environment, no text, logos, or watermarks. Two Omani teenage students collaboratively using a tablet with simple colorful geographic puzzle shapes."
+    },
+    {
+      "id": "booklets",
+      "web_asset": "booklets.webp",
+      "mobile_asset": "booklets-small.webp",
+      "prompt_brief": "Landscape 3:2, photorealistic editorial Omani education photography. Authentic Omani school clothing: white dishdasha and embroidered kumma. Natural hands, warm daylight, calm cream and muted sage environment, no text, logos, or watermarks. Pale oak library desk with open educational booklets containing landscape spreads and maps, a blue notebook, pencil and small olive branch."
+    },
+    {
+      "id": "school",
+      "web_asset": "school.webp",
+      "mobile_asset": "school-small.webp",
+      "prompt_brief": "Landscape 3:2, photorealistic editorial Omani education photography. Authentic Omani school clothing: white dishdasha and embroidered kumma. Natural hands, warm daylight, calm cream and muted sage environment, no text, logos, or watermarks. Group of Omani boys collaboratively assembling a clay mountain landscape model around a classroom desk."
+    },
+    {
+      "id": "oman-hero",
+      "web_asset": "oman-hero.webp",
+      "mobile_asset": "oman-hero-small.webp",
+      "prompt_brief": "Photorealistic fictional Omani stone village beside terraced date palm gardens and rugged Hajar mountains, warm morning daylight, calm cream and sage color palette, no people, text, logos or watermark."
+    }
+  ]
+}

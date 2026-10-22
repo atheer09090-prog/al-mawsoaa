@@ -1,0 +1,709 @@
+(() => {
+'use strict';
+
+/* ---------- Data ---------- */
+const SECTIONS = [
+  {id:'library', title:'المكتبة المرئية', desc:'فيديوهات ومواد مرئية تُقرّب موضوعات الموسوعة إلى الصف، وتفتح مساحة للمشاهدة والحوار.', short:'فيديوهات ومحتوى مرئي مرتبط بالموسوعة.', kind:'فيديو', label:'شاهد واكتشف'},
+  {id:'presentations', title:'العروض التقديمية', desc:'عروض تقديمية تعليمية تساعد على عرض موضوعات الموسوعة ومناقشتها بصريًا داخل الحصة.', short:'عروض تقديمية تعليمية قابلة للمعاينة والتنزيل.', kind:'عرض', label:'تصفّح العروض'},
+  {id:'play', title:'الألعاب التفاعلية', desc:'ألعاب وأنشطة رقمية تفاعلية تجعل استكشاف المعرفة تجربة مشاركة واكتشاف.', short:'ألعاب وأنشطة رقمية تفاعلية للتعلّم بالاكتشاف.', kind:'لعبة', label:'ابدأ التعلّم'},
+  {id:'student-presentations', title:'سفراء المعرفة', desc:'عروض شفوية يقدّمها طلاب المدرسة عن كنوز عُمان ومعارفها.', short:'عروض شفوية من طلاب المدرسة.', kind:'عرض شفهي', label:'شاهد عروض الطلاب'},
+  {id:'booklets', title:'المطويات والتحميلات', desc:'مواد تعريفية مختصرة للقراءة والمعاينة والتنزيل، مصممة لتكون قريبة من المتعلم.', short:'مطويات ومواد تعريفية للقراءة والتنزيل.', kind:'مطوية', label:'اقرأ المطويات'},
+  {id:'school', title:'الموسوعة في المدرسة', desc:'مساحة للورش والمبادرات والمسابقات والأفكار الصفية التي تفعّل موارد الموسوعة في المدرسة.', short:'أنشطة ومبادرات لتفعيل الموسوعة في البيئة المدرسية.', kind:'نشاط', label:'فعّل المعرفة'}
+];
+const STEPS = [
+  {lead:'اختر ما يناسب درسك:', sections:['library','presentations','booklets']},
+  {lead:'تعلّم وشارك المعرفة:', sections:['play','student-presentations']},
+  {lead:'امتد بالمعرفة إلى المدرسة:', sections:['school']}
+];
+const TITLE = 'الموسوعة العُمانية | معرفة تنبض بعُمان';
+const rawContent = window.OMANI_CONTENT;
+const dataOk = Array.isArray(rawContent);
+const byId = id => SECTIONS.find(s => s.id === id);
+const content = dataOk ? rawContent.filter(x => x && x.id && x.title && byId(x.section)) : [];
+
+/* ---------- Helpers ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ico = (name, cls = '') => `<svg class="ico ${cls}" aria-hidden="true"><use href="#i-${name}"/></svg>`;
+let nf; try { nf = new Intl.NumberFormat('ar-OM-u-nu-arab'); } catch { nf = new Intl.NumberFormat('ar'); }
+const num = n => nf.format(n);
+const countLabel = n => n === 0 ? 'لا مواد بعد' : n === 1 ? 'مادة واحدة' : n === 2 ? 'مادتان' : n <= 10 ? `${num(n)} مواد` : `${num(n)} مادة`;
+const norm = s => String(s ?? '').toLowerCase().replace(/[\u064B-\u0652\u0640]/g, '').replace(/[إأآ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه');
+const haystack = x => norm(`${x.title} ${x.description || ''} ${x.audience || ''} ${x.category || ''}`);
+const inSection = id => content.filter(x => x.section === id);
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch { return false; } }
+};
+const viewed = new Set(store.get('omani-viewed', []));
+const isNew = item => {
+  const t = Date.parse(item.added);
+  return Number.isFinite(t) && Date.now() - t >= 0 && Date.now() - t < 30 * 864e5;
+};
+
+/* ---------- Toast ---------- */
+let toastTimer;
+function toast(message, type = 'success') {
+  const t = $('#toast');
+  t.className = 'toast' + (type === 'error' ? ' is-error' : '');
+  t.innerHTML = `${ico(type === 'error' ? 'alert' : 'check')}<span>${esc(message)}</span>`;
+  requestAnimationFrame(() => t.classList.add('is-visible'));
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('is-visible'), 3000);
+}
+
+/* ---------- Home: facade ---------- */
+const sectionImage = id => `assets/images/${id}.webp`;
+const sectionImageSet = id => `srcset="assets/images/${id}-small.webp 640w, ${sectionImage(id)} 1280w" sizes="(max-width: 760px) 90vw, (max-width: 960px) 50vw, 40vw"`;
+const IMAGE_ALT = {library:'طالب عُماني يقرأ كتابًا في مكتبة المدرسة', presentations:'طالبة تعرض درسًا على الشاشة الصفية', play:'طالبات يتعلمن معًا باستخدام جهاز لوحي', 'student-presentations':'طالبة عُمانية تحمل كتاب الموسوعة بين رفوف المكتبة', booklets:'كتب الموسوعة العُمانية مفتوحة على طاولة القراءة', school:'طالبة تشرح موضوعًا من الموسوعة أمام شاشة الصف'};
+function bindImageReveal(root = document) {
+  $$('.hero-image, .collection-image, .resource-cover-image', root).forEach(img => {
+    const finish = () => img.classList.add(img.naturalWidth ? 'is-loaded' : 'is-failed');
+    if (img.complete) finish();
+    else {
+      img.addEventListener('load', finish, {once:true});
+      img.addEventListener('error', finish, {once:true});
+    }
+  });
+}
+function renderBays() {
+  $('#bays').innerHTML = SECTIONS.map((s, i) => `<article class="bay reveal" style="--i:${i}" role="group" aria-roledescription="شريحة" aria-label="${num(i + 1)} من ${num(SECTIONS.length)}: ${s.title}">
+    <a class="collection-card${s.id === 'school' ? ' collection-card-school' : ''}" href="#${s.id}" aria-label="${s.title} — ${s.label}"><div class="collection-photo${s.id === 'school' ? ' collection-photo-school' : ''}"><img class="collection-image" src="${sectionImage(s.id)}" ${sectionImageSet(s.id)} width="1280" height="720" alt="${IMAGE_ALT[s.id]}" loading="lazy" decoding="async"></div>
+    <div class="collection-body"><div class="collection-topline"><span class="collection-icon">${ico(s.id)}</span><span class="collection-kicker">القسم ${num(i + 1)}</span></div><div class="collection-text"><h3>${s.title}</h3><p>${s.short}</p></div><span class="collection-action"><span>اكتشف القسم</span><span class="collection-arrow">${ico('arrow')}</span></span></div></a></article>`).join('');
+  bindImageReveal($('#bays'));
+  initBaysCarousel();
+  $('#footerNav').innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${s.title}</a>`).join('');
+}
+
+function initBaysCarousel() {
+  const rail = $('#bays'), slides = $$('.bay', rail), dots = $('#bayDots');
+  const previous = $('#bayPrev'), next = $('#bayNext'), current = $('#bayCurrent'), total = $('#bayTotal');
+  if (!rail || !slides.length || !dots || !previous || !next) return;
+  const arabic = n => String(n).padStart(2, '0').replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+  let active = 0, frame = 0, hasActive = false;
+  dots.innerHTML = SECTIONS.map((section, i) => `<button class="carousel-dot" type="button" data-bay-index="${i}" aria-label="انتقل إلى ${section.title}" aria-current="${i === 0 ? 'true' : 'false'}"></button>`).join('');
+  total.textContent = arabic(slides.length);
+
+  const update = () => {
+    frame = 0;
+    const center = rail.getBoundingClientRect().left + rail.clientWidth / 2;
+    let closest = 0, distance = Infinity;
+    slides.forEach((slide, i) => {
+      const box = slide.getBoundingClientRect();
+      const d = Math.abs(box.left + box.width / 2 - center);
+      if (d < distance) { closest = i; distance = d; }
+    });
+    const changed = hasActive && closest !== active;
+    active = closest;
+    hasActive = true;
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('is-current', i === active);
+      if (changed && i === active && !reduceMotion()) {
+        slide.classList.remove('is-arriving');
+        void slide.offsetWidth;
+        slide.classList.add('is-arriving');
+        clearTimeout(slide.arrivalTimer);
+        slide.arrivalTimer = setTimeout(() => slide.classList.remove('is-arriving'), 1000);
+      }
+    });
+    [...dots.children].forEach((dot, i) => dot.setAttribute('aria-current', String(i === active)));
+    current.textContent = arabic(active + 1);
+    previous.disabled = active === 0;
+    next.disabled = active === slides.length - 1;
+  };
+  const goTo = index => {
+    const target = Math.max(0, Math.min(slides.length - 1, index));
+    slides[target].scrollIntoView({behavior: reduceMotion() ? 'auto' : 'smooth', block: 'nearest', inline: 'center'});
+  };
+  rail.addEventListener('scroll', () => { if (!frame) frame = requestAnimationFrame(update); }, {passive:true});
+  previous.addEventListener('click', () => goTo(active - 1));
+  next.addEventListener('click', () => goTo(active + 1));
+  dots.addEventListener('click', e => { const dot = e.target.closest('[data-bay-index]'); if (dot) goTo(Number(dot.dataset.bayIndex)); });
+  rail.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(active - 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(active + 1); }
+  });
+  update();
+}
+
+function renderRecent() {
+  // Resources already live in their own sections; keep the legacy container
+  // hidden so the home page does not repeat the same cards a second time.
+  const section = $('#recentSection');
+  if (section) section.hidden = true;
+}
+
+/* ---------- Stepper ---------- */
+function setStep(i, focus) {
+  const tabs = $$('.step-tab');
+  tabs.forEach((t, k) => { t.setAttribute('aria-selected', String(k === i)); t.tabIndex = k === i ? 0 : -1; });
+  $('#stepper').style.setProperty('--fill', i / (tabs.length - 1));
+  const panel = $('#stepPanel');
+  panel.setAttribute('aria-labelledby', `step-tab-${i}`);
+  panel.innerHTML = `<p>${STEPS[i].lead}</p><div class="step-chips">${STEPS[i].sections.map(id => {
+    const s = byId(id), n = inSection(id).length;
+    return `<a class="step-chip" href="#${id}">${ico(id)}${s.title}<small>${n ? countLabel(n) : 'قريبًا'}</small></a>`;
+  }).join('')}</div>`;
+  panel.classList.remove('is-swapping'); void panel.offsetWidth; panel.classList.add('is-swapping');
+  if (focus) tabs[i].focus();
+}
+function initStepper() {
+  const tabs = $$('.step-tab');
+  tabs.forEach((t, i) => t.addEventListener('click', () => setStep(i)));
+  $('.step-tabs').addEventListener('keydown', e => {
+    const cur = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
+    const next = {ArrowLeft:1, ArrowDown:1, ArrowRight:-1, ArrowUp:-1}[e.key];
+    if (next) { e.preventDefault(); setStep((cur + next + tabs.length) % tabs.length, true); }
+    if (e.key === 'Home') { e.preventDefault(); setStep(0, true); }
+    if (e.key === 'End') { e.preventDefault(); setStep(tabs.length - 1, true); }
+  });
+  setStep(0);
+}
+
+/* ---------- Resource cards ---------- */
+function actionLabel(i) {
+  const ext = (i.file || i.attachment || '').split('?')[0].split('.').pop().toLowerCase();
+  return i.section === 'play' ? 'ابدأ اللعب' : i.section === 'library' || (i.section === 'presentations' && ['mp4','webm','ogg'].includes(ext)) ? 'شاهد الفيديو' : i.section === 'presentations' ? 'عاين العرض'
+    : i.section === 'booklets' ? 'عاين المادة' : (i.attachment ? 'عرض المرفق' : 'تفاصيل النشاط');
+}
+function resourceCard(item, i = 0) {
+  const s = byId(item.section);
+  const seen = viewed.has(item.id);
+  const cover = item.cover
+    ? `<img class="resource-cover-image" src="${esc(item.cover)}" alt="غلاف ${esc(item.title)}" loading="lazy">`
+    : `<div class="resource-cover" aria-hidden="true">${ico(s.id)}</div>`;
+  const badges = `<span class="badge">${s.kind}</span>${seen ? `<span class="badge badge-seen">${ico('check')} اطّلعت</span>` : isNew(item) ? '<span class="badge badge-new">جديد</span>' : ''}`;
+  const steps = item.section === 'school' && item.steps?.length
+    ? `<details><summary>خطوات التنفيذ</summary><ol>${item.steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol></details>` : '';
+  return `<article class="resource-card" data-section="${s.id}" style="--i:${i}"><div class="resource-cover-wrap">${cover}<div class="badges">${badges}</div></div>
+    <div class="resource-body"><div class="resource-meta">${esc(item.category || s.title)}${item.audience ? ` · ${esc(item.audience)}` : ''}</div>
+    <h3>${esc(item.title)}</h3><p>${esc(item.description || '')}</p>${steps}
+    <button class="resource-action" type="button" data-resource="${esc(item.id)}">${actionLabel(item)} ${ico('arrow')}</button></div></article>`;
+}
+
+/* ---------- Category page ---------- */
+const state = {section: null, q: '', cat: '', sort: 'default'};
+function sectionItems() {
+  let items = inSection(state.section.id);
+  if (state.cat) items = items.filter(x => x.category === state.cat);
+  const q = norm(state.q.trim());
+  if (q) items = items.filter(x => haystack(x).includes(q));
+  if (state.sort === 'new') items = [...items].sort((a, b) => (b.added || '').localeCompare(a.added || ''));
+  if (state.sort === 'alpha') items = [...items].sort((a, b) => a.title.localeCompare(b.title, 'ar'));
+  return items;
+}
+function renderSection(animate = false) {
+  const s = state.section, all = inSection(s.id), items = sectionItems();
+  const cats = [...new Set(all.map(x => x.category).filter(Boolean))];
+  const toolbar = $('#categoryToolbar');
+  toolbar.hidden = all.length <= 6;
+  const chips = $('#chips');
+  chips.hidden = cats.length < 2;
+  chips.innerHTML = cats.length < 2 ? '' : ['', ...cats].map(c => `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="${c === state.cat}">${c ? esc(c) : 'الكل'}</button>`).join('');
+  $('#resultCount').textContent = toolbar.hidden ? '' : (items.length ? countLabel(items.length) : 'لا نتائج');
+  $('#categoryCount').textContent = all.length ? countLabel(all.length) : '';
+  // progress
+  const seenN = all.filter(x => viewed.has(x.id)).length;
+  $('#progressWrap').hidden = !all.length;
+  if (all.length) {
+    $('#progressLabel').textContent = `اطّلعت على ${num(seenN)} من ${num(all.length)}`;
+    const pct = Math.round(seenN / all.length * 100);
+    $('#progressBar').setAttribute('aria-valuenow', pct);
+    $('#progressBar').style.setProperty('--v', seenN / all.length);
+    $('#resetProgress').hidden = !seenN;
+  }
+  // grid + empty states
+  const grid = $('#categoryGrid');
+  grid.classList.toggle('is-entering', animate);
+  grid.innerHTML = items.map((x, i) => resourceCard(x, i)).join('');
+  bindImageReveal(grid);
+  const empty = $('#emptyState');
+  empty.hidden = items.length > 0;
+  if (!items.length) {
+    const actions = $('#emptyActions');
+    if (!dataOk) {
+      $('#emptyTitle').textContent = 'تعذّر تحميل المحتوى';
+      $('#emptyText').textContent = 'لم نتمكن من قراءة بيانات الموارد. أعد تحميل الصفحة وحاول مجددًا.';
+      actions.innerHTML = '<button class="button button-primary" type="button" data-reload>أعد المحاولة</button>';
+    } else if (all.length) {
+      $('#emptyTitle').textContent = 'لا توجد نتائج مطابقة';
+      $('#emptyText').textContent = 'جرّب كلمات أخرى أو أزل التصفية لعرض كل مواد القسم.';
+      actions.innerHTML = '<button class="button button-ghost" type="button" data-clear>إزالة التصفية</button>';
+    } else {
+      $('#emptyTitle').textContent = 'قريبًا في هذا القسم';
+      $('#emptyText').textContent = 'نعمل على تجهيز موارده التعليمية.';
+      actions.innerHTML = `<a class="button button-ghost" href="#collections">تصفّح الأقسام ${ico('arrow')}</a>`;
+    }
+  }
+}
+function renderPager() {
+  const i = SECTIONS.indexOf(state.section), n = SECTIONS.length;
+  const prev = SECTIONS[(i - 1 + n) % n], next = SECTIONS[(i + 1) % n];
+  $('#sectionPager').innerHTML =
+    `<a class="pager-link prev" href="#${prev.id}">${ico('arrow', 'flip')}<span><small>القسم السابق</small><b>${prev.title}</b></span></a>` +
+    `<a class="pager-link next" href="#${next.id}"><span><small>القسم التالي</small><b>${next.title}</b></span>${ico('arrow')}</a>`;
+}
+function showSection(s) {
+  const changed = state.section !== s;
+  if (changed) {
+    state.section = s; state.q = ''; state.cat = ''; state.sort = 'default';
+    $('#searchInput').value = ''; $('#sortSelect').value = 'default';
+    $('#categoryTitle').textContent = s.title;
+    $('#categoryDescription').textContent = s.short;
+    $('#categoryBadge').innerHTML = ico(s.id);
+    renderSection(true); renderPager();
+  }
+  return changed;
+}
+
+/* ---------- Viewer ---------- */
+const viewer = $('#viewer');
+let openItem = null;
+function mediaFrame(el, label = 'جارٍ التحميل…') {
+  const wrap = document.createElement('div');
+  wrap.className = 'media-frame';
+  const load = document.createElement('div');
+  load.className = 'media-loading'; load.textContent = label;
+  const slow = setTimeout(() => { load.textContent = 'ما زال التحميل جاريًا…'; }, 8000);
+  const done = () => { clearTimeout(slow); load.remove(); };
+  wrap.append(el, load);
+  return {wrap, done};
+}
+function showFileError(host, url, title) {
+  const box = document.createElement('div');
+  box.className = 'viewer-placeholder';
+  box.innerHTML = `${ico('alert')}<p>تعذّر فتح «${esc(title)}» أو لم يُضف ملفها بعد.</p>${url ? `<a href="${esc(url)}" download>محاولة تنزيل الملف</a>` : ''}`;
+  host.querySelector('.media-frame')?.remove();
+  host.append(box);
+}
+function openResource(item, silent = false) {
+  const s = byId(item.section), host = $('#viewerContent');
+  openItem = item;
+  host.replaceChildren();
+  $('#viewerKind').textContent = s.title;
+  const download = $('#viewerDownload');
+  download.hidden = true;
+  const h = document.createElement('h2'); h.id = 'viewerTitle'; h.textContent = item.title;
+  host.append(h);
+  const metaText = [item.category, item.audience].filter(Boolean).join(' · ');
+  if (metaText) { const m = document.createElement('p'); m.className = 'viewer-meta'; m.textContent = metaText; host.append(m); }
+  if (item.description) { const p = document.createElement('p'); p.textContent = item.description; host.append(p); }
+  if (item.section === 'school' && item.steps?.length) {
+    const ol = document.createElement('ol');
+    item.steps.forEach(t => { const li = document.createElement('li'); li.textContent = t; ol.append(li); });
+    host.append(ol);
+  }
+  const source = item.file || item.attachment;
+  const ext = source ? source.split('?')[0].split('.').pop().toLowerCase() : '';
+  if (item.section === 'play' && (item.embed || item.url)) {
+    if (item.embed) {
+      const f = document.createElement('iframe');
+      f.title = item.title; f.allow = 'fullscreen; autoplay'; f.allowFullscreen = true; f.className = 'is-game';
+      const {wrap, done} = mediaFrame(f, 'جارٍ تحميل اللعبة…');
+      f.addEventListener('load', done); f.src = item.embed;
+      host.append(wrap);
+      const hint = document.createElement('p'); hint.className = 'viewer-hint';
+      hint.innerHTML = `إذا لم تظهر اللعبة، <a href="${esc(item.url || item.embed)}" target="_blank" rel="noopener">افتحها في نافذة جديدة</a>.`;
+      host.append(hint);
+    } else {
+      const c = document.createElement('div'); c.className = 'file-card';
+      c.innerHTML = `${ico('external')}<span>هذه اللعبة تُفتح في موقعها الخارجي. <a href="${esc(item.url)}" target="_blank" rel="noopener">فتح اللعبة في نافذة جديدة</a></span>`;
+      host.append(c);
+    }
+    if (item.file) {
+      const c = document.createElement('div'); c.className = 'file-card resource-download';
+      c.innerHTML = `${ico('download')}<span>تفضّلين تشغيلها من PowerPoint؟ <a href="${esc(item.file)}" download>تنزيل ملف اللعبة</a></span>`;
+      host.append(c);
+    }
+  } else if (item.url) {
+    const c = document.createElement('div'); c.className = 'file-card';
+    c.innerHTML = `${ico('external')}<span>مطوية تفاعلية على الويب. <a href="${esc(item.url)}" target="_blank" rel="noopener">فتح المطوية في نافذة جديدة</a></span>`;
+    host.append(c);
+  } else if (source) {
+    download.href = item.file || source; download.hidden = false;
+    if ((item.preview || source).split('?')[0].toLowerCase().endsWith('.pdf')) {
+      const f = document.createElement('iframe'); f.title = `معاينة ${item.title}`;
+      const {wrap, done} = mediaFrame(f, 'جارٍ تجهيز المعاينة…');
+      f.addEventListener('load', done); f.src = item.preview || source; host.append(wrap);
+    } else if (['png','jpg','jpeg','webp','gif','svg'].includes(ext)) {
+      const im = document.createElement('img'); im.alt = item.title;
+      const {wrap, done} = mediaFrame(im, 'جارٍ تحميل الصورة…');
+      im.addEventListener('load', done); im.addEventListener('error', () => showFileError(host, source, item.title), {once: true});
+      im.src = source; host.append(wrap);
+    } else if (['mp4','webm','ogg'].includes(ext)) {
+      const v = document.createElement('video'); v.controls = true; v.playsInline = true; v.preload = 'metadata';
+      if (item.cover) v.poster = item.cover;
+      const {wrap, done} = mediaFrame(v, 'جارٍ تحميل الفيديو…');
+      v.addEventListener('loadeddata', done);
+      v.addEventListener('error', () => showFileError(host, source, item.title), {once: true});
+      v.src = source; host.append(wrap);
+    } else {
+      const c = document.createElement('div'); c.className = 'file-card';
+      c.innerHTML = `${ico('download')}<span>هذا الملف يُنزَّل إلى جهازك. <a href="${esc(source)}" download>تنزيل الملف</a></span>`;
+      host.append(c);
+    }
+  } else if (item.section !== 'school' && item.section !== 'play') {
+    showFileError(host, null, item.title);
+  }
+  if (!viewed.has(item.id)) {
+    viewed.add(item.id); store.set('omani-viewed', [...viewed]);
+    refreshViewedUI();
+  }
+  if (!viewer.open) viewer.showModal();
+  viewer.scrollTop = 0;
+  if (!silent) history.replaceState(null, '', `#${item.section}/${encodeURIComponent(item.id)}`);
+}
+function refreshViewedUI() {
+  if (state.section) renderSection(false);
+  renderRecent();
+}
+function closeViewer() {
+  if (viewer.open) viewer.close();
+}
+viewer.addEventListener('close', () => {
+  if (viewer.open) return; // a stale close event after the viewer was reopened
+  $('#viewerContent').replaceChildren(); // stops video / iframes
+  if (openItem) {
+    const {rid} = parseHash();
+    if (rid) history.replaceState(null, '', `#${openItem.section}`);
+    openItem = null;
+  }
+});
+viewer.addEventListener('click', e => { if (e.target === viewer) closeViewer(); });
+$('#viewerClose').addEventListener('click', closeViewer);
+$('#copyLink').addEventListener('click', async () => {
+  if (!openItem) return;
+  const url = `${location.origin}${location.pathname}#${openItem.section}/${encodeURIComponent(openItem.id)}`;
+  try {
+    await navigator.clipboard.writeText(url);
+    toast('تم نسخ رابط المادة');
+  } catch {
+    try {
+      const ta = document.createElement('textarea'); ta.value = url; ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.append(ta); ta.select();
+      const ok = document.execCommand('copy'); ta.remove();
+      ok ? toast('تم نسخ رابط المادة') : toast('تعذّر النسخ. انسخ الرابط من شريط العنوان.', 'error');
+    } catch { toast('تعذّر النسخ. انسخ الرابط من شريط العنوان.', 'error'); }
+  }
+});
+
+/* ---------- Search palette ---------- */
+const palette = $('#palette'), pInput = $('#paletteInput'), pList = $('#paletteList');
+let pItems = [], pIndex = 0;
+function renderPalette() {
+  const q = norm(pInput.value.trim());
+  const secs = SECTIONS.filter(s => !q || norm(`${s.title} ${s.short} ${s.desc}`).includes(q));
+  const res = q ? content.filter(x => haystack(x).includes(q)).slice(0, 8)
+    : [...content].sort((a, b) => (b.added || '').localeCompare(a.added || '')).slice(0, 3);
+  pItems = [
+    ...secs.map(s => ({type: 'section', hash: s.id, icon: s.id, title: s.title, sub: s.short})),
+    ...res.map(x => ({type: 'item', hash: `${x.section}/${encodeURIComponent(x.id)}`, icon: x.section, title: x.title, sub: `${byId(x.section).title}${x.category ? ' · ' + x.category : ''}`}))
+  ];
+  pIndex = 0;
+  if (!pItems.length) { pList.innerHTML = `<li class="palette-empty" role="presentation">لا توجد نتائج لـ «${esc(pInput.value.trim())}»</li>`; pInput.removeAttribute('aria-activedescendant'); return; }
+  let html = '', last = '';
+  pItems.forEach((it, i) => {
+    const g = it.type === 'section' ? 'الأقسام' : (q ? 'المواد' : 'أحدث المواد');
+    if (g !== last) { html += `<li class="palette-group" role="presentation">${g}</li>`; last = g; }
+    html += `<li class="palette-item" role="option" id="pal-${i}" data-i="${i}" aria-selected="${i === 0}">${ico(it.icon)}<span><b>${esc(it.title)}</b><small>${esc(it.sub)}</small></span></li>`;
+  });
+  pList.innerHTML = html;
+  pInput.setAttribute('aria-activedescendant', 'pal-0');
+}
+function movePalette(d) {
+  if (!pItems.length) return;
+  pIndex = (pIndex + d + pItems.length) % pItems.length;
+  $$('.palette-item', pList).forEach((el, i) => el.setAttribute('aria-selected', String(i === pIndex)));
+  const el = $(`#pal-${pIndex}`); pInput.setAttribute('aria-activedescendant', `pal-${pIndex}`); el.scrollIntoView({block: 'nearest'});
+}
+function chooseItem(i) {
+  const it = pItems[i]; if (!it) return;
+  palette.close();
+  goTo('#' + it.hash);
+}
+function openPalette() {
+  if (palette.open) return;
+  closeMenu();
+  pInput.value = ''; renderPalette(); palette.showModal(); pInput.focus();
+}
+pInput.addEventListener('input', renderPalette);
+pInput.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown') { e.preventDefault(); movePalette(1); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); movePalette(-1); }
+  else if (e.key === 'Enter') { e.preventDefault(); chooseItem(pIndex); }
+});
+pList.addEventListener('click', e => { const li = e.target.closest('.palette-item'); if (li) chooseItem(+li.dataset.i); });
+pList.addEventListener('mousemove', e => { const li = e.target.closest('.palette-item'); if (li && +li.dataset.i !== pIndex) movePalette(+li.dataset.i - pIndex); });
+palette.addEventListener('click', e => { if (e.target === palette) palette.close(); });
+$('#openSearch').addEventListener('click', openPalette);
+$('#paletteClose').addEventListener('click', () => palette.close());
+document.addEventListener('click', e => { if (e.target.closest('[data-open-search]')) openPalette(); });
+document.addEventListener('keydown', e => {
+  const typing = e.target.closest?.('input, textarea, select, [contenteditable]');
+  if (((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') || (e.key === '/' && !typing && !e.ctrlKey && !e.metaKey && !e.altKey)) {
+    e.preventDefault(); openPalette();
+  }
+});
+
+/* ---------- Routing ---------- */
+function parseHash() {
+  let raw = 'home';
+  try { raw = decodeURIComponent(location.hash.slice(1) || 'home'); } catch { /* malformed hash */ }
+  const [page, ...rest] = raw.split('/');
+  return {page, rid: rest.join('/')};
+}
+function goTo(hash) {
+  if (location.hash === hash) route(); else location.hash = hash;
+}
+function closeMenu() {
+  $('#primaryNav').classList.remove('is-open');
+  $('#menuToggle').setAttribute('aria-expanded', 'false');
+  $('#menuToggle').setAttribute('aria-label', 'فتح قائمة الأقسام');
+}
+function route() {
+  const {page, rid} = parseHash();
+  const section = byId(page);
+  const homeAnchors = ['home', 'about', 'collections'];
+  const isHome = !section;
+  $('#siteHeader').dataset.view = isHome ? 'home' : 'category';
+  if (!rid && viewer.open) viewer.close();
+  $$('[data-page]').forEach(x => x.classList.toggle('is-active', x.dataset.page === (isHome ? 'home' : 'category')));
+  $$('.primary-nav a').forEach(a => {
+    const cur = a.dataset.route === (section ? section.id : 'home');
+    if (cur) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+  });
+  closeMenu();
+  if (section) {
+    const changed = showSection(section);
+    document.title = `${section.title} | الموسوعة العُمانية`;
+    if (changed) {
+      scrollTo({top: 0, behavior: reduceMotion() ? 'auto' : 'smooth'});
+      $('#categoryTitle').focus({preventScroll: true});
+    }
+    if (rid) {
+      const item = content.find(x => x.id === rid);
+      if (item) openResource(item, true);
+      else { toast('تعذّر العثور على المادة المطلوبة', 'error'); history.replaceState(null, '', `#${section.id}`); }
+    }
+  } else {
+    state.section = null;
+    document.title = TITLE;
+    const anchor = homeAnchors.includes(page) && page !== 'home' ? document.getElementById(page) : null;
+    if (anchor) anchor.scrollIntoView({behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start'});
+    else scrollTo({top: 0, behavior: reduceMotion() ? 'auto' : 'smooth'});
+  }
+}
+
+/* ---------- Intro (stays until the visitor enters) ---------- */
+function intro() {
+  const splash = $('#splash'), root = document.documentElement, reduce = reduceMotion();
+  let seen = false;
+  try { seen = !!sessionStorage.getItem('omani-intro-seen-v2') && !/[?&]intro\b/.test(location.search); } catch { /* storage blocked */ }
+  const deepLink = location.hash.length > 1 && location.hash !== '#home';
+  if (seen || deepLink) { splash.classList.add('is-hidden'); root.classList.remove('splash-on'); return; }
+  root.classList.add('splash-on');
+  const under = $$('.site-header, main, .site-footer, .skip-link');
+  under.forEach(el => { el.inert = true; });
+  $('#enterSite').focus({preventScroll: true});
+  let leaving = false;
+  const leave = () => {
+    if (leaving) return; leaving = true;
+    try { sessionStorage.setItem('omani-intro-seen-v2', '1'); } catch { /* ignore */ }
+    splash.style.removeProperty('--dy'); splash.classList.remove('is-dragging'); splash.classList.add('is-leaving');
+    under.forEach(el => { el.inert = false; });
+    setTimeout(() => { splash.classList.add('is-hidden'); root.classList.remove('splash-on'); scrollTo(0, 0); $('.hero-title').setAttribute('tabindex', '-1'); $('.hero-title').focus({preventScroll:true}); }, reduce ? 0 : 860);
+  };
+  $('#enterSite').addEventListener('click', leave);
+  splash.addEventListener('wheel', e => { if (e.deltaY > 12) { e.preventDefault(); leave(); } }, {passive: false});
+  let y0 = null, dy = 0, ts = 0;
+  splash.addEventListener('pointerdown', e => { if (e.target.closest('button')) return; y0 = e.clientY; dy = 0; ts = e.timeStamp; splash.setPointerCapture(e.pointerId); splash.classList.add('is-dragging'); });
+  splash.addEventListener('pointermove', e => { if (y0 === null) return; dy = Math.max(0, y0 - e.clientY); splash.style.setProperty('--dy', -Math.min(dy, innerHeight * .6) + 'px'); });
+  const end = e => { if (y0 === null) return; const v = dy / Math.max(1, e.timeStamp - ts); y0 = null; splash.classList.remove('is-dragging'); if (dy > 90 || (dy > 30 && v > .5)) leave(); else splash.style.removeProperty('--dy'); };
+  splash.addEventListener('pointerup', end); splash.addEventListener('pointercancel', end);
+}
+
+/* ---------- Scroll effects ---------- */
+function initScroll() {
+  const header = $('#siteHeader'), bar = $('#scrollProgress'), top = $('#toTop');
+  let ticking = false;
+  const update = () => {
+    const y = scrollY, max = document.documentElement.scrollHeight - innerHeight;
+    header.classList.toggle('is-scrolled', y > 8);
+    bar.style.setProperty('--p', max > 0 ? Math.min(1, y / max) : 0);
+    top.hidden = y < 700;
+    ticking = false;
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, {passive: true});
+  top.addEventListener('click', () => scrollTo({top: 0, behavior: reduceMotion() ? 'auto' : 'smooth'}));
+  update();
+}
+function initReveal() {
+  const els = $$('.reveal');
+  if (!('IntersectionObserver' in window) || reduceMotion()) { els.forEach(e => e.classList.add('is-visible')); return; }
+  const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } }), {threshold: .12});
+  els.forEach(e => io.observe(e));
+}
+function initSchoolGallery() {
+  const gallery = $('#schoolGallery'), viewport = $('#galleryViewport'), track = $('#galleryTrack');
+  const pause = $('#galleryPause'), previous = $('#galleryPrev'), next = $('#galleryNext');
+  const cards = track ? $$('.gallery-photo', track) : [];
+  const dialog = $('#galleryLightbox'), dialogImage = $('#galleryLightboxImage'), dialogCaption = $('#galleryLightboxCaption');
+  const dialogClose = $('#galleryLightboxClose'), dialogPrev = $('#galleryLightboxPrev'), dialogNext = $('#galleryLightboxNext');
+  if (!gallery || !viewport || !track || !cards.length) return;
+  const reduced = reduceMotion();
+  let raf = 0, lastTime = 0, direction = 1, inView = !('IntersectionObserver' in window);
+  let userPaused = reduced, focusPaused = false, hovering = false, holdUntil = 0, selected = 0, opener = null;
+  const speed = 26;
+  const maxScroll = () => Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+  const updateControls = () => {
+    if (previous) previous.disabled = viewport.scrollLeft <= 1;
+    if (next) next.disabled = viewport.scrollLeft >= maxScroll() - 1;
+  };
+  const shouldPause = () => reduced || userPaused || focusPaused || hovering || !inView || document.hidden || Boolean(dialog?.open);
+  const stop = () => { if (raf) cancelAnimationFrame(raf); raf = 0; lastTime = 0; };
+  const tick = now => {
+    raf = 0;
+    if (shouldPause()) return;
+    const dt = lastTime ? Math.min(48, now - lastTime) : 0;
+    lastTime = now;
+    const max = maxScroll();
+    if (max > 0 && now >= holdUntil) {
+      let position = viewport.scrollLeft + direction * speed * dt / 1000;
+      if (position >= max) { position = max; direction = -1; holdUntil = now + 650; }
+      else if (position <= 0) { position = 0; direction = 1; holdUntil = now + 650; }
+      viewport.scrollLeft = position;
+      updateControls();
+    }
+    raf = requestAnimationFrame(tick);
+  };
+  const syncMotion = () => {
+    if (shouldPause()) stop();
+    else if (!raf) raf = requestAnimationFrame(tick);
+  };
+  const pauseForInteraction = (duration = 1200) => {
+    stop();
+    holdUntil = performance.now() + duration;
+    setTimeout(syncMotion, duration + 30);
+  };
+  const nudge = (directionStep, e) => {
+    if (e?.detail > 0) focusPaused = false;
+    const distance = Math.max(220, Math.round(viewport.clientWidth * .68)) * directionStep;
+    pauseForInteraction(950);
+    viewport.scrollBy({left: distance, behavior: reduced ? 'auto' : 'smooth'});
+  };
+  previous?.addEventListener('click', e => nudge(-1, e));
+  next?.addEventListener('click', e => nudge(1, e));
+  viewport.addEventListener('scroll', updateControls, {passive:true});
+  pause?.addEventListener('click', e => {
+    userPaused = !userPaused;
+    if (e.detail > 0) focusPaused = false;
+    pause.setAttribute('aria-pressed', String(userPaused));
+    pause.setAttribute('aria-label', userPaused ? 'استأنف حركة الصور' : 'أوقف حركة الصور');
+    pause.querySelector('span').textContent = userPaused ? 'تشغيل العرض' : 'إيقاف العرض';
+    pause.querySelector('svg').innerHTML = userPaused
+      ? '<path d="m9 5 10 7-10 7z" fill="currentColor"/>'
+      : '<path d="M8 5v14M16 5v14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
+    syncMotion();
+  });
+  gallery.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') { hovering = true; syncMotion(); } });
+  gallery.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') { hovering = false; syncMotion(); } });
+  gallery.addEventListener('focusin', () => { focusPaused = true; syncMotion(); });
+  gallery.addEventListener('focusout', () => setTimeout(() => { focusPaused = gallery.contains(document.activeElement); syncMotion(); }, 0));
+  viewport.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') { focusPaused = false; pauseForInteraction(1500); } }, {passive:true});
+  viewport.addEventListener('pointerup', e => { if (e.pointerType !== 'mouse') setTimeout(() => { focusPaused = false; syncMotion(); }, 1500); }, {passive:true});
+  viewport.addEventListener('wheel', () => pauseForInteraction(1400), {passive:true});
+  document.addEventListener('visibilitychange', syncMotion);
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => { inView = entries[0].isIntersecting; syncMotion(); }, {threshold:.12});
+    observer.observe(gallery);
+  }
+  cards.forEach((card, i) => card.addEventListener('click', () => {
+    if (!dialog || !dialogImage || !dialogCaption || typeof dialog.showModal !== 'function') return;
+    selected = i; opener = card;
+    const image = $('img', card);
+    dialogImage.src = image.currentSrc || image.src;
+    dialogImage.alt = image.alt;
+    dialogCaption.textContent = card.dataset.caption || image.alt;
+    dialog.showModal();
+    dialogClose?.focus();
+    syncMotion();
+  }));
+  const updateDialog = step => {
+    selected = (selected + step + cards.length) % cards.length;
+    const image = $('img', cards[selected]);
+    dialogImage.src = image.currentSrc || image.src;
+    dialogImage.alt = image.alt;
+    dialogCaption.textContent = cards[selected].dataset.caption || image.alt;
+  };
+  dialogPrev?.addEventListener('click', () => updateDialog(-1));
+  dialogNext?.addEventListener('click', () => updateDialog(1));
+  dialogClose?.addEventListener('click', () => dialog?.close());
+  dialog?.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
+  dialog?.addEventListener('close', () => {
+    const restore = opener;
+    opener = null;
+    restore?.focus({preventScroll:true});
+    requestAnimationFrame(() => { focusPaused = false; syncMotion(); });
+  });
+  updateControls();
+  syncMotion();
+}
+
+/* ---------- Boot ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  $('#year').textContent = new Date().getFullYear();
+  if (!dataOk) $('#dataError').hidden = false;
+  renderBays(); renderRecent(); bindImageReveal(document); initStepper();
+  intro(); initScroll(); initReveal(); initSchoolGallery();
+  route();
+  addEventListener('hashchange', route);
+
+  // menu
+  const toggle = $('#menuToggle'), nav = $('#primaryNav');
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'إغلاق قائمة الأقسام' : 'فتح قائمة الأقسام');
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('is-open')) { closeMenu(); toggle.focus(); } });
+  document.addEventListener('click', e => { if (nav.classList.contains('is-open') && !e.target.closest('#primaryNav, #menuToggle')) closeMenu(); });
+
+  // resources (event delegation for both grids)
+  const open = e => {
+    const b = e.target.closest('[data-resource]');
+    if (b) { const item = content.find(x => x.id === b.dataset.resource); if (item) openResource(item); }
+  };
+  $('#categoryGrid').addEventListener('click', open);
+  $('#recentGrid').addEventListener('click', open);
+  [$('#categoryGrid'), $('#recentGrid')].forEach(grid => grid.addEventListener('error', e => {
+    if (e.target.matches('.resource-cover-image')) {
+      const ph = document.createElement('div');
+      ph.className = 'resource-cover'; ph.setAttribute('aria-hidden', 'true');
+      ph.innerHTML = ico(e.target.closest('.resource-card')?.dataset.section || 'library');
+      e.target.replaceWith(ph);
+    }
+  }, true));
+
+  // toolbar
+  $('#searchInput').addEventListener('input', e => { state.q = e.target.value; renderSection(false); });
+  $('#sortSelect').addEventListener('change', e => { state.sort = e.target.value; renderSection(true); });
+  $('#chips').addEventListener('click', e => {
+    const b = e.target.closest('[data-cat]'); if (!b) return;
+    state.cat = b.dataset.cat; renderSection(true);
+  });
+  $('#emptyState').addEventListener('click', e => {
+    if (e.target.closest('[data-clear]')) { state.q = ''; state.cat = ''; $('#searchInput').value = ''; renderSection(true); }
+    if (e.target.closest('[data-reload]')) location.reload();
+  });
+  $('#resetProgress').addEventListener('click', () => {
+    const ids = new Set(inSection(state.section.id).map(x => x.id));
+    ids.forEach(id => viewed.delete(id));
+    store.set('omani-viewed', [...viewed]);
+    refreshViewedUI();
+    toast('تم مسح سجل الاطّلاع لهذا القسم');
+  });
+  $('#retryData').addEventListener('click', () => location.reload());
+});
+})();
