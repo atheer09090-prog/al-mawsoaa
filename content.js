@@ -10,6 +10,7 @@ window.OMANI_CONTENT = [
     "title": "مجلس الشورى",
     "description": "حلقة بودكاست مصوّرة من تقديم سارة المطروشي، وضيفة البرنامج منى أحمد الكثيري.",
     "cover": "assets/content/podcasts/majlis-al-shura.png",
+    "coverCrop": {"zoom": 1.5, "y": 48},
     "file": "assets/content/podcasts/majlis-al-shura.mp4",
     "category": "المجتمع العُماني",
     "added": "2026-10-24"
@@ -20,6 +21,7 @@ window.OMANI_CONTENT = [
     "title": "صباحية العيد",
     "description": "أجواء العيد… فرحة تتجدد. حلقة بودكاست مصوّرة من تقديم سارة المطروشي، وضيفة البرنامج وفاء حامد الشحري.",
     "cover": "assets/content/podcasts/sabahiyat-al-eid.png",
+    "coverCrop": {"zoom": 1.6, "y": 52},
     "file": "assets/content/podcasts/sabahiyat-al-eid.mp4",
     "category": "الثقافة العُمانية",
     "added": "2026-10-24"

@@ -71,10 +71,16 @@ function bindImageReveal(root = document) {
     }
   });
 }
+function podcastPortrait(item, imageClass) {
+  const zoom = Math.min(3, Math.max(1, Number(item.coverCrop?.zoom) || 1.5));
+  const y = Number(item.coverCrop?.y ?? 50);
+  const position = Number.isFinite(y) ? Math.min(100, Math.max(0, y)) : 50;
+  return `<div class="podcast-portrait" style="--portrait-zoom:${zoom};--portrait-y:${position}%"><img class="${imageClass}" src="${esc(item.cover)}" width="764" height="1372" alt="صورة ضيفة حلقة ${esc(item.title)}" loading="lazy" decoding="async"></div>`;
+}
 function renderBays() {
   $('#sectionCaption').textContent = `${num(SECTIONS.length)} أبواب للمعرفة والمشاركة.`;
   $('#bays').innerHTML = SECTIONS.map((s, i) => `<article class="bay reveal" style="--i:${i}" role="group" aria-roledescription="شريحة" aria-label="${num(i + 1)} من ${num(SECTIONS.length)}: ${s.title}">
-    <a class="collection-card${s.id === 'school' ? ' collection-card-school' : ''}" href="#${s.id}" aria-label="${s.title} — ${s.label}">${s.id === 'podcasts' ? `<div class="collection-photo collection-photo-podcasts"><div class="podcast-portraits">${inSection(s.id).filter(item => item.cover).slice(0,2).map(item => `<img class="collection-image" src="${esc(item.cover)}" width="764" height="1372" alt="غلاف حلقة ${esc(item.title)}" loading="lazy" decoding="async">`).join('')}</div></div>` : `<div class="collection-photo${s.id === 'school' ? ' collection-photo-school' : ''}"><img class="collection-image" src="${sectionImage(s.id)}" ${sectionImageSet(s.id)} width="1280" height="720" alt="${IMAGE_ALT[s.id]}" loading="lazy" decoding="async"></div>`}
+    <a class="collection-card${s.id === 'school' ? ' collection-card-school' : ''}" href="#${s.id}" aria-label="${s.title} — ${s.label}">${s.id === 'podcasts' ? `<div class="collection-photo collection-photo-podcasts"><div class="podcast-portraits">${inSection(s.id).filter(item => item.cover).slice(0,2).map(item => podcastPortrait(item, 'collection-image')).join('')}</div></div>` : `<div class="collection-photo${s.id === 'school' ? ' collection-photo-school' : ''}"><img class="collection-image" src="${sectionImage(s.id)}" ${sectionImageSet(s.id)} width="1280" height="720" alt="${IMAGE_ALT[s.id]}" loading="lazy" decoding="async"></div>`}
     <div class="collection-body"><div class="collection-topline"><span class="collection-icon">${ico(s.id)}</span><span class="collection-kicker">القسم ${num(i + 1)}</span></div><div class="collection-text"><h3>${s.title}</h3><p>${s.short}</p></div><span class="collection-action"><span>اكتشف القسم</span><span class="collection-arrow">${ico('arrow')}</span></span></div></a></article>`).join('');
   bindImageReveal($('#bays'));
   initBaysCarousel();
@@ -179,7 +185,7 @@ function resourceCard(item, i = 0) {
   const s = byId(item.section);
   const seen = viewed.has(item.id);
   const cover = item.cover
-    ? `<img class="resource-cover-image" src="${esc(item.cover)}" alt="غلاف ${esc(item.title)}" loading="lazy">`
+    ? item.section === 'podcasts' ? podcastPortrait(item, 'resource-cover-image') : `<img class="resource-cover-image" src="${esc(item.cover)}" alt="غلاف ${esc(item.title)}" loading="lazy">`
     : `<div class="resource-cover" aria-hidden="true">${ico(s.id)}</div>`;
   const badges = `<span class="badge">${s.kind}</span>${seen ? `<span class="badge badge-seen">${ico('check')} اطّلعت</span>` : isNew(item) ? '<span class="badge badge-new">جديد</span>' : ''}`;
   const steps = item.section === 'school' && item.steps?.length
