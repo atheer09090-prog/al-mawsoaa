@@ -4,6 +4,7 @@
 /* ---------- Data ---------- */
 const SECTIONS = [
   {id:'library', title:'المكتبة المرئية', desc:'فيديوهات ومواد مرئية تُقرّب موضوعات الموسوعة إلى الصف، وتفتح مساحة للمشاهدة والحوار.', short:'فيديوهات ومحتوى مرئي مرتبط بالموسوعة.', kind:'فيديو', label:'شاهد واكتشف'},
+  {id:'podcasts', title:'البودكاست', desc:'حوارات طلابية مصوّرة؛ أصوات من المدرسة تفتح نوافذ على المجتمع والثقافة العُمانية.', short:'حوارات مصوّرة بأصوات طالبات مدرسة غدو.', kind:'حلقة بودكاست', label:'شاهد الحلقات'},
   {id:'presentations', title:'العروض التقديمية', desc:'عروض تقديمية تعليمية تساعد على عرض موضوعات الموسوعة ومناقشتها بصريًا داخل الحصة.', short:'عروض تقديمية تعليمية قابلة للمعاينة والتنزيل.', kind:'عرض', label:'تصفّح العروض'},
   {id:'play', title:'الألعاب التفاعلية', desc:'ألعاب وأنشطة رقمية تفاعلية تجعل استكشاف المعرفة تجربة مشاركة واكتشاف.', short:'ألعاب وأنشطة رقمية تفاعلية للتعلّم بالاكتشاف.', kind:'لعبة', label:'ابدأ التعلّم'},
   {id:'practice', title:'من المعرفة إلى التطبيق', desc:'تجارب وممارسات مصوّرة من التراث والحياة العُمانية، في فيديوهات غير مصنوعة بالذكاء الاصطناعي.', short:'فيديوهات واقعية تصل المعرفة بالتجربة والممارسة.', kind:'تطبيق عملي', label:'شاهد التطبيق'},
@@ -12,7 +13,7 @@ const SECTIONS = [
   {id:'school', title:'الموسوعة في المدرسة', desc:'مساحة للورش والمبادرات والمسابقات والأفكار الصفية التي تفعّل موارد الموسوعة في المدرسة.', short:'أنشطة ومبادرات لتفعيل الموسوعة في البيئة المدرسية.', kind:'نشاط', label:'فعّل المعرفة'}
 ];
 const STEPS = [
-  {lead:'اختر ما يناسب درسك:', sections:['library','presentations','booklets']},
+  {lead:'اختر ما يناسب درسك:', sections:['library','podcasts','presentations','booklets']},
   {lead:'تعلّم وشارك المعرفة:', sections:['play','practice','student-presentations']},
   {lead:'امتد بالمعرفة إلى المدرسة:', sections:['school']}
 ];
@@ -73,7 +74,7 @@ function bindImageReveal(root = document) {
 function renderBays() {
   $('#sectionCaption').textContent = `${num(SECTIONS.length)} أبواب للمعرفة والمشاركة.`;
   $('#bays').innerHTML = SECTIONS.map((s, i) => `<article class="bay reveal" style="--i:${i}" role="group" aria-roledescription="شريحة" aria-label="${num(i + 1)} من ${num(SECTIONS.length)}: ${s.title}">
-    <a class="collection-card${s.id === 'school' ? ' collection-card-school' : ''}" href="#${s.id}" aria-label="${s.title} — ${s.label}"><div class="collection-photo${s.id === 'school' ? ' collection-photo-school' : ''}"><img class="collection-image" src="${sectionImage(s.id)}" ${sectionImageSet(s.id)} width="1280" height="720" alt="${IMAGE_ALT[s.id]}" loading="lazy" decoding="async"></div>
+    <a class="collection-card${s.id === 'school' ? ' collection-card-school' : ''}" href="#${s.id}" aria-label="${s.title} — ${s.label}">${s.id === 'podcasts' ? `<div class="collection-photo collection-photo-podcasts"><div class="podcast-portraits">${inSection(s.id).filter(item => item.cover).slice(0,2).map(item => `<img class="collection-image" src="${esc(item.cover)}" width="764" height="1372" alt="غلاف حلقة ${esc(item.title)}" loading="lazy" decoding="async">`).join('')}</div></div>` : `<div class="collection-photo${s.id === 'school' ? ' collection-photo-school' : ''}"><img class="collection-image" src="${sectionImage(s.id)}" ${sectionImageSet(s.id)} width="1280" height="720" alt="${IMAGE_ALT[s.id]}" loading="lazy" decoding="async"></div>`}
     <div class="collection-body"><div class="collection-topline"><span class="collection-icon">${ico(s.id)}</span><span class="collection-kicker">القسم ${num(i + 1)}</span></div><div class="collection-text"><h3>${s.title}</h3><p>${s.short}</p></div><span class="collection-action"><span>اكتشف القسم</span><span class="collection-arrow">${ico('arrow')}</span></span></div></a></article>`).join('');
   bindImageReveal($('#bays'));
   initBaysCarousel();
@@ -168,6 +169,7 @@ function initStepper() {
 /* ---------- Resource cards ---------- */
 function actionLabel(i) {
   const ext = (i.file || i.attachment || '').split('?')[0].split('.').pop().toLowerCase();
+  if (i.section === 'podcasts') return 'شاهد الحلقة';
   if (['mp4','webm','ogg'].includes(ext)) return 'شاهد الفيديو';
   if (i.section === 'play' && i.url && !i.embed) return 'افتح اللعبة';
   return i.section === 'play' ? 'ابدأ اللعب' : i.section === 'library' || (i.section === 'presentations' && ['mp4','webm','ogg'].includes(ext)) ? 'شاهد الفيديو' : i.section === 'presentations' ? 'عاين العرض'
@@ -347,8 +349,9 @@ function openResource(item, silent = false) {
       im.src = source; host.append(wrap);
     } else if (['mp4','webm','ogg'].includes(ext)) {
       const v = document.createElement('video'); v.controls = true; v.playsInline = true; v.preload = 'metadata';
+      v.setAttribute('aria-label', item.title);
       if (item.cover) v.poster = item.cover;
-      const {wrap, done} = mediaFrame(v, 'جارٍ تحميل الفيديو…');
+      const {wrap, done} = mediaFrame(v, item.section === 'podcasts' ? 'جارٍ تحميل الحلقة…' : 'جارٍ تحميل الفيديو…');
       v.addEventListener('loadedmetadata', done, {once:true});
       v.addEventListener('loadeddata', done, {once:true});
       v.addEventListener('error', () => showFileError(host, source, item.title), {once: true});

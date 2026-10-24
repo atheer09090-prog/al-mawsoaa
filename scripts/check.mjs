@@ -44,7 +44,7 @@ assert.equal(new Set(domIds).size, domIds.length, 'Duplicate HTML id');
 for (const s of sections) {
   assert(html.includes(`data-route="${s.id}"`), `Navigation missing ${s.id}`);
   assert(domIds.includes(`i-${s.id}`), `Missing section icon ${s.id}`);
-  if(s.id !== 'practice') {
+  if(!['practice','podcasts'].includes(s.id)) {
     await checkRef(`assets/images/${s.id}.webp`);
     await checkRef(`assets/images/${s.id}-small.webp`);
   }
