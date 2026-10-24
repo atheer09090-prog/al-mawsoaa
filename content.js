@@ -5,6 +5,28 @@
  */
 window.OMANI_CONTENT = [
   {
+    "id": "game-oman-economy",
+    "section": "play",
+    "title": "مهمة إنقاذ كنز الاقتصاد العُماني",
+    "description": "اجتازي المحطات، وأجيبي عن الأسئلة، واجمعي الأختام الستة لفتح كنز المعرفة. لعبة تفاعلية على Canva تتطلب اتصالًا بالإنترنت.",
+    "cover": "assets/content/games/cover-oman-economy.png",
+    "embed": "assets/content/games/oman-economy.html",
+    "url": "https://www.canva.com/design/DAHY1fW5OkU/OrWAfcBPW72qQvgi20LZRw/view",
+    "category": "الاقتصاد العُماني",
+    "added": "2026-10-24"
+  },
+  {
+    "id": "game-oman-museum",
+    "section": "play",
+    "title": "لعبة متحف عُمان",
+    "description": "رحلة مصوّرة بين المواقع الأثرية، مع ثمانية أسئلة تفاعلية وفيديوهات اللعبة الأصلية. متاحة داخل الموقع، مع تنزيل نسخة PowerPoint الأصلية (نحو ٢٤٢ م.ب.).",
+    "cover": "assets/content/games/museum/image1.png",
+    "embed": "assets/content/games/oman-museum.html",
+    "file": "assets/content/games/oman-museum.pptx",
+    "category": "التراث العُماني",
+    "added": "2026-10-24"
+  },
+  {
     "id": "podcast-majlis-al-shura",
     "section": "podcasts",
     "title": "مجلس الشورى",

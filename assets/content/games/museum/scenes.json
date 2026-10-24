@@ -1,0 +1,760 @@
+[
+  {
+    "slide": 1,
+    "media": "media1.mp4",
+    "poster": "image1.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 2
+      }
+    ]
+  },
+  {
+    "slide": 2,
+    "media": "media2.mp4",
+    "poster": "image4.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 3
+      }
+    ]
+  },
+  {
+    "slide": 3,
+    "media": "media3.mp4",
+    "poster": "image9.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 4
+      }
+    ]
+  },
+  {
+    "slide": 4,
+    "media": null,
+    "poster": null,
+    "question": "الولاية العمانية التي يقع فيها موقع بات الأثري",
+    "answers": [
+      {
+        "label": "عبري",
+        "target": 5
+      },
+      {
+        "label": "صحار",
+        "target": 6
+      },
+      {
+        "label": "نزوى",
+        "target": 7
+      }
+    ],
+    "actions": [
+      {
+        "label": "",
+        "target": 6
+      },
+      {
+        "label": "",
+        "target": 5
+      },
+      {
+        "label": "",
+        "target": 7
+      },
+      {
+        "label": "",
+        "target": 1
+      }
+    ],
+    "background": "image10.png"
+  },
+  {
+    "slide": 5,
+    "media": null,
+    "poster": null,
+    "question": "أهم المعالم الأثرية في مدينة قلهات الاثرية",
+    "answers": [
+      {
+        "label": "ضريح بيبي مريم",
+        "target": 10
+      },
+      {
+        "label": "حصن رأس الحد",
+        "target": 8
+      },
+      {
+        "label": "قلعة بهلا",
+        "target": 9
+      }
+    ],
+    "actions": [
+      {
+        "label": "",
+        "target": 8
+      },
+      {
+        "label": "",
+        "target": 10
+      },
+      {
+        "label": "",
+        "target": 9
+      },
+      {
+        "label": "",
+        "target": 1
+      }
+    ],
+    "background": "image10.png"
+  },
+  {
+    "slide": 6,
+    "media": "media4.mp4",
+    "poster": "image12.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 4
+      }
+    ]
+  },
+  {
+    "slide": 7,
+    "media": "media4.mp4",
+    "poster": "image12.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 4
+      }
+    ]
+  },
+  {
+    "slide": 8,
+    "media": "media5.mp4",
+    "poster": "image12.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 5
+      }
+    ]
+  },
+  {
+    "slide": 9,
+    "media": "media5.mp4",
+    "poster": "image12.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 5
+      }
+    ]
+  },
+  {
+    "slide": 10,
+    "media": "media6.mp4",
+    "poster": "image15.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 11
+      }
+    ]
+  },
+  {
+    "slide": 11,
+    "media": "media7.mp4",
+    "poster": "image16.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 12
+      }
+    ]
+  },
+  {
+    "slide": 12,
+    "media": null,
+    "poster": null,
+    "question": "العام الميلادي الذي تم فيه إدراج مدينة قلهات الأثرية في قائمة اليونسكو للتراث العالمي",
+    "answers": [
+      {
+        "label": "2018",
+        "target": 13
+      },
+      {
+        "label": "2022",
+        "target": 15
+      },
+      {
+        "label": "2014",
+        "target": 14
+      }
+    ],
+    "actions": [
+      {
+        "label": "",
+        "target": 15
+      },
+      {
+        "label": "",
+        "target": 13
+      },
+      {
+        "label": "",
+        "target": 14
+      },
+      {
+        "label": "",
+        "target": 1
+      }
+    ],
+    "background": "image17.png"
+  },
+  {
+    "slide": 13,
+    "media": null,
+    "poster": null,
+    "question": "العصر الذي يعود فيه تاريخ موقع بات الاثري",
+    "answers": [
+      {
+        "label": "العصر البرونزي",
+        "target": 18
+      },
+      {
+        "label": "العصر الحجري",
+        "target": 17
+      },
+      {
+        "label": "العصر الحديدي",
+        "target": 16
+      }
+    ],
+    "actions": [
+      {
+        "label": "",
+        "target": 17
+      },
+      {
+        "label": "",
+        "target": 18
+      },
+      {
+        "label": "",
+        "target": 16
+      },
+      {
+        "label": "",
+        "target": 1
+      }
+    ],
+    "background": "image17.png"
+  },
+  {
+    "slide": 14,
+    "media": "media8.mp4",
+    "poster": "image18.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 12
+      }
+    ]
+  },
+  {
+    "slide": 15,
+    "media": "media8.mp4",
+    "poster": "image18.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 12
+      }
+    ]
+  },
+  {
+    "slide": 16,
+    "media": "media8.mp4",
+    "poster": "image18.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 13
+      }
+    ]
+  },
+  {
+    "slide": 17,
+    "media": "media9.mp4",
+    "poster": "image18.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 13
+      }
+    ]
+  },
+  {
+    "slide": 18,
+    "media": "media10.mp4",
+    "poster": "image19.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 19
+      }
+    ]
+  },
+  {
+    "slide": 19,
+    "media": "media11.mp4",
+    "poster": "image20.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 20
+      }
+    ]
+  },
+  {
+    "slide": 20,
+    "media": null,
+    "poster": null,
+    "question": "المحافظة التي يقع فيها موقع سمهرم الأثري",
+    "answers": [
+      {
+        "label": "ظفار",
+        "target": 21
+      },
+      {
+        "label": "شمال الباطنة",
+        "target": 22
+      },
+      {
+        "label": "الداخلية",
+        "target": 23
+      }
+    ],
+    "actions": [
+      {
+        "label": "",
+        "target": 22
+      },
+      {
+        "label": "",
+        "target": 21
+      },
+      {
+        "label": "",
+        "target": 23
+      },
+      {
+        "label": "",
+        "target": 1
+      }
+    ],
+    "background": "image21.png"
+  },
+  {
+    "slide": 21,
+    "media": null,
+    "poster": null,
+    "question": "الشكل المعماري لمباني بات الأثرية",
+    "answers": [
+      {
+        "label": "شكل خلية النحل",
+        "target": 26
+      },
+      {
+        "label": "الشكل الهرمي",
+        "target": 24
+      },
+      {
+        "label": "الشكل المدرج",
+        "target": 25
+      }
+    ],
+    "actions": [
+      {
+        "label": "",
+        "target": 24
+      },
+      {
+        "label": "",
+        "target": 26
+      },
+      {
+        "label": "",
+        "target": 25
+      },
+      {
+        "label": "",
+        "target": 1
+      }
+    ],
+    "background": "image21.png"
+  },
+  {
+    "slide": 22,
+    "media": "media12.mp4",
+    "poster": "image22.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 20
+      }
+    ]
+  },
+  {
+    "slide": 23,
+    "media": "media13.mp4",
+    "poster": "image22.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 20
+      }
+    ]
+  },
+  {
+    "slide": 24,
+    "media": "media13.mp4",
+    "poster": "image22.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 21
+      }
+    ]
+  },
+  {
+    "slide": 25,
+    "media": "media13.mp4",
+    "poster": "image22.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 21
+      }
+    ]
+  },
+  {
+    "slide": 26,
+    "media": "media14.mp4",
+    "poster": "image23.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 27
+      }
+    ]
+  },
+  {
+    "slide": 27,
+    "media": "media15.mp4",
+    "poster": "image24.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 28
+      }
+    ]
+  },
+  {
+    "slide": 28,
+    "media": null,
+    "poster": null,
+    "question": "العام الميلادي الذي تم فيه إدراج موقع بات ضمن قائمة مواقع التراث العالمي لليونسكو",
+    "answers": [
+      {
+        "label": "1988",
+        "target": 29
+      },
+      {
+        "label": "1984",
+        "target": 30
+      },
+      {
+        "label": "1986",
+        "target": 31
+      }
+    ],
+    "actions": [
+      {
+        "label": "",
+        "target": 30
+      },
+      {
+        "label": "",
+        "target": 29
+      },
+      {
+        "label": "",
+        "target": 31
+      },
+      {
+        "label": "",
+        "target": 1
+      }
+    ],
+    "background": "image25.png"
+  },
+  {
+    "slide": 29,
+    "media": null,
+    "poster": null,
+    "question": "المدينة الأثرية التي كان مينائها مركزًا مهما لتصدير اللبان",
+    "answers": [
+      {
+        "label": "سمهرم",
+        "target": 34
+      },
+      {
+        "label": "قلهات",
+        "target": 33
+      },
+      {
+        "label": "بات",
+        "target": 32
+      }
+    ],
+    "actions": [
+      {
+        "label": "",
+        "target": 33
+      },
+      {
+        "label": "",
+        "target": 34
+      },
+      {
+        "label": "",
+        "target": 32
+      },
+      {
+        "label": "",
+        "target": 1
+      }
+    ],
+    "background": "image25.png"
+  },
+  {
+    "slide": 30,
+    "media": "media16.mp4",
+    "poster": "image26.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 28
+      }
+    ]
+  },
+  {
+    "slide": 31,
+    "media": "media17.mp4",
+    "poster": "image26.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 28
+      }
+    ]
+  },
+  {
+    "slide": 32,
+    "media": "media17.mp4",
+    "poster": "image26.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 29
+      }
+    ]
+  },
+  {
+    "slide": 33,
+    "media": "media17.mp4",
+    "poster": "image26.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 29
+      }
+    ]
+  },
+  {
+    "slide": 34,
+    "media": "media18.mp4",
+    "poster": "image27.png",
+    "question": "",
+    "answers": [],
+    "actions": [
+      {
+        "label": "",
+        "target": 1
+      },
+      {
+        "label": "",
+        "target": 35
+      }
+    ]
+  },
+  {
+    "slide": 35,
+    "media": "media19.mp4",
+    "poster": "image28.png",
+    "question": "",
+    "answers": [],
+    "actions": []
+  }
+]

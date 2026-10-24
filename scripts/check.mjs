@@ -59,6 +59,21 @@ for (const file of await readdir(path.join(root,'assets/content/games'))) {
   const game = await text('assets/content/games/'+file);
   for (const m of game.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)) new vm.Script(m[1], {filename:file});
 }
+// The museum game's clips and branching scenes live below its HTML entry point.
+const museumPath = 'assets/content/games/museum/';
+const museumScenes = JSON.parse(await text(museumPath + 'scenes.json'));
+assert.equal(museumScenes.length, 35, 'Museum scenes missing');
+assert.equal(museumScenes.filter(scene=>scene.question).length, 8, 'Museum questions missing');
+for (const [i, scene] of museumScenes.entries()) {
+  assert.equal(scene.slide, i + 1, 'Museum scene order changed');
+  for (const key of ['media','poster','background']) if (scene[key]) await checkRef(museumPath + scene[key]);
+  if (scene.question) assert.equal(scene.answers.length, 3, 'Museum answer missing');
+  for (const action of [...scene.answers, ...scene.actions]) {
+    assert(Number.isInteger(action.target) && action.target >= 1 && action.target <= museumScenes.length, 'Broken museum scene destination');
+  }
+}
+for (const file of ['game.js','game.css']) await checkRef(museumPath + file);
+new vm.Script(await text(museumPath + 'game.js'), {filename:'museum/game.js'});
 assert.equal(await text('content.js'), registry, 'Legacy registry is out of sync; run build');
 for (const id of ['video-omani-drum','video-tab-tanyan']) assert.equal(items.find(i=>i.id===id)?.section,'practice');
 assert(items.filter(i=>i.section==='practice').every(i=>i.file.endsWith('.mp4')));
