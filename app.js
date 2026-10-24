@@ -6,13 +6,14 @@ const SECTIONS = [
   {id:'library', title:'المكتبة المرئية', desc:'فيديوهات ومواد مرئية تُقرّب موضوعات الموسوعة إلى الصف، وتفتح مساحة للمشاهدة والحوار.', short:'فيديوهات ومحتوى مرئي مرتبط بالموسوعة.', kind:'فيديو', label:'شاهد واكتشف'},
   {id:'presentations', title:'العروض التقديمية', desc:'عروض تقديمية تعليمية تساعد على عرض موضوعات الموسوعة ومناقشتها بصريًا داخل الحصة.', short:'عروض تقديمية تعليمية قابلة للمعاينة والتنزيل.', kind:'عرض', label:'تصفّح العروض'},
   {id:'play', title:'الألعاب التفاعلية', desc:'ألعاب وأنشطة رقمية تفاعلية تجعل استكشاف المعرفة تجربة مشاركة واكتشاف.', short:'ألعاب وأنشطة رقمية تفاعلية للتعلّم بالاكتشاف.', kind:'لعبة', label:'ابدأ التعلّم'},
+  {id:'practice', title:'من المعرفة إلى التطبيق', desc:'تجارب وممارسات مصوّرة من التراث والحياة العُمانية، في فيديوهات غير مصنوعة بالذكاء الاصطناعي.', short:'فيديوهات واقعية تصل المعرفة بالتجربة والممارسة.', kind:'تطبيق عملي', label:'شاهد التطبيق'},
   {id:'student-presentations', title:'سفراء المعرفة', desc:'عروض شفوية يقدّمها طلاب المدرسة عن كنوز عُمان ومعارفها.', short:'عروض شفوية من طلاب المدرسة.', kind:'عرض شفهي', label:'شاهد عروض الطلاب'},
   {id:'booklets', title:'المطويات والتحميلات', desc:'مواد تعريفية مختصرة للقراءة والمعاينة والتنزيل، مصممة لتكون قريبة من المتعلم.', short:'مطويات ومواد تعريفية للقراءة والتنزيل.', kind:'مطوية', label:'اقرأ المطويات'},
   {id:'school', title:'الموسوعة في المدرسة', desc:'مساحة للورش والمبادرات والمسابقات والأفكار الصفية التي تفعّل موارد الموسوعة في المدرسة.', short:'أنشطة ومبادرات لتفعيل الموسوعة في البيئة المدرسية.', kind:'نشاط', label:'فعّل المعرفة'}
 ];
 const STEPS = [
   {lead:'اختر ما يناسب درسك:', sections:['library','presentations','booklets']},
-  {lead:'تعلّم وشارك المعرفة:', sections:['play','student-presentations']},
+  {lead:'تعلّم وشارك المعرفة:', sections:['play','practice','student-presentations']},
   {lead:'امتد بالمعرفة إلى المدرسة:', sections:['school']}
 ];
 const TITLE = 'الموسوعة العُمانية | معرفة تنبض بعُمان';
@@ -37,7 +38,8 @@ const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch { return false; } }
 };
-const viewed = new Set(store.get('omani-viewed', []));
+const savedViewed = store.get('omani-viewed', []);
+const viewed = new Set(Array.isArray(savedViewed) ? savedViewed.filter(id => typeof id === 'string') : []);
 const isNew = item => {
   const t = Date.parse(item.added);
   return Number.isFinite(t) && Date.now() - t >= 0 && Date.now() - t < 30 * 864e5;
@@ -55,9 +57,9 @@ function toast(message, type = 'success') {
 }
 
 /* ---------- Home: facade ---------- */
-const sectionImage = id => `assets/images/${id}.webp`;
-const sectionImageSet = id => `srcset="assets/images/${id}-small.webp 640w, ${sectionImage(id)} 1280w" sizes="(max-width: 760px) 90vw, (max-width: 960px) 50vw, 40vw"`;
-const IMAGE_ALT = {library:'طالب عُماني يقرأ كتابًا في مكتبة المدرسة', presentations:'طالبة تعرض درسًا على الشاشة الصفية', play:'طالبات يتعلمن معًا باستخدام جهاز لوحي', 'student-presentations':'طالبة عُمانية تحمل كتاب الموسوعة بين رفوف المكتبة', booklets:'كتب الموسوعة العُمانية مفتوحة على طاولة القراءة', school:'طالبة تشرح موضوعًا من الموسوعة أمام شاشة الصف'};
+const sectionImage = id => id === 'practice' ? 'assets/content/covers/omani-drum.webp' : `assets/images/${id}.webp`;
+const sectionImageSet = id => id === 'practice' ? '' : `srcset="assets/images/${id}-small.webp 640w, ${sectionImage(id)} 1280w" sizes="(max-width: 760px) 90vw, (max-width: 960px) 50vw, 40vw"`;
+const IMAGE_ALT = {practice:'لقطة من فيديو الطبل العربي في التراث العُماني', library:'طالب عُماني يقرأ كتابًا في مكتبة المدرسة', presentations:'طالبة تعرض درسًا على الشاشة الصفية', play:'طالبات يتعلمن معًا باستخدام جهاز لوحي', 'student-presentations':'طالبة عُمانية تحمل كتاب الموسوعة بين رفوف المكتبة', booklets:'كتب الموسوعة العُمانية مفتوحة على طاولة القراءة', school:'طالبة تشرح موضوعًا من الموسوعة أمام شاشة الصف'};
 function bindImageReveal(root = document) {
   $$('.hero-image, .collection-image, .resource-cover-image', root).forEach(img => {
     const finish = () => img.classList.add(img.naturalWidth ? 'is-loaded' : 'is-failed');
@@ -69,6 +71,7 @@ function bindImageReveal(root = document) {
   });
 }
 function renderBays() {
+  $('#sectionCaption').textContent = `${num(SECTIONS.length)} أبواب للمعرفة والمشاركة.`;
   $('#bays').innerHTML = SECTIONS.map((s, i) => `<article class="bay reveal" style="--i:${i}" role="group" aria-roledescription="شريحة" aria-label="${num(i + 1)} من ${num(SECTIONS.length)}: ${s.title}">
     <a class="collection-card${s.id === 'school' ? ' collection-card-school' : ''}" href="#${s.id}" aria-label="${s.title} — ${s.label}"><div class="collection-photo${s.id === 'school' ? ' collection-photo-school' : ''}"><img class="collection-image" src="${sectionImage(s.id)}" ${sectionImageSet(s.id)} width="1280" height="720" alt="${IMAGE_ALT[s.id]}" loading="lazy" decoding="async"></div>
     <div class="collection-body"><div class="collection-topline"><span class="collection-icon">${ico(s.id)}</span><span class="collection-kicker">القسم ${num(i + 1)}</span></div><div class="collection-text"><h3>${s.title}</h3><p>${s.short}</p></div><span class="collection-action"><span>اكتشف القسم</span><span class="collection-arrow">${ico('arrow')}</span></span></div></a></article>`).join('');
@@ -165,6 +168,8 @@ function initStepper() {
 /* ---------- Resource cards ---------- */
 function actionLabel(i) {
   const ext = (i.file || i.attachment || '').split('?')[0].split('.').pop().toLowerCase();
+  if (['mp4','webm','ogg'].includes(ext)) return 'شاهد الفيديو';
+  if (i.section === 'play' && i.url && !i.embed) return 'افتح اللعبة';
   return i.section === 'play' ? 'ابدأ اللعب' : i.section === 'library' || (i.section === 'presentations' && ['mp4','webm','ogg'].includes(ext)) ? 'شاهد الفيديو' : i.section === 'presentations' ? 'عاين العرض'
     : i.section === 'booklets' ? 'عاين المادة' : (i.attachment ? 'عرض المرفق' : 'تفاصيل النشاط');
 }
@@ -177,10 +182,13 @@ function resourceCard(item, i = 0) {
   const badges = `<span class="badge">${s.kind}</span>${seen ? `<span class="badge badge-seen">${ico('check')} اطّلعت</span>` : isNew(item) ? '<span class="badge badge-new">جديد</span>' : ''}`;
   const steps = item.section === 'school' && item.steps?.length
     ? `<details><summary>خطوات التنفيذ</summary><ol>${item.steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol></details>` : '';
+  const action = item.section === 'play' && item.url && !item.embed
+    ? `<a class="resource-action" href="${esc(item.url)}" target="_blank" rel="noopener noreferrer" data-external-resource="${esc(item.id)}" aria-label="${esc(item.title)} — تفتح في تبويب جديد">${actionLabel(item)} ${ico('external')}</a>`
+    : `<button class="resource-action" type="button" data-resource="${esc(item.id)}">${actionLabel(item)} ${ico('arrow')}</button>`;
   return `<article class="resource-card" data-section="${s.id}" style="--i:${i}"><div class="resource-cover-wrap">${cover}<div class="badges">${badges}</div></div>
     <div class="resource-body"><div class="resource-meta">${esc(item.category || s.title)}${item.audience ? ` · ${esc(item.audience)}` : ''}</div>
     <h3>${esc(item.title)}</h3><p>${esc(item.description || '')}</p>${steps}
-    <button class="resource-action" type="button" data-resource="${esc(item.id)}">${actionLabel(item)} ${ico('arrow')}</button></div></article>`;
+    ${action}</div></article>`;
 }
 
 /* ---------- Category page ---------- */
@@ -198,7 +206,8 @@ function renderSection(animate = false) {
   const s = state.section, all = inSection(s.id), items = sectionItems();
   const cats = [...new Set(all.map(x => x.category).filter(Boolean))];
   const toolbar = $('#categoryToolbar');
-  toolbar.hidden = all.length <= 6;
+  toolbar.hidden = !all.length;
+  $('#categoryGrid').dataset.section = s.id;
   const chips = $('#chips');
   chips.hidden = cats.length < 2;
   chips.innerHTML = cats.length < 2 ? '' : ['', ...cats].map(c => `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="${c === state.cat}">${c ? esc(c) : 'الكل'}</button>`).join('');
@@ -305,11 +314,11 @@ function openResource(item, silent = false) {
       f.addEventListener('load', done); f.src = item.embed;
       host.append(wrap);
       const hint = document.createElement('p'); hint.className = 'viewer-hint';
-      hint.innerHTML = `إذا لم تظهر اللعبة، <a href="${esc(item.url || item.embed)}" target="_blank" rel="noopener">افتحها في نافذة جديدة</a>.`;
+      hint.innerHTML = `إذا لم تظهر اللعبة، <a href="${esc(item.url || item.embed)}" target="_blank" rel="noopener noreferrer">افتحها في نافذة جديدة</a>.`;
       host.append(hint);
     } else {
       const c = document.createElement('div'); c.className = 'file-card';
-      c.innerHTML = `${ico('external')}<span>هذه اللعبة تُفتح في موقعها الخارجي. <a href="${esc(item.url)}" target="_blank" rel="noopener">فتح اللعبة في نافذة جديدة</a></span>`;
+      c.innerHTML = `${ico('external')}<span>هذه اللعبة تُفتح في موقعها الخارجي. <a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">فتح اللعبة في نافذة جديدة</a></span>`;
       host.append(c);
     }
     if (item.file) {
@@ -319,14 +328,18 @@ function openResource(item, silent = false) {
     }
   } else if (item.url) {
     const c = document.createElement('div'); c.className = 'file-card';
-    c.innerHTML = `${ico('external')}<span>مطوية تفاعلية على الويب. <a href="${esc(item.url)}" target="_blank" rel="noopener">فتح المطوية في نافذة جديدة</a></span>`;
+    c.innerHTML = `${ico('external')}<span>مطوية تفاعلية على الويب. <a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">فتح المطوية في نافذة جديدة</a></span>`;
     host.append(c);
   } else if (source) {
     download.href = item.file || source; download.hidden = false;
-    if ((item.preview || source).split('?')[0].toLowerCase().endsWith('.pdf')) {
+    if (item.pages?.length) {
+      appendBookletPages(host, item.pages);
+    } else if ((item.preview || source).split('?')[0].toLowerCase().endsWith('.pdf')) {
       const f = document.createElement('iframe'); f.title = `معاينة ${item.title}`;
       const {wrap, done} = mediaFrame(f, 'جارٍ تجهيز المعاينة…');
-      f.addEventListener('load', done); f.src = item.preview || source; host.append(wrap);
+      f.addEventListener('load', done); f.src = `${item.preview || source}#view=FitH`; host.append(wrap);
+      const hint = document.createElement('p'); hint.className = 'viewer-hint';
+      hint.innerHTML = `<a href="${esc(item.preview || source)}" target="_blank" rel="noopener noreferrer">افتح PDF في تبويب جديد</a> أو استخدم زر التنزيل.`; host.append(hint);
     } else if (['png','jpg','jpeg','webp','gif','svg'].includes(ext)) {
       const im = document.createElement('img'); im.alt = item.title;
       const {wrap, done} = mediaFrame(im, 'جارٍ تحميل الصورة…');
@@ -336,7 +349,8 @@ function openResource(item, silent = false) {
       const v = document.createElement('video'); v.controls = true; v.playsInline = true; v.preload = 'metadata';
       if (item.cover) v.poster = item.cover;
       const {wrap, done} = mediaFrame(v, 'جارٍ تحميل الفيديو…');
-      v.addEventListener('loadeddata', done);
+      v.addEventListener('loadedmetadata', done, {once:true});
+      v.addEventListener('loadeddata', done, {once:true});
       v.addEventListener('error', () => showFileError(host, source, item.title), {once: true});
       v.src = source; host.append(wrap);
     } else {
@@ -347,6 +361,13 @@ function openResource(item, silent = false) {
   } else if (item.section !== 'school' && item.section !== 'play') {
     showFileError(host, null, item.title);
   }
+  if (item.downloads?.length) {
+    const files = document.createElement('div'); files.className = 'additional-downloads';
+    item.downloads.forEach(file => {
+      const link = document.createElement('a'); link.className = 'chip-button'; link.href = file.file; link.download = ''; link.textContent = file.label; files.append(link);
+    });
+    host.append(files);
+  }
   if (!viewed.has(item.id)) {
     viewed.add(item.id); store.set('omani-viewed', [...viewed]);
     refreshViewedUI();
@@ -354,6 +375,21 @@ function openResource(item, silent = false) {
   if (!viewer.open) viewer.showModal();
   viewer.scrollTop = 0;
   if (!silent) history.replaceState(null, '', `#${item.section}/${encodeURIComponent(item.id)}`);
+}
+function appendBookletPages(host, pages) {
+  const gallery = document.createElement('div'); gallery.className = 'booklet-pages';
+  pages.forEach((page, index) => {
+    const figure = document.createElement('figure'); figure.className = 'booklet-page';
+    const caption = document.createElement('figcaption'); caption.textContent = page.label || `الصفحة ${num(index + 1)}`;
+    const image = document.createElement('img'); image.src = page.src; image.alt = page.label || `الصفحة ${num(index + 1)}`; image.loading = index ? 'lazy' : 'eager'; image.decoding = 'async';
+    if (page.width && page.height) { image.width = page.width; image.height = page.height; }
+    image.addEventListener('error', () => {
+      image.hidden = true; const error = document.createElement('p'); error.textContent = 'تعذّر تحميل هذه الصفحة. يمكنك تنزيل ملف PDF من الأعلى.'; figure.append(error);
+    }, {once:true});
+    const fullSize = document.createElement('a'); fullSize.href = page.src; fullSize.target = '_blank'; fullSize.rel = 'noopener noreferrer'; fullSize.setAttribute('aria-label', `${caption.textContent} — فتح بالحجم الكامل`); fullSize.title = 'افتح الصفحة بالحجم الكامل'; fullSize.append(image);
+    figure.append(caption, fullSize); gallery.append(figure);
+  });
+  host.append(gallery);
 }
 function refreshViewedUI() {
   if (state.section) renderSection(false);
@@ -464,6 +500,9 @@ function closeMenu() {
 }
 function route() {
   const {page, rid} = parseHash();
+  if (page === 'presentations' && rid === 'presentation-frankincense-tree-video') {
+    history.replaceState(null, '', `#library/${rid}`); route(); return;
+  }
   const section = byId(page);
   const homeAnchors = ['home', 'about', 'collections'];
   const isHome = !section;
@@ -483,7 +522,7 @@ function route() {
       $('#categoryTitle').focus({preventScroll: true});
     }
     if (rid) {
-      const item = content.find(x => x.id === rid);
+      const item = content.find(x => x.id === rid && x.section === section.id);
       if (item) openResource(item, true);
       else { toast('تعذّر العثور على المادة المطلوبة', 'error'); history.replaceState(null, '', `#${section.id}`); }
     }
@@ -552,10 +591,12 @@ function initSchoolGallery() {
   const dialog = $('#galleryLightbox'), dialogImage = $('#galleryLightboxImage'), dialogCaption = $('#galleryLightboxCaption');
   const dialogClose = $('#galleryLightboxClose'), dialogPrev = $('#galleryLightboxPrev'), dialogNext = $('#galleryLightboxNext');
   if (!gallery || !viewport || !track || !cards.length) return;
-  const reduced = reduceMotion();
+  const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+  let reduced = motionPreference.matches;
   let raf = 0, lastTime = 0, direction = 1, inView = !('IntersectionObserver' in window);
   let userPaused = reduced, focusPaused = false, hovering = false, holdUntil = 0, selected = 0, opener = null;
-  const speed = 26;
+  const speed = 20;
+  let position = viewport.scrollLeft, autoScrolling = false;
   const maxScroll = () => Math.max(0, viewport.scrollWidth - viewport.clientWidth);
   const updateControls = () => {
     if (previous) previous.disabled = viewport.scrollLeft <= 1;
@@ -570,17 +611,19 @@ function initSchoolGallery() {
     lastTime = now;
     const max = maxScroll();
     if (max > 0 && now >= holdUntil) {
-      let position = viewport.scrollLeft + direction * speed * dt / 1000;
+      position += direction * speed * dt / 1000;
       if (position >= max) { position = max; direction = -1; holdUntil = now + 650; }
       else if (position <= 0) { position = 0; direction = 1; holdUntil = now + 650; }
+      autoScrolling = true;
       viewport.scrollLeft = position;
+      autoScrolling = false;
       updateControls();
     }
     raf = requestAnimationFrame(tick);
   };
   const syncMotion = () => {
     if (shouldPause()) stop();
-    else if (!raf) raf = requestAnimationFrame(tick);
+    else if (!raf) { position = viewport.scrollLeft; raf = requestAnimationFrame(tick); }
   };
   const pauseForInteraction = (duration = 1200) => {
     stop();
@@ -595,7 +638,7 @@ function initSchoolGallery() {
   };
   previous?.addEventListener('click', e => nudge(-1, e));
   next?.addEventListener('click', e => nudge(1, e));
-  viewport.addEventListener('scroll', updateControls, {passive:true});
+  viewport.addEventListener('scroll', () => { if (!raf && !autoScrolling) position = viewport.scrollLeft; updateControls(); }, {passive:true});
   pause?.addEventListener('click', e => {
     userPaused = !userPaused;
     if (e.detail > 0) focusPaused = false;
@@ -614,6 +657,11 @@ function initSchoolGallery() {
   viewport.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') { focusPaused = false; pauseForInteraction(1500); } }, {passive:true});
   viewport.addEventListener('pointerup', e => { if (e.pointerType !== 'mouse') setTimeout(() => { focusPaused = false; syncMotion(); }, 1500); }, {passive:true});
   viewport.addEventListener('wheel', () => pauseForInteraction(1400), {passive:true});
+  viewport.addEventListener('keydown', e => {
+    if (e.target !== viewport || !['ArrowLeft','ArrowRight'].includes(e.key)) return;
+    e.preventDefault(); nudge(e.key === 'ArrowLeft' ? -1 : 1, e);
+  });
+  motionPreference.addEventListener('change', e => { reduced = e.matches; userPaused = reduced; syncMotion(); });
   document.addEventListener('visibilitychange', syncMotion);
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => { inView = entries[0].isIntersecting; syncMotion(); }, {threshold:.12});
@@ -675,7 +723,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const b = e.target.closest('[data-resource]');
     if (b) { const item = content.find(x => x.id === b.dataset.resource); if (item) openResource(item); }
   };
-  $('#categoryGrid').addEventListener('click', open);
+  $('#categoryGrid').addEventListener('click', e => {
+    const link = e.target.closest('[data-external-resource]');
+    if (link) {
+      viewed.add(link.dataset.externalResource); store.set('omani-viewed', [...viewed]);
+      setTimeout(refreshViewedUI, 0);
+    }
+    open(e);
+  });
   $('#recentGrid').addEventListener('click', open);
   [$('#categoryGrid'), $('#recentGrid')].forEach(grid => grid.addEventListener('error', e => {
     if (e.target.matches('.resource-cover-image')) {

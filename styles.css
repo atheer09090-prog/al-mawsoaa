@@ -377,3 +377,54 @@ html,body{overflow-x:clip}
   .hero-lead{font-size:16px}
 }
 @media(max-width:760px){.gallery-viewport{margin-inline:calc((100% - 100vw)/2)}}
+
+/* Content additions keep the existing palette, logo and opening untouched. */
+.intro-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:99px;background:var(--paper);color:var(--sea);font-size:13px;white-space:nowrap}
+.intro-link:hover{background:var(--khaki-soft)}
+.intro-link .ico{width:19px;height:22px}
+.primary-nav{max-height:calc(100dvh - var(--header-h) - 24px);overflow-y:auto;overscroll-behavior:contain}
+.resource-cover-image{object-fit:contain;background:var(--khaki-soft)}
+.collection-carousel .collection-photo img{object-fit:contain}
+.collection-carousel .collection-card:hover .collection-photo img,.collection-carousel .collection-card:focus-visible .collection-photo img,.bay.is-current .collection-photo img{transform:none}
+.bay.is-arriving .collection-photo img{animation:none}
+.category-grid[data-section="play"]{grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:20px}
+.resource-card[data-section="play"] .resource-cover{font-size:28px}
+.resource-card[data-section="play"] .resource-cover-wrap{aspect-ratio:2.2}
+.resource-card[data-section="play"] .resource-body{padding:16px}
+.resource-card[data-section="play"] h3{font-size:18px}
+.resource-card[data-section="play"] .resource-action{font-size:13px}
+.resource-card[data-section="booklets"] .resource-cover-wrap{aspect-ratio:auto}
+.resource-card[data-section="booklets"] .resource-cover-image{height:210px;padding:10px;object-fit:contain}
+.resource-card[data-section="booklets"] .badges{position:static;padding:7px 12px 10px;background:var(--khaki-soft)}
+.booklet-pages{display:grid;gap:24px;margin-top:24px}
+.booklet-page{margin:0;padding:10px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.booklet-page figcaption{padding:4px 3px 10px;color:var(--olive);font-size:13px}
+.booklet-page img{display:block;width:100%;height:auto;max-height:none;object-fit:contain}
+.additional-downloads{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.collection-carousel .collection-card-school .collection-photo-school{height:auto;min-height:0;aspect-ratio:16/9;align-self:center}
+.collection-carousel .collection-card-school .collection-photo-school img{height:100%;min-height:0;aspect-ratio:16/9;object-fit:contain;transform:none;animation:none}
+.gallery-photo,.gallery-photo:nth-child(3n+2){height:auto;aspect-ratio:16/9;flex-basis:clamp(285px,32vw,420px)}
+.gallery-photo img{object-fit:contain;transform:none}
+.gallery-photo:hover img,.gallery-photo:focus-visible img{transform:none}
+.gallery-caption{background:rgba(16,43,57,.85);padding:3px 9px;border-radius:6px}
+@media(max-width:760px){
+  .collection-carousel .collection-card-school .collection-photo-school,.collection-carousel .collection-card-school .collection-photo-school img{aspect-ratio:16/9}
+  .gallery-photo,.gallery-photo:nth-child(3n+2){height:auto;flex-basis:78vw;aspect-ratio:16/9}
+  .viewer-content{padding:20px 14px}
+  .booklet-page{padding:5px}
+}
+@media(max-width:560px){
+  .header-inner{gap:6px}
+  .header-tools{gap:5px}
+  .intro-link{padding-inline:9px;font-size:11px}
+  .intro-link .ico{display:none}
+  .brand-name{font-size:15px}
+}
+@media(max-width:360px){
+  .brand{gap:5px}
+  .brand-emblem{width:23px}
+  .brand-name{font-size:13px}
+  .header-tools .search-trigger,.header-tools .menu-toggle{min-width:38px;width:38px}
+  .intro-link{padding-inline:7px}
+}
+@media(prefers-reduced-motion:reduce){.gallery-photo:hover,.gallery-photo:focus-visible{transform:none}}
