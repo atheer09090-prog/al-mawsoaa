@@ -82,4 +82,9 @@ async function compareDirectory(relative='') {
   }
 }
 await compareDirectory();
+for (const file of files.keys()) {
+  if (!file.endsWith('.pptx')) continue;
+  const bytes = await readFile(path.join(root, file));
+  assert.equal(bytes.subarray(0,4).toString('hex'), '504b0304', `PowerPoint contains an LFS pointer instead of the original file: ${file}`);
+}
 console.log(`PASS: ${sections.length} sections, ${items.length} unique resources, ${localRefs} local references; scripts, opening, downloads and dist verified.`);

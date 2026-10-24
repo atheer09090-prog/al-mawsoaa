@@ -1,8 +1,10 @@
 import {cp, mkdir, readFile, rm, writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
+import {resolveLfs} from './resolve-lfs.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const destination = path.join(root, 'dist');
+await resolveLfs(root);
 // Keep the legacy data entry point identical to the authoritative registry.
 await writeFile(path.join(root, 'content.js'), await readFile(path.join(root, 'data/content.js')));
 await rm(destination, {recursive:true, force:true});
