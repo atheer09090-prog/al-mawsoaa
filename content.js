@@ -117,6 +117,16 @@ window.OMANI_CONTENT = [
     "added": "2026-10-21"
   },
   {
+    "id": "game-faisal-journey",
+    "section": "play",
+    "title": "رحلة السلطان فيصل",
+    "description": "مغامرة تاريخية عبر سبع مراحل في عهد السلطان فيصل بن تركي؛ استكشف المواقع والوثائق، وتفاعل مع الشخصيات، وأجب عن أسئلة المؤرّخ.",
+    "cover": "assets/content/games/cover-faisal-journey.webp",
+    "embed": "assets/content/games/faisal-journey.html",
+    "category": "مغامرة تاريخية",
+    "added": "2026-10-24"
+  },
+  {
     "id": "game-history-rescue",
     "section": "play",
     "title": "مهمة إنقاذ تاريخ عُمان",
