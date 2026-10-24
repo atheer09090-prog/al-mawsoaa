@@ -458,7 +458,7 @@ function step(dt){const p=G.p,L=G.L;const SP=330,JV=840,GR=2100;
   if(h.kind==='snake'&&h.hp>0){h.ph+=dt;const d=p.x-h.x;h.face=d>0?1:-1;if(h.bite>0){h.bite-=dt;if(h.bite<.25&&!h.bit){h.bit=true;if(Math.abs(d)<120&&Math.abs(h.z-p.z)<40&&p.h<50){hurt(h.x);toast('لدغة أفعى! اضربها بالسيف ⚔️');}}}else if(Math.abs(d)<150&&Math.abs(h.z-p.z)<60){h.bite=.6;h.bit=false;}}
   if(h.kind==='rocks'){if(p.h<62&&Math.abs(p.z-h.z)<34&&Math.abs(p.x-h.x)<h.w/2+20){p.x=oldX;if(Math.abs(oldX-h.x)<h.w/2+20)p.x=h.x+(oldX<h.x?-1:1)*(h.w/2+21);}}
   if(h.kind==='falaj'){const y0=FY0()+6,xc=h.x+40*(1-2*(gyz(p.z)-y0)/(H-y0));if(p.ground&&Math.abs(p.x-xc)<(h.w-40)/2-14){hurt(h.x);toast('سقطت في الفلج! اقفز فوقه');p.x=xc-h.w/2-50;p.vy=0;p.h=0;}}
-  
+
   if(h.dead>0)h.dead-=dt;}
  if(G.invul>0)G.invul-=dt;if(G.shake>0)G.shake-=dt;
  timerTick(dt);
