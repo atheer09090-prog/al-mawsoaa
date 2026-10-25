@@ -1,0 +1,322 @@
+[
+  {
+    "id": "dunes",
+    "title": "كثبان رمال الشرقية عند الغروب",
+    "author": "albinfo",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Wahiba_Sands_06.jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/af/Wahiba_Sands_06.jpg",
+    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "focal": "50% 50%",
+    "files": [
+      {
+        "src": "assets/images/calendar/dunes-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 15682
+      },
+      {
+        "src": "assets/images/calendar/dunes-1200.webp",
+        "width": 1200,
+        "height": 675,
+        "bytes": 41414
+      },
+      {
+        "src": "assets/images/calendar/dunes-1800.webp",
+        "width": 1800,
+        "height": 1013,
+        "bytes": 72780
+      }
+    ],
+    "originalSha256": "b5f385febccf47fd8163bbe6ae1dc0bde6eae0f7e600787fcbde6036ce30caa4"
+  },
+  {
+    "id": "mountains",
+    "title": "هضبة جبل شمس وجبال الحجر",
+    "author": "albinfo",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Jebel_Shams_plateau.jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/08/Jebel_Shams_plateau.jpg",
+    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "focal": "50% 50%",
+    "files": [
+      {
+        "src": "assets/images/calendar/mountains-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 50500
+      },
+      {
+        "src": "assets/images/calendar/mountains-1200.webp",
+        "width": 1200,
+        "height": 675,
+        "bytes": 169148
+      },
+      {
+        "src": "assets/images/calendar/mountains-1800.webp",
+        "width": 1800,
+        "height": 1013,
+        "bytes": 170366
+      }
+    ],
+    "originalSha256": "3d6ad2fc9eb9b86f5c5c2e92669ee5e78a208571702568383bf6e933ac5e7617"
+  },
+  {
+    "id": "roses",
+    "title": "ورود مزروعة في قرية العين بالجبل الأخضر",
+    "author": "Kathryn james",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Roses_Al_Ayn.jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/46/Roses_Al_Ayn.jpg",
+    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "focal": "50% 50%",
+    "files": [
+      {
+        "src": "assets/images/calendar/roses-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 79822
+      },
+      {
+        "src": "assets/images/calendar/roses-1200.webp",
+        "width": 1200,
+        "height": 675,
+        "bytes": 169186
+      },
+      {
+        "src": "assets/images/calendar/roses-1800.webp",
+        "width": 1800,
+        "height": 1013,
+        "bytes": 162366
+      }
+    ],
+    "originalSha256": "b1186373330008df605364cfff18ba1a3125b30b9cbd8cc637ad8f9e018612d8"
+  },
+  {
+    "id": "frankincense",
+    "title": "أشجار اللبان في وادي دوكة بمحافظة ظفار",
+    "author": "Dr. Thomas Liptak",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Oman,_Wadi_Dawkah,_Land_of_Frankincense.jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/65/Oman%2C_Wadi_Dawkah%2C_Land_of_Frankincense.jpg",
+    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "focal": "50% 50%",
+    "files": [
+      {
+        "src": "assets/images/calendar/frankincense-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 46688
+      },
+      {
+        "src": "assets/images/calendar/frankincense-1200.webp",
+        "width": 1200,
+        "height": 675,
+        "bytes": 156132
+      },
+      {
+        "src": "assets/images/calendar/frankincense-1800.webp",
+        "width": 1800,
+        "height": 1013,
+        "bytes": 179788
+      }
+    ],
+    "originalSha256": "e25df2c765904b084e166a5da95963e77de1fcadf7efbe24fa6d67c12fb973e5"
+  },
+  {
+    "id": "khareef",
+    "title": "وادي دربات في موسم خريف ظفار",
+    "author": "Muiad123",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Wadi_darbat_(3).jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Wadi_darbat_%283%29.jpg",
+    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "focal": "50% 50%",
+    "files": [
+      {
+        "src": "assets/images/calendar/khareef-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 57128
+      },
+      {
+        "src": "assets/images/calendar/khareef-1200.webp",
+        "width": 1200,
+        "height": 675,
+        "bytes": 177444
+      },
+      {
+        "src": "assets/images/calendar/khareef-1800.webp",
+        "width": 1800,
+        "height": 1013,
+        "bytes": 167036
+      }
+    ],
+    "originalSha256": "e463bee40dccd0aae6c9c4edd1c879d783725e8914b91bd184ba7cc5986f1bca"
+  },
+  {
+    "id": "turtle",
+    "title": "سلحفاة على شاطئ محمية رأس الجنز",
+    "author": "Andries Oudshoorn",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Ras_al-Jinz_(4).jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/98/Ras_al-Jinz_%284%29.jpg",
+    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "focal": "50% 50%",
+    "files": [
+      {
+        "src": "assets/images/calendar/turtle-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 46458
+      },
+      {
+        "src": "assets/images/calendar/turtle-1200.webp",
+        "width": 1200,
+        "height": 675,
+        "bytes": 138072
+      },
+      {
+        "src": "assets/images/calendar/turtle-1800.webp",
+        "width": 1800,
+        "height": 1013,
+        "bytes": 161784
+      }
+    ],
+    "originalSha256": "b9368294b5e4f572da3fa178fb9f380fc1689ac7f0e9e07db680d436920a2ac0"
+  },
+  {
+    "id": "terraces",
+    "title": "مدرجات قرية العين الزراعية في الجبل الأخضر",
+    "author": "albinfo",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Jebel_Akhdar_%E2%80%93_Al-Ayn_village.jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Jebel_Akhdar_%E2%80%93_Al-Ayn_village.jpg",
+    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "focal": "50% 50%",
+    "files": [
+      {
+        "src": "assets/images/calendar/terraces-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 82506
+      },
+      {
+        "src": "assets/images/calendar/terraces-1200.webp",
+        "width": 1200,
+        "height": 675,
+        "bytes": 175716
+      },
+      {
+        "src": "assets/images/calendar/terraces-1800.webp",
+        "width": 1800,
+        "height": 1013,
+        "bytes": 162758
+      }
+    ],
+    "originalSha256": "36c27e367e440c9f1f677bf62e872a860b46fec6ee1f12bd8cd2eda76b39f856"
+  },
+  {
+    "id": "palms",
+    "title": "واحة النخيل في بركة الموز بمحافظة الداخلية",
+    "author": "Albinfo",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Birkat_al_Mouz.jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/68/Birkat_al_Mouz.jpg",
+    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "focal": "50% 50%",
+    "files": [
+      {
+        "src": "assets/images/calendar/palms-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 61018
+      },
+      {
+        "src": "assets/images/calendar/palms-1200.webp",
+        "width": 1200,
+        "height": 675,
+        "bytes": 168806
+      },
+      {
+        "src": "assets/images/calendar/palms-1800.webp",
+        "width": 1800,
+        "height": 1013,
+        "bytes": 172314
+      }
+    ],
+    "originalSha256": "a08bb12a89707ed340b288168b2345b0b810f868d1877b473e354c93912b87b3"
+  },
+  {
+    "id": "wadi",
+    "title": "مجرى وادي شاب بين الجبال",
+    "author": "albinfo",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Wadi_Shab_2.jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Wadi_Shab_2.jpg",
+    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "focal": "50% 50%",
+    "files": [
+      {
+        "src": "assets/images/calendar/wadi-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 46912
+      },
+      {
+        "src": "assets/images/calendar/wadi-1200.webp",
+        "width": 1200,
+        "height": 675,
+        "bytes": 169856
+      },
+      {
+        "src": "assets/images/calendar/wadi-1800.webp",
+        "width": 1800,
+        "height": 1013,
+        "bytes": 166578
+      }
+    ],
+    "originalSha256": "f37d1332f5069b17717fcd3a20ff27456b09d67ecc09d7087e2caf97739d19cd"
+  },
+  {
+    "id": "muttrah",
+    "title": "كورنيش مطرح ليلًا وانعكاس الأضواء على الخليج",
+    "author": "Davide Mauro",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Muttrah_Corniche_by_night_01.jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Muttrah_Corniche_by_night_01.jpg",
+    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "focal": "50% 50%",
+    "files": [
+      {
+        "src": "assets/images/calendar/muttrah-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 31582
+      },
+      {
+        "src": "assets/images/calendar/muttrah-1200.webp",
+        "width": 1200,
+        "height": 675,
+        "bytes": 93036
+      },
+      {
+        "src": "assets/images/calendar/muttrah-1800.webp",
+        "width": 1800,
+        "height": 1013,
+        "bytes": 132614
+      }
+    ],
+    "originalSha256": "8bb24d6a34748ce3dcd948b2e1ac28620fe0a4c9fb4e111ffd79073cf50411a9"
+  }
+]

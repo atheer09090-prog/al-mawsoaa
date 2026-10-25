@@ -93,7 +93,7 @@ function renderBays() {
       </a></article>`;
   }).join('');
   bindImageReveal($('#bays'));
-  $('#footerNav').innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${s.title}</a>`).join('');
+  $('#footerNav').innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${s.title}</a>`).join('') + '<a href="#calendar">عُمان على مدار العام</a><a href="#image-credits">مصادر الصور</a>';
 }
 
 function renderRecent() {
@@ -369,8 +369,8 @@ viewer.addEventListener('close', () => {
   if (viewer.open) return; // a stale close event after the viewer was reopened
   $('#viewerContent').replaceChildren(); // stops video / iframes
   if (openItem) {
-    const {rid} = parseHash();
-    if (rid) history.replaceState(null, '', `#${openItem.section}`);
+    const {page, rid} = parseHash();
+    if (page === openItem.section && rid === openItem.id) history.replaceState(null, '', `#${openItem.section}`);
     openItem = null;
   }
 });
@@ -402,13 +402,14 @@ function renderPalette() {
     : [...content].sort((a, b) => (b.added || '').localeCompare(a.added || '')).slice(0, 3);
   pItems = [
     ...secs.map(s => ({type: 'section', hash: s.id, icon: s.id, title: s.title, sub: s.short})),
+    ...(window.OmaniCalendar?.search(q) || []),
     ...res.map(x => ({type: 'item', hash: `${x.section}/${encodeURIComponent(x.id)}`, icon: x.section, title: x.title, sub: `${byId(x.section).title}${x.category ? ' · ' + x.category : ''}`}))
   ];
   pIndex = 0;
   if (!pItems.length) { pList.innerHTML = `<li class="palette-empty" role="presentation">لا توجد نتائج لـ «${esc(pInput.value.trim())}»</li>`; pInput.removeAttribute('aria-activedescendant'); return; }
   let html = '', last = '';
   pItems.forEach((it, i) => {
-    const g = it.type === 'section' ? 'الأقسام' : (q ? 'المواد' : 'أحدث المواد');
+    const g = it.type === 'section' ? 'الأقسام' : it.type === 'feature' ? 'استكشف عُمان' : (q ? 'المواد' : 'أحدث المواد');
     if (g !== last) { html += `<li class="palette-group" role="presentation">${g}</li>`; last = g; }
     html += `<li class="palette-item" role="option" id="pal-${i}" data-i="${i}" aria-selected="${i === 0}">${ico(it.icon)}<span><b>${esc(it.title)}</b><small>${esc(it.sub)}</small></span></li>`;
   });
@@ -471,10 +472,21 @@ function route() {
     history.replaceState(null, '', `#library/${rid}`); route(); return;
   }
   const section = byId(page);
-  const homeAnchors = ['home', 'schoolGallery', 'about', 'collections'];
+  if (page === 'image-credits') {
+    closeViewer(); closeMenu(); state.section = null;
+    $$('[data-page]').forEach(x => x.classList.toggle('is-active', x.dataset.page === 'credits'));
+    $$('.primary-nav a').forEach(a => a.removeAttribute('aria-current'));
+    $('#siteHeader').dataset.view = 'credits';
+    window.OmaniCalendar?.renderCredits();
+    document.title = 'مصادر الصور | الموسوعة العُمانية';
+    scrollTo({top:0,behavior:reduceMotion()?'auto':'smooth'});
+    $('#imageCreditsTitle').focus({preventScroll:true});
+    return;
+  }
+  const homeAnchors = ['home', 'schoolGallery', 'about', 'collections', 'calendar'];
   const isHome = !section;
   $('#siteHeader').dataset.view = isHome ? 'home' : 'category';
-  if (!rid && viewer.open) viewer.close();
+  if ((!rid || !section) && viewer.open) viewer.close();
   $$('[data-page]').forEach(x => x.classList.toggle('is-active', x.dataset.page === (isHome ? 'home' : 'category')));
   $$('.primary-nav a').forEach(a => {
     const cur = a.dataset.route === (section ? section.id : 'home');
@@ -496,6 +508,7 @@ function route() {
   } else {
     state.section = null;
     document.title = TITLE;
+    if (page === 'calendar' && rid) window.OmaniCalendar?.selectEvent(rid);
     const anchor = homeAnchors.includes(page) && page !== 'home' ? document.getElementById(page) : null;
     if (anchor) anchor.scrollIntoView({behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start'});
     else scrollTo({top: 0, behavior: reduceMotion() ? 'auto' : 'smooth'});
@@ -673,6 +686,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#year').textContent = new Date().getFullYear();
   if (!dataOk) $('#dataError').hidden = false;
   renderBays(); renderRecent(); bindImageReveal(document); initStepper();
+  window.OmaniCalendar?.init();
   intro(); initScroll(); initReveal(); initSchoolGallery();
   route();
   addEventListener('hashchange', route);
