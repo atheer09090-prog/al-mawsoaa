@@ -9,7 +9,7 @@ await resolveLfs(root);
 await writeFile(path.join(root, 'content.js'), await readFile(path.join(root, 'data/content.js')));
 await rm(destination, {recursive:true, force:true});
 await mkdir(destination, {recursive:true});
-for (const entry of ['index.html','app.js','calendar.js','styles.css','data','assets']) {
+for (const entry of ['index.html','app.js','journey.js','motion.js','journey.css','styles.css','data','assets']) {
   await cp(path.join(root, entry), path.join(destination, entry), {
     recursive:true, filter:source => !['.DS_Store','Thumbs.db'].includes(path.basename(source))
   });

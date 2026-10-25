@@ -100,7 +100,7 @@ function renderBays() {
   }).join('');
   $('#bays').setAttribute('aria-busy','false');
   bindImageReveal($('#bays'));
-  $('#footerNav').innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${s.title}</a>`).join('') + '<a href="#calendar">عُمان على مدار العام</a><a href="#image-credits">مصادر الصور</a>';
+  $('#footerNav').innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${s.title}</a>`).join('') + '<a href="#journey">رحلة عام في عُمان</a><a href="#image-credits">مصادر الصور</a>';
 }
 
 function renderRecent() {
@@ -409,7 +409,7 @@ function renderPalette() {
     : [...content].sort((a, b) => (b.added || '').localeCompare(a.added || '')).slice(0, 3);
   pItems = [
     ...secs.map(s => ({type: 'section', hash: s.id, icon: s.id, title: s.title, sub: s.short})),
-    ...(window.OmaniCalendar?.search(q) || []),
+    ...(window.OmaniJourney?.search(q) || []),
     ...res.map(x => ({type: 'item', hash: `${x.section}/${encodeURIComponent(x.id)}`, icon: x.section, title: x.title, sub: `${byId(x.section).title}${x.category ? ' · ' + x.category : ''}`}))
   ];
   pIndex = 0;
@@ -463,7 +463,13 @@ function parseHash() {
   let raw = 'home';
   try { raw = decodeURIComponent(location.hash.slice(1) || 'home'); } catch { /* malformed hash */ }
   const [page, ...rest] = raw.split('/');
-  return {page, rid: rest.join('/')};
+  const rid = rest.join('/');
+  if (page === 'calendar') {
+    const chapter = window.OmaniJourney?.legacy(rid) || rid;
+    history.replaceState(null,'','#journey'+(chapter ? '/'+chapter : ''));
+    return {page:'journey',rid:chapter};
+  }
+  return {page, rid};
 }
 function goTo(hash) {
   if (location.hash === hash) route(); else location.hash = hash;
@@ -476,10 +482,10 @@ function closeMenu() {
 let routedOnce = false;
 function route() {
   const {page} = parseHash(), section = byId(page);
-  const nextView = page === 'image-credits' ? 'credits' : section ? 'category' : 'home';
+  const nextView = page === 'journey' ? 'journey' : page === 'image-credits' ? 'credits' : section ? 'category' : 'home';
   const previousView = $('.page.is-active')?.dataset.page;
   const changed = nextView !== previousView || (section && state.section?.id !== section.id);
-  const animate = routedOnce && changed;
+  const animate = routedOnce && changed && nextView !== 'journey' && previousView !== 'journey';
   routedOnce = true;
   const useSnapshot = animate && !reduceMotion() && document.startViewTransition && !document.documentElement.dataset.viewTransition;
   const update = () => {
@@ -490,7 +496,7 @@ function route() {
       void active.offsetWidth; active.classList.add('is-route-entering');
     }
     if (nextView === 'home' && changed) {
-      const target = ['calendar','about','collections','schoolGallery'].includes(page) ? document.querySelector(`#${page} h2`) : $('.hero-title');
+      const target = ['about','collections','schoolGallery'].includes(page) ? document.querySelector(`#${page} h2`) : $('.hero-title');
       if (target) { target.setAttribute('tabindex','-1'); target.focus({preventScroll:true}); }
     }
   };
@@ -502,18 +508,28 @@ function renderRoute() {
     history.replaceState(null, '', `#library/${rid}`); route(); return;
   }
   const section = byId(page);
+  if (page !== 'journey') window.OmaniJourney?.leave();
+  if (page === 'journey') {
+    closeViewer(); closeMenu(); state.section = null;
+    $$('[data-page]').forEach(x=>x.classList.toggle('is-active',x.dataset.page==='journey'));
+    $$('.primary-nav a').forEach(a=>a.removeAttribute('aria-current'));
+    $('#siteHeader').dataset.view='journey';
+    document.title='رحلة عام في عُمان | الموسوعة العُمانية';
+    window.OmaniJourney?.enter(rid);
+    return;
+  }
   if (page === 'image-credits') {
     closeViewer(); closeMenu(); state.section = null;
     $$('[data-page]').forEach(x => x.classList.toggle('is-active', x.dataset.page === 'credits'));
     $$('.primary-nav a').forEach(a => a.removeAttribute('aria-current'));
     $('#siteHeader').dataset.view = 'credits';
-    window.OmaniCalendar?.renderCredits();
+    window.OmaniJourney?.renderCredits();
     document.title = 'مصادر الصور | الموسوعة العُمانية';
     scrollTo({top:0,behavior:reduceMotion()?'auto':'smooth'});
     $('#imageCreditsTitle').focus({preventScroll:true});
     return;
   }
-  const homeAnchors = ['home', 'schoolGallery', 'about', 'collections', 'calendar'];
+  const homeAnchors = ['home', 'schoolGallery', 'about', 'collections'];
   const isHome = !section;
   $('#siteHeader').dataset.view = isHome ? 'home' : 'category';
   if ((!rid || !section) && viewer.open) viewer.close();
@@ -538,7 +554,6 @@ function renderRoute() {
   } else {
     state.section = null;
     document.title = TITLE;
-    if (page === 'calendar' && rid) window.OmaniCalendar?.selectEvent(rid);
     const anchor = homeAnchors.includes(page) && page !== 'home' ? document.getElementById(page) : null;
     if (anchor) {
       anchor.scrollIntoView({behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start'});
@@ -728,7 +743,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#year').textContent = new Date().getFullYear();
   if (!dataOk) $('#dataError').hidden = false;
   renderBays(); renderRecent(); bindImageReveal(document); initStepper();
-  window.OmaniCalendar?.init();
+  window.OmaniJourney?.init();
   prepareSplashMedia(); intro(); initScroll(); initReveal(); initSchoolGallery();
   route();
   addEventListener('hashchange', route);

@@ -7,29 +7,54 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "url": "https://commons.wikimedia.org/wiki/File:Wahiba_Sands_06.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/af/Wahiba_Sands_06.jpg",
-    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "changes": "قصّ للمنظر إلى ١٦:٩، واقتطاع تفصيل من الصورة نفسها بنسبة ٤:٥، ثم تغيير الحجم والتحويل والضغط إلى WebP. تحتفظ النسخ المشتقة برخصة الأصل.",
     "focal": "50% 50%",
     "files": [
       {
-        "src": "assets/images/calendar/dunes-640.webp",
+        "src": "assets/images/journey/dunes-wide-640.webp",
+        "variant": "wide",
         "width": 640,
         "height": 360,
-        "bytes": 15682
+        "bytes": 15610
       },
       {
-        "src": "assets/images/calendar/dunes-1200.webp",
+        "src": "assets/images/journey/dunes-wide-1200.webp",
+        "variant": "wide",
         "width": 1200,
         "height": 675,
-        "bytes": 41414
+        "bytes": 42054
       },
       {
-        "src": "assets/images/calendar/dunes-1800.webp",
+        "src": "assets/images/journey/dunes-wide-1800.webp",
+        "variant": "wide",
         "width": 1800,
-        "height": 1013,
-        "bytes": 72780
+        "height": 1012,
+        "bytes": 72950
+      },
+      {
+        "src": "assets/images/journey/dunes-detail-640.webp",
+        "variant": "detail",
+        "width": 640,
+        "height": 800,
+        "bytes": 25680
+      },
+      {
+        "src": "assets/images/journey/dunes-detail-1200.webp",
+        "variant": "detail",
+        "width": 1200,
+        "height": 1500,
+        "bytes": 62630
+      },
+      {
+        "src": "assets/images/journey/dunes-detail-1800.webp",
+        "variant": "detail",
+        "width": 1800,
+        "height": 2250,
+        "bytes": 115052
       }
     ],
-    "originalSha256": "b5f385febccf47fd8163bbe6ae1dc0bde6eae0f7e600787fcbde6036ce30caa4"
+    "originalSha256": "b5f385febccf47fd8163bbe6ae1dc0bde6eae0f7e600787fcbde6036ce30caa4",
+    "detailFocal": "50% 50%"
   },
   {
     "id": "mountains",
@@ -39,29 +64,54 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "url": "https://commons.wikimedia.org/wiki/File:Jebel_Shams_plateau.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/08/Jebel_Shams_plateau.jpg",
-    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "changes": "قصّ للمنظر إلى ١٦:٩، واقتطاع تفصيل من الصورة نفسها بنسبة ٤:٥، ثم تغيير الحجم والتحويل والضغط إلى WebP. تحتفظ النسخ المشتقة برخصة الأصل.",
     "focal": "50% 50%",
     "files": [
       {
-        "src": "assets/images/calendar/mountains-640.webp",
+        "src": "assets/images/journey/mountains-wide-640.webp",
+        "variant": "wide",
         "width": 640,
         "height": 360,
         "bytes": 50500
       },
       {
-        "src": "assets/images/calendar/mountains-1200.webp",
+        "src": "assets/images/journey/mountains-wide-1200.webp",
+        "variant": "wide",
         "width": 1200,
         "height": 675,
         "bytes": 169148
       },
       {
-        "src": "assets/images/calendar/mountains-1800.webp",
+        "src": "assets/images/journey/mountains-wide-1800.webp",
+        "variant": "wide",
         "width": 1800,
-        "height": 1013,
-        "bytes": 170366
+        "height": 1012,
+        "bytes": 157490
+      },
+      {
+        "src": "assets/images/journey/mountains-detail-640.webp",
+        "variant": "detail",
+        "width": 640,
+        "height": 800,
+        "bytes": 97996
+      },
+      {
+        "src": "assets/images/journey/mountains-detail-1200.webp",
+        "variant": "detail",
+        "width": 1200,
+        "height": 1500,
+        "bytes": 169260
+      },
+      {
+        "src": "assets/images/journey/mountains-detail-1800.webp",
+        "variant": "detail",
+        "width": 1800,
+        "height": 2250,
+        "bytes": 153470
       }
     ],
-    "originalSha256": "3d6ad2fc9eb9b86f5c5c2e92669ee5e78a208571702568383bf6e933ac5e7617"
+    "originalSha256": "3d6ad2fc9eb9b86f5c5c2e92669ee5e78a208571702568383bf6e933ac5e7617",
+    "detailFocal": "50% 50%"
   },
   {
     "id": "roses",
@@ -71,29 +121,54 @@
     "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
     "url": "https://commons.wikimedia.org/wiki/File:Roses_Al_Ayn.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/46/Roses_Al_Ayn.jpg",
-    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "changes": "قصّ للمنظر إلى ١٦:٩، واقتطاع تفصيل من الصورة نفسها بنسبة ٤:٥، ثم تغيير الحجم والتحويل والضغط إلى WebP. تحتفظ النسخ المشتقة برخصة الأصل.",
     "focal": "50% 50%",
     "files": [
       {
-        "src": "assets/images/calendar/roses-640.webp",
+        "src": "assets/images/journey/roses-wide-640.webp",
+        "variant": "wide",
         "width": 640,
         "height": 360,
-        "bytes": 79822
+        "bytes": 80482
       },
       {
-        "src": "assets/images/calendar/roses-1200.webp",
+        "src": "assets/images/journey/roses-wide-1200.webp",
+        "variant": "wide",
         "width": 1200,
         "height": 675,
-        "bytes": 169186
+        "bytes": 173788
       },
       {
-        "src": "assets/images/calendar/roses-1800.webp",
+        "src": "assets/images/journey/roses-wide-1800.webp",
+        "variant": "wide",
         "width": 1800,
-        "height": 1013,
-        "bytes": 162366
+        "height": 1012,
+        "bytes": 171370
+      },
+      {
+        "src": "assets/images/journey/roses-detail-640.webp",
+        "variant": "detail",
+        "width": 640,
+        "height": 800,
+        "bytes": 152514
+      },
+      {
+        "src": "assets/images/journey/roses-detail-1200.webp",
+        "variant": "detail",
+        "width": 1200,
+        "height": 1500,
+        "bytes": 178790
+      },
+      {
+        "src": "assets/images/journey/roses-detail-1800.webp",
+        "variant": "detail",
+        "width": 1800,
+        "height": 2250,
+        "bytes": 162274
       }
     ],
-    "originalSha256": "b1186373330008df605364cfff18ba1a3125b30b9cbd8cc637ad8f9e018612d8"
+    "originalSha256": "b1186373330008df605364cfff18ba1a3125b30b9cbd8cc637ad8f9e018612d8",
+    "detailFocal": "50% 50%"
   },
   {
     "id": "frankincense",
@@ -103,29 +178,54 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "url": "https://commons.wikimedia.org/wiki/File:Oman,_Wadi_Dawkah,_Land_of_Frankincense.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/65/Oman%2C_Wadi_Dawkah%2C_Land_of_Frankincense.jpg",
-    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "changes": "قصّ للمنظر إلى ١٦:٩، واقتطاع تفصيل من الصورة نفسها بنسبة ٤:٥، ثم تغيير الحجم والتحويل والضغط إلى WebP. تحتفظ النسخ المشتقة برخصة الأصل.",
     "focal": "50% 50%",
     "files": [
       {
-        "src": "assets/images/calendar/frankincense-640.webp",
+        "src": "assets/images/journey/frankincense-wide-640.webp",
+        "variant": "wide",
         "width": 640,
         "height": 360,
-        "bytes": 46688
+        "bytes": 46536
       },
       {
-        "src": "assets/images/calendar/frankincense-1200.webp",
+        "src": "assets/images/journey/frankincense-wide-1200.webp",
+        "variant": "wide",
         "width": 1200,
         "height": 675,
-        "bytes": 156132
+        "bytes": 156236
       },
       {
-        "src": "assets/images/calendar/frankincense-1800.webp",
+        "src": "assets/images/journey/frankincense-wide-1800.webp",
+        "variant": "wide",
         "width": 1800,
-        "height": 1013,
-        "bytes": 179788
+        "height": 1012,
+        "bytes": 169140
+      },
+      {
+        "src": "assets/images/journey/frankincense-detail-640.webp",
+        "variant": "detail",
+        "width": 640,
+        "height": 800,
+        "bytes": 94142
+      },
+      {
+        "src": "assets/images/journey/frankincense-detail-1200.webp",
+        "variant": "detail",
+        "width": 1200,
+        "height": 1500,
+        "bytes": 176440
+      },
+      {
+        "src": "assets/images/journey/frankincense-detail-1800.webp",
+        "variant": "detail",
+        "width": 1800,
+        "height": 2250,
+        "bytes": 165016
       }
     ],
-    "originalSha256": "e25df2c765904b084e166a5da95963e77de1fcadf7efbe24fa6d67c12fb973e5"
+    "originalSha256": "e25df2c765904b084e166a5da95963e77de1fcadf7efbe24fa6d67c12fb973e5",
+    "detailFocal": "50% 50%"
   },
   {
     "id": "khareef",
@@ -135,29 +235,54 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "url": "https://commons.wikimedia.org/wiki/File:Wadi_darbat_(3).jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Wadi_darbat_%283%29.jpg",
-    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "changes": "قصّ للمنظر إلى ١٦:٩، واقتطاع تفصيل من الصورة نفسها بنسبة ٤:٥، ثم تغيير الحجم والتحويل والضغط إلى WebP. تحتفظ النسخ المشتقة برخصة الأصل.",
     "focal": "50% 50%",
     "files": [
       {
-        "src": "assets/images/calendar/khareef-640.webp",
+        "src": "assets/images/journey/khareef-wide-640.webp",
+        "variant": "wide",
         "width": 640,
         "height": 360,
-        "bytes": 57128
+        "bytes": 57298
       },
       {
-        "src": "assets/images/calendar/khareef-1200.webp",
+        "src": "assets/images/journey/khareef-wide-1200.webp",
+        "variant": "wide",
         "width": 1200,
         "height": 675,
-        "bytes": 177444
+        "bytes": 178886
       },
       {
-        "src": "assets/images/calendar/khareef-1800.webp",
+        "src": "assets/images/journey/khareef-wide-1800.webp",
+        "variant": "wide",
         "width": 1800,
-        "height": 1013,
-        "bytes": 167036
+        "height": 1012,
+        "bytes": 161210
+      },
+      {
+        "src": "assets/images/journey/khareef-detail-640.webp",
+        "variant": "detail",
+        "width": 640,
+        "height": 800,
+        "bytes": 114290
+      },
+      {
+        "src": "assets/images/journey/khareef-detail-1200.webp",
+        "variant": "detail",
+        "width": 1200,
+        "height": 1500,
+        "bytes": 170984
+      },
+      {
+        "src": "assets/images/journey/khareef-detail-1800.webp",
+        "variant": "detail",
+        "width": 1800,
+        "height": 2250,
+        "bytes": 153360
       }
     ],
-    "originalSha256": "e463bee40dccd0aae6c9c4edd1c879d783725e8914b91bd184ba7cc5986f1bca"
+    "originalSha256": "e463bee40dccd0aae6c9c4edd1c879d783725e8914b91bd184ba7cc5986f1bca",
+    "detailFocal": "50% 50%"
   },
   {
     "id": "turtle",
@@ -167,29 +292,54 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
     "url": "https://commons.wikimedia.org/wiki/File:Ras_al-Jinz_(4).jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/98/Ras_al-Jinz_%284%29.jpg",
-    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "changes": "قصّ للمنظر إلى ١٦:٩، واقتطاع تفصيل من الصورة نفسها بنسبة ٤:٥، ثم تغيير الحجم والتحويل والضغط إلى WebP. تحتفظ النسخ المشتقة برخصة الأصل.",
     "focal": "50% 50%",
     "files": [
       {
-        "src": "assets/images/calendar/turtle-640.webp",
+        "src": "assets/images/journey/turtle-wide-640.webp",
+        "variant": "wide",
         "width": 640,
         "height": 360,
-        "bytes": 46458
+        "bytes": 45606
       },
       {
-        "src": "assets/images/calendar/turtle-1200.webp",
+        "src": "assets/images/journey/turtle-wide-1200.webp",
+        "variant": "wide",
         "width": 1200,
         "height": 675,
-        "bytes": 138072
+        "bytes": 135848
       },
       {
-        "src": "assets/images/calendar/turtle-1800.webp",
+        "src": "assets/images/journey/turtle-wide-1800.webp",
+        "variant": "wide",
         "width": 1800,
-        "height": 1013,
-        "bytes": 161784
+        "height": 1012,
+        "bytes": 172836
+      },
+      {
+        "src": "assets/images/journey/turtle-detail-640.webp",
+        "variant": "detail",
+        "width": 640,
+        "height": 800,
+        "bytes": 83342
+      },
+      {
+        "src": "assets/images/journey/turtle-detail-1200.webp",
+        "variant": "detail",
+        "width": 1200,
+        "height": 1500,
+        "bytes": 153862
+      },
+      {
+        "src": "assets/images/journey/turtle-detail-1800.webp",
+        "variant": "detail",
+        "width": 1800,
+        "height": 2250,
+        "bytes": 170850
       }
     ],
-    "originalSha256": "b9368294b5e4f572da3fa178fb9f380fc1689ac7f0e9e07db680d436920a2ac0"
+    "originalSha256": "b9368294b5e4f572da3fa178fb9f380fc1689ac7f0e9e07db680d436920a2ac0",
+    "detailFocal": "50% 50%"
   },
   {
     "id": "terraces",
@@ -199,29 +349,54 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "url": "https://commons.wikimedia.org/wiki/File:Jebel_Akhdar_%E2%80%93_Al-Ayn_village.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Jebel_Akhdar_%E2%80%93_Al-Ayn_village.jpg",
-    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "changes": "قصّ للمنظر إلى ١٦:٩، واقتطاع تفصيل من الصورة نفسها بنسبة ٤:٥، ثم تغيير الحجم والتحويل والضغط إلى WebP. تحتفظ النسخ المشتقة برخصة الأصل.",
     "focal": "50% 50%",
     "files": [
       {
-        "src": "assets/images/calendar/terraces-640.webp",
+        "src": "assets/images/journey/terraces-wide-640.webp",
+        "variant": "wide",
         "width": 640,
         "height": 360,
-        "bytes": 82506
+        "bytes": 84156
       },
       {
-        "src": "assets/images/calendar/terraces-1200.webp",
+        "src": "assets/images/journey/terraces-wide-1200.webp",
+        "variant": "wide",
         "width": 1200,
         "height": 675,
-        "bytes": 175716
+        "bytes": 166960
       },
       {
-        "src": "assets/images/calendar/terraces-1800.webp",
+        "src": "assets/images/journey/terraces-wide-1800.webp",
+        "variant": "wide",
         "width": 1800,
-        "height": 1013,
-        "bytes": 162758
+        "height": 1012,
+        "bytes": 171782
+      },
+      {
+        "src": "assets/images/journey/terraces-detail-640.webp",
+        "variant": "detail",
+        "width": 640,
+        "height": 800,
+        "bytes": 162570
+      },
+      {
+        "src": "assets/images/journey/terraces-detail-1200.webp",
+        "variant": "detail",
+        "width": 1200,
+        "height": 1500,
+        "bytes": 176716
+      },
+      {
+        "src": "assets/images/journey/terraces-detail-1800.webp",
+        "variant": "detail",
+        "width": 1800,
+        "height": 2250,
+        "bytes": 150190
       }
     ],
-    "originalSha256": "36c27e367e440c9f1f677bf62e872a860b46fec6ee1f12bd8cd2eda76b39f856"
+    "originalSha256": "36c27e367e440c9f1f677bf62e872a860b46fec6ee1f12bd8cd2eda76b39f856",
+    "detailFocal": "50% 50%"
   },
   {
     "id": "palms",
@@ -231,29 +406,54 @@
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
     "url": "https://commons.wikimedia.org/wiki/File:Birkat_al_Mouz.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/68/Birkat_al_Mouz.jpg",
-    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "changes": "قصّ للمنظر إلى ١٦:٩، واقتطاع تفصيل من الصورة نفسها بنسبة ٤:٥، ثم تغيير الحجم والتحويل والضغط إلى WebP. تحتفظ النسخ المشتقة برخصة الأصل.",
     "focal": "50% 50%",
     "files": [
       {
-        "src": "assets/images/calendar/palms-640.webp",
+        "src": "assets/images/journey/palms-wide-640.webp",
+        "variant": "wide",
         "width": 640,
         "height": 360,
-        "bytes": 61018
+        "bytes": 61422
       },
       {
-        "src": "assets/images/calendar/palms-1200.webp",
+        "src": "assets/images/journey/palms-wide-1200.webp",
+        "variant": "wide",
         "width": 1200,
         "height": 675,
-        "bytes": 168806
+        "bytes": 158826
       },
       {
-        "src": "assets/images/calendar/palms-1800.webp",
+        "src": "assets/images/journey/palms-wide-1800.webp",
+        "variant": "wide",
         "width": 1800,
-        "height": 1013,
-        "bytes": 172314
+        "height": 1012,
+        "bytes": 165472
+      },
+      {
+        "src": "assets/images/journey/palms-detail-640.webp",
+        "variant": "detail",
+        "width": 640,
+        "height": 800,
+        "bytes": 128526
+      },
+      {
+        "src": "assets/images/journey/palms-detail-1200.webp",
+        "variant": "detail",
+        "width": 1200,
+        "height": 1500,
+        "bytes": 179752
+      },
+      {
+        "src": "assets/images/journey/palms-detail-1800.webp",
+        "variant": "detail",
+        "width": 1800,
+        "height": 2250,
+        "bytes": 170908
       }
     ],
-    "originalSha256": "a08bb12a89707ed340b288168b2345b0b810f868d1877b473e354c93912b87b3"
+    "originalSha256": "a08bb12a89707ed340b288168b2345b0b810f868d1877b473e354c93912b87b3",
+    "detailFocal": "50% 50%"
   },
   {
     "id": "wadi",
@@ -263,29 +463,54 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "url": "https://commons.wikimedia.org/wiki/File:Wadi_Shab_2.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Wadi_Shab_2.jpg",
-    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "changes": "قصّ للمنظر إلى ١٦:٩، واقتطاع تفصيل من الصورة نفسها بنسبة ٤:٥، ثم تغيير الحجم والتحويل والضغط إلى WebP. تحتفظ النسخ المشتقة برخصة الأصل.",
     "focal": "50% 50%",
     "files": [
       {
-        "src": "assets/images/calendar/wadi-640.webp",
+        "src": "assets/images/journey/wadi-wide-640.webp",
+        "variant": "wide",
         "width": 640,
         "height": 360,
-        "bytes": 46912
+        "bytes": 47490
       },
       {
-        "src": "assets/images/calendar/wadi-1200.webp",
+        "src": "assets/images/journey/wadi-wide-1200.webp",
+        "variant": "wide",
         "width": 1200,
         "height": 675,
-        "bytes": 169856
+        "bytes": 172462
       },
       {
-        "src": "assets/images/calendar/wadi-1800.webp",
+        "src": "assets/images/journey/wadi-wide-1800.webp",
+        "variant": "wide",
         "width": 1800,
-        "height": 1013,
-        "bytes": 166578
+        "height": 1012,
+        "bytes": 158578
+      },
+      {
+        "src": "assets/images/journey/wadi-detail-640.webp",
+        "variant": "detail",
+        "width": 640,
+        "height": 800,
+        "bytes": 104656
+      },
+      {
+        "src": "assets/images/journey/wadi-detail-1200.webp",
+        "variant": "detail",
+        "width": 1200,
+        "height": 1500,
+        "bytes": 168196
+      },
+      {
+        "src": "assets/images/journey/wadi-detail-1800.webp",
+        "variant": "detail",
+        "width": 1800,
+        "height": 2250,
+        "bytes": 170636
       }
     ],
-    "originalSha256": "f37d1332f5069b17717fcd3a20ff27456b09d67ecc09d7087e2caf97739d19cd"
+    "originalSha256": "f37d1332f5069b17717fcd3a20ff27456b09d67ecc09d7087e2caf97739d19cd",
+    "detailFocal": "50% 50%"
   },
   {
     "id": "muttrah",
@@ -295,28 +520,167 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "url": "https://commons.wikimedia.org/wiki/File:Muttrah_Corniche_by_night_01.jpg",
     "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Muttrah_Corniche_by_night_01.jpg",
-    "changes": "قصّ إلى إطار ١٦:٩، وتغيير الحجم، والتحويل إلى WebP مع ضغط الصورة. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "changes": "قصّ للمنظر إلى ١٦:٩، واقتطاع تفصيل من الصورة نفسها بنسبة ٤:٥، ثم تغيير الحجم والتحويل والضغط إلى WebP. تحتفظ النسخ المشتقة برخصة الأصل.",
     "focal": "50% 50%",
     "files": [
       {
-        "src": "assets/images/calendar/muttrah-640.webp",
+        "src": "assets/images/journey/muttrah-wide-640.webp",
+        "variant": "wide",
         "width": 640,
         "height": 360,
-        "bytes": 31582
+        "bytes": 31942
       },
       {
-        "src": "assets/images/calendar/muttrah-1200.webp",
+        "src": "assets/images/journey/muttrah-wide-1200.webp",
+        "variant": "wide",
         "width": 1200,
         "height": 675,
-        "bytes": 93036
+        "bytes": 93068
       },
       {
-        "src": "assets/images/calendar/muttrah-1800.webp",
+        "src": "assets/images/journey/muttrah-wide-1800.webp",
+        "variant": "wide",
         "width": 1800,
-        "height": 1013,
-        "bytes": 132614
+        "height": 1012,
+        "bytes": 121448
+      },
+      {
+        "src": "assets/images/journey/muttrah-detail-640.webp",
+        "variant": "detail",
+        "width": 640,
+        "height": 800,
+        "bytes": 58436
+      },
+      {
+        "src": "assets/images/journey/muttrah-detail-1200.webp",
+        "variant": "detail",
+        "width": 1200,
+        "height": 1500,
+        "bytes": 179974
+      },
+      {
+        "src": "assets/images/journey/muttrah-detail-1800.webp",
+        "variant": "detail",
+        "width": 1800,
+        "height": 2250,
+        "bytes": 161226
       }
     ],
-    "originalSha256": "8bb24d6a34748ce3dcd948b2e1ac28620fe0a4c9fb4e111ffd79073cf50411a9"
+    "originalSha256": "8bb24d6a34748ce3dcd948b2e1ac28620fe0a4c9fb4e111ffd79073cf50411a9",
+    "detailFocal": "50% 50%"
+  },
+  {
+    "id": "dates",
+    "title": "ثمار النخيل في عُمان",
+    "author": "Alyahyai",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Dates_and_Sun.jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Dates_and_Sun.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "files": [
+      {
+        "src": "assets/images/journey/dates-wide-640.webp",
+        "variant": "wide",
+        "width": 640,
+        "height": 360,
+        "bytes": 89770
+      },
+      {
+        "src": "assets/images/journey/dates-wide-1200.webp",
+        "variant": "wide",
+        "width": 1200,
+        "height": 675,
+        "bytes": 167306
+      },
+      {
+        "src": "assets/images/journey/dates-wide-1800.webp",
+        "variant": "wide",
+        "width": 1800,
+        "height": 1012,
+        "bytes": 178310
+      },
+      {
+        "src": "assets/images/journey/dates-detail-640.webp",
+        "variant": "detail",
+        "width": 640,
+        "height": 800,
+        "bytes": 148644
+      },
+      {
+        "src": "assets/images/journey/dates-detail-1200.webp",
+        "variant": "detail",
+        "width": 1200,
+        "height": 1500,
+        "bytes": 161262
+      },
+      {
+        "src": "assets/images/journey/dates-detail-1800.webp",
+        "variant": "detail",
+        "width": 1800,
+        "height": 2250,
+        "bytes": 157174
+      }
+    ],
+    "focal": "50% 50%",
+    "detailFocal": "50% 50%",
+    "changes": "قصّ للمنظر إلى ١٦:٩، واقتطاع تفصيل من الصورة نفسها بنسبة ٤:٥، ثم تغيير الحجم والتحويل والضغط إلى WebP. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "originalSha256": "448e81bccb3f69c1990213d3ffe40c32c90aa7d293352dae7fc1f53d7c330464"
+  },
+  {
+    "id": "camp",
+    "title": "مخيم بين كثبان رمال الشرقية في بدية",
+    "author": "\"dronepicr\"",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Desert_camp_in_Wahiba_Sands_Bidiya,_Oman_(53697963193).jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/75/Desert_camp_in_Wahiba_Sands_Bidiya%2C_Oman_%2853697963193%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "files": [
+      {
+        "src": "assets/images/journey/camp-wide-640.webp",
+        "variant": "wide",
+        "width": 640,
+        "height": 360,
+        "bytes": 19370
+      },
+      {
+        "src": "assets/images/journey/camp-wide-1200.webp",
+        "variant": "wide",
+        "width": 1200,
+        "height": 675,
+        "bytes": 58520
+      },
+      {
+        "src": "assets/images/journey/camp-wide-1800.webp",
+        "variant": "wide",
+        "width": 1800,
+        "height": 1012,
+        "bytes": 116960
+      },
+      {
+        "src": "assets/images/journey/camp-detail-640.webp",
+        "variant": "detail",
+        "width": 640,
+        "height": 800,
+        "bytes": 36350
+      },
+      {
+        "src": "assets/images/journey/camp-detail-1200.webp",
+        "variant": "detail",
+        "width": 1200,
+        "height": 1500,
+        "bytes": 104886
+      },
+      {
+        "src": "assets/images/journey/camp-detail-1800.webp",
+        "variant": "detail",
+        "width": 1800,
+        "height": 2250,
+        "bytes": 132204
+      }
+    ],
+    "focal": "50% 50%",
+    "detailFocal": "50% 50%",
+    "changes": "قصّ للمنظر إلى ١٦:٩، واقتطاع تفصيل من الصورة نفسها بنسبة ٤:٥، ثم تغيير الحجم والتحويل والضغط إلى WebP. تحتفظ النسخ المشتقة برخصة الأصل.",
+    "originalSha256": "22ada07690aafdbe5fd3679cd955576316b1755480a14949af479759b289debe"
   }
 ]
