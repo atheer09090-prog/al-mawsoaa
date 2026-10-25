@@ -393,6 +393,7 @@ html,body{overflow-x:clip}
 .resource-card[data-section="play"] .resource-body{padding:16px}
 .resource-card[data-section="play"] h3{font-size:18px}
 .resource-card[data-section="play"] .resource-action{font-size:13px}
+.resource-card[data-section="presentations"] .resource-cover-image{object-fit:contain}
 .resource-card[data-section="booklets"] .resource-cover-wrap{aspect-ratio:auto}
 .resource-card[data-section="booklets"] .resource-cover-image{height:210px;padding:10px;object-fit:contain}
 .resource-card[data-section="booklets"] .badges{position:static;padding:7px 12px 10px;background:var(--khaki-soft)}

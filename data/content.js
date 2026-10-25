@@ -5,6 +5,198 @@
  */
 window.OMANI_CONTENT = [
   {
+    "id": "presentation-bahla-fort",
+    "section": "presentations",
+    "title": "قلعة بهلاء",
+    "description": "عرض تقديمي عن قلعة بهلاء، مع معاينة الشرائح كاملة وتنزيل ملف PowerPoint الأصلي.",
+    "cover": "assets/content/presentations/bahla-fort-slide-01.webp",
+    "file": "assets/content/presentations/bahla-fort.pptx",
+    "pages": [
+      {
+        "src": "assets/content/presentations/bahla-fort-slide-01.webp",
+        "label": "الشريحة 1",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bahla-fort-slide-02.webp",
+        "label": "الشريحة 2",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bahla-fort-slide-03.webp",
+        "label": "الشريحة 3",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bahla-fort-slide-04.webp",
+        "label": "الشريحة 4",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bahla-fort-slide-05.webp",
+        "label": "الشريحة 5",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bahla-fort-slide-06.webp",
+        "label": "الشريحة 6",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bahla-fort-slide-07.webp",
+        "label": "الشريحة 7",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bahla-fort-slide-08.webp",
+        "label": "الشريحة 8",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bahla-fort-slide-09.webp",
+        "label": "الشريحة 9",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bahla-fort-slide-10.webp",
+        "label": "الشريحة 10",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bahla-fort-slide-11.webp",
+        "label": "الشريحة 11",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bahla-fort-slide-12.webp",
+        "label": "الشريحة 12",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bahla-fort-slide-13.webp",
+        "label": "الشريحة 13",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bahla-fort-slide-14.webp",
+        "label": "الشريحة 14",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bahla-fort-slide-15.webp",
+        "label": "الشريحة 15",
+        "width": 1600,
+        "height": 900
+      }
+    ],
+    "category": "المواقع الأثرية",
+    "added": "2026-10-25"
+  },
+  {
+    "id": "presentation-bat-archaeological-site",
+    "section": "presentations",
+    "title": "موقع بات الأثري",
+    "description": "عرض تقديمي عن موقع بات الأثري، متاح لمعاينة جميع الشرائح وتنزيل ملف PDF الأصلي.",
+    "cover": "assets/content/presentations/bat-archaeological-site-slide-01.webp",
+    "file": "assets/content/presentations/bat-archaeological-site.pdf",
+    "pages": [
+      {
+        "src": "assets/content/presentations/bat-archaeological-site-slide-01.webp",
+        "label": "الشريحة 1",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bat-archaeological-site-slide-02.webp",
+        "label": "الشريحة 2",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bat-archaeological-site-slide-03.webp",
+        "label": "الشريحة 3",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bat-archaeological-site-slide-04.webp",
+        "label": "الشريحة 4",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bat-archaeological-site-slide-05.webp",
+        "label": "الشريحة 5",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/bat-archaeological-site-slide-06.webp",
+        "label": "الشريحة 6",
+        "width": 1600,
+        "height": 900
+      }
+    ],
+    "category": "المواقع الأثرية",
+    "added": "2026-10-25"
+  },
+  {
+    "id": "presentation-sumhuram-archaeological-site",
+    "section": "presentations",
+    "title": "موقع سمهرم الأثري",
+    "description": "عرض تقديمي عن موقع سمهرم الأثري، متاح لمعاينة جميع الشرائح وتنزيل ملف PDF الأصلي.",
+    "cover": "assets/content/presentations/sumhuram-archaeological-site-slide-01.webp",
+    "file": "assets/content/presentations/sumhuram-archaeological-site.pdf",
+    "pages": [
+      {
+        "src": "assets/content/presentations/sumhuram-archaeological-site-slide-01.webp",
+        "label": "الشريحة 1",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/sumhuram-archaeological-site-slide-02.webp",
+        "label": "الشريحة 2",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/sumhuram-archaeological-site-slide-03.webp",
+        "label": "الشريحة 3",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/sumhuram-archaeological-site-slide-04.webp",
+        "label": "الشريحة 4",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/sumhuram-archaeological-site-slide-05.webp",
+        "label": "الشريحة 5",
+        "width": 1600,
+        "height": 900
+      }
+    ],
+    "category": "المواقع الأثرية",
+    "added": "2026-10-25"
+  },
+  {
     "id": "game-oman-economy",
     "section": "play",
     "title": "مهمة إنقاذ كنز الاقتصاد العُماني",
@@ -32,7 +224,10 @@ window.OMANI_CONTENT = [
     "title": "مجلس الشورى",
     "description": "حلقة بودكاست مصوّرة من تقديم سارة المطروشي، وضيفة البرنامج منى أحمد الكثيري.",
     "cover": "assets/content/podcasts/majlis-al-shura.png",
-    "coverCrop": {"zoom": 1.5, "y": 48},
+    "coverCrop": {
+      "zoom": 1.5,
+      "y": 48
+    },
     "file": "assets/content/podcasts/majlis-al-shura.mp4",
     "category": "المجتمع العُماني",
     "added": "2026-10-24"
@@ -43,7 +238,10 @@ window.OMANI_CONTENT = [
     "title": "صباحية العيد",
     "description": "أجواء العيد… فرحة تتجدد. حلقة بودكاست مصوّرة من تقديم سارة المطروشي، وضيفة البرنامج وفاء حامد الشحري.",
     "cover": "assets/content/podcasts/sabahiyat-al-eid.png",
-    "coverCrop": {"zoom": 1.6, "y": 52},
+    "coverCrop": {
+      "zoom": 1.6,
+      "y": 52
+    },
     "file": "assets/content/podcasts/sabahiyat-al-eid.mp4",
     "category": "الثقافة العُمانية",
     "added": "2026-10-24"
