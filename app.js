@@ -9,7 +9,7 @@ const SECTIONS = [
   {id:'play', title:'الألعاب التفاعلية', desc:'ألعاب وأنشطة رقمية تفاعلية تجعل استكشاف المعرفة تجربة مشاركة واكتشاف.', short:'ألعاب وأنشطة رقمية تفاعلية للتعلّم بالاكتشاف.', kind:'لعبة', label:'ابدأ التعلّم'},
   {id:'practice', title:'من المعرفة إلى التطبيق', desc:'تجارب وممارسات مصوّرة من التراث والحياة العُمانية، في فيديوهات غير مصنوعة بالذكاء الاصطناعي.', short:'فيديوهات واقعية تصل المعرفة بالتجربة والممارسة.', kind:'تطبيق عملي', label:'شاهد التطبيق'},
   {id:'student-presentations', title:'سفراء المعرفة', desc:'عروض شفوية يقدّمها طلاب المدرسة عن كنوز عُمان ومعارفها.', short:'عروض شفوية من طلاب المدرسة.', kind:'عرض شفهي', label:'شاهد عروض الطلاب'},
-  {id:'booklets', title:'المطويات والتحميلات', desc:'مواد تعريفية مختصرة للقراءة والمعاينة والتنزيل، مصممة لتكون قريبة من المتعلم.', short:'مطويات ومواد تعريفية للقراءة والتنزيل.', kind:'مطوية', label:'اقرأ المطويات'},
+  {id:'booklets', title:'المطويات', desc:'مواد تعريفية مختصرة للقراءة والمعاينة والتنزيل، مصممة لتكون قريبة من المتعلم.', short:'مطويات ومواد تعريفية للقراءة والتنزيل.', kind:'مطوية', label:'اقرأ المطويات'},
   {id:'school', title:'الموسوعة في المدرسة', desc:'مساحة للورش والمبادرات والمسابقات والأفكار الصفية التي تفعّل موارد الموسوعة في المدرسة.', short:'أنشطة ومبادرات لتفعيل الموسوعة في البيئة المدرسية.', kind:'نشاط', label:'فعّل المعرفة'}
 ];
 const STEPS = [
@@ -570,7 +570,7 @@ function initSchoolGallery() {
     if (next) next.disabled = viewport.scrollLeft >= maxScroll() - 1;
   };
   const shouldPause = () => reduced || userPaused || focusPaused || hovering || !inView || document.hidden || Boolean(dialog?.open);
-  const stop = () => { if (raf) cancelAnimationFrame(raf); raf = 0; lastTime = 0; };
+  const stop = () => { if (raf) cancelAnimationFrame(raf); raf = 0; lastTime = 0; gallery.setAttribute('data-motion', 'paused'); };
   const tick = now => {
     raf = 0;
     if (shouldPause()) return;
@@ -589,7 +589,9 @@ function initSchoolGallery() {
     raf = requestAnimationFrame(tick);
   };
   const syncMotion = () => {
-    if (shouldPause()) stop();
+    const paused = shouldPause();
+    gallery.setAttribute('data-motion', paused ? 'paused' : 'running');
+    if (paused) stop();
     else if (!raf) { position = viewport.scrollLeft; raf = requestAnimationFrame(tick); }
   };
   const pauseForInteraction = (duration = 1200) => {
