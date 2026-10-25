@@ -69,4 +69,22 @@ assert.equal((html.match(/id="calendar"/g)||[]).length,1);
 assert(script.includes("image.loading = 'lazy'"));
 assert(!/setInterval\(/.test(script),'Calendar must not autoplay');
 new vm.Script(script);new vm.Script(calendarSource);
+// Returning visitors and deep links must never initiate the hidden splash image.
+const mediaFn=app.match(/function prepareSplashMedia\([\s\S]*?\n\}/)[0];
+function introImageFixture(shown,hash){
+  const image={dataset:{src:'assets/images/intro-coast.webp',srcset:'assets/images/intro-coast-small.webp 900w'},getAttribute(){return null}};
+  const fixture={location:{hash},document:{documentElement:{classList:{contains:()=>shown}}},$:()=>image};
+  vm.runInNewContext(mediaFn+';prepareSplashMedia();',fixture);return image;
+}
+assert.equal(introImageFixture(false,'#home').src,undefined);
+assert.equal(introImageFixture(true,'#calendar').src,undefined);
+assert.equal(introImageFixture(true,'#home').src,'assets/images/intro-coast.webp');
+assert.equal(introImageFixture(true,'#home').fetchPriority,'high');
+const splashTag=html.match(/<img class="splash-landscape"[^>]*>/)[0];
+assert(!/\ssrc=/.test(splashTag),'Hidden splash image must not have a parser-loaded source');
+assert(!/\ssrcset=/.test(splashTag));
+assert(html.includes('class="knowledge-grid"')&&!html.includes('id="bays" class="bays"'),'Knowledge doors must stay a grid');
+context.document={documentElement:{dataset:{}}};context.matchMedia=()=>({matches:true});
+let updated=0;context.window.OmaniMotion.run(()=>updated++);assert.equal(updated,1,'Reduced motion must update immediately');
+context.matchMedia=()=>({matches:false});context.window.OmaniMotion.run(()=>updated++);assert.equal(updated,2,'Browsers without View Transitions must update normally');
 console.log(`PASS: ${entries.length} events across 12 months, ${credits.length} licensed photos / 30 responsive files; RTL keys, search, genuine resource links and image budgets verified.`);

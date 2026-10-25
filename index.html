@@ -13,12 +13,13 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill='%2317384a' d='M4 36V17a16 16 0 0 1 32 0v19h-5V17a11 11 0 0 0-22 0v19z'/%3E%3Cpath fill='%23dba84a' d='M17 22h6v6h-6z'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/ibm-plex-sans-arabic-600.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/noto-sans-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261025-calendar">
+  <link rel="stylesheet" href="styles.css?v=20261025-calendar-r2">
   <script>try{var q=sessionStorage.getItem('omani-intro-seen-v2'),f=/[?&]intro\b/.test(location.search),d=location.hash.length>1&&location.hash!=='#home';document.documentElement.classList.add((q&&!f)||d?'no-splash':'splash-on')}catch(e){document.documentElement.classList.add('splash-on')}</script>
   <script src="data/content.js" defer></script>
-  <script src="data/calendar.js?v=20261025-calendar" defer></script>
-  <script src="calendar.js?v=20261025-calendar" defer></script>
-  <script src="app.js?v=20261025-calendar" defer></script>
+  <script src="data/images.js?v=20261025-calendar-r2" defer></script>
+  <script src="data/calendar.js?v=20261025-calendar-r2" defer></script>
+  <script src="calendar.js?v=20261025-calendar-r2" defer></script>
+  <script src="app.js?v=20261025-calendar-r2" defer></script>
 </head>
 <body>
   <svg class="sprite" aria-hidden="true" focusable="false">
@@ -48,7 +49,7 @@
   <a class="skip-link" href="#main">انتقل إلى المحتوى</a>
 
   <div class="splash" id="splash" role="dialog" aria-modal="true" aria-label="افتتاحية الموسوعة العُمانية">
-    <div class="splash-scene" aria-hidden="true"><img class="splash-landscape" src="assets/images/intro-coast.webp" srcset="assets/images/intro-coast-small.webp 900w, assets/images/intro-coast.webp 1600w" sizes="100vw" width="1600" height="900" alt="" fetchpriority="high" decoding="async"></div>
+    <div class="splash-scene" aria-hidden="true"><img class="splash-landscape" data-src="assets/images/intro-coast.webp" data-srcset="assets/images/intro-coast-small.webp 900w, assets/images/intro-coast.webp 1600w" sizes="100vw" width="1600" height="900" alt="" decoding="async"></div>
     <div class="intro-door intro-door-right" aria-hidden="true"></div><div class="intro-door intro-door-left" aria-hidden="true"></div>
     <div class="splash-stage">
       <div class="splash-portal"><svg class="portal-outline" viewBox="0 0 280 310" aria-hidden="true"><path d="M24 298V133a116 116 0 0 1 232 0v165"/><path class="portal-inner" d="M38 298V133a102 102 0 0 1 204 0v165"/></svg><img class="splash-logo" src="assets/logo-splash.webp" alt="شعار الموسوعة العُمانية"></div>
@@ -105,7 +106,7 @@
         </div>
         <a class="button button-primary home-explore" href="#schoolGallery">استكشف الموسوعة <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
-      <section class="school-gallery front-gallery section-shell" id="schoolGallery" aria-labelledby="schoolGalleryTitle">
+      <section class="school-gallery front-gallery section-shell reveal" id="schoolGallery" aria-labelledby="schoolGalleryTitle">
         <div class="gallery-heading">
           <div><p class="eyebrow">من قلب المدرسة</p><h2 id="schoolGalleryTitle">لحظات من التعلّم</h2></div>
           <div class="gallery-tools">
@@ -118,12 +119,12 @@
         </div>
         <div class="gallery-viewport" id="galleryViewport" role="region" aria-roledescription="معرض صور" aria-label="صور من مدرسة غدو" tabindex="0">
             <div class="gallery-track" id="galleryTrack">
-              <button class="gallery-photo" type="button" data-caption="تفاصيل من صفحات الموسوعة"><img src="assets/images/school-gallery-01.webp" width="960" height="540" alt="أيدٍ تتصفح صفحات الموسوعة وتدوّن الملاحظات" fetchpriority="high" decoding="async"><span class="gallery-caption">تفاصيل من صفحات الموسوعة</span><span class="gallery-zoom" aria-hidden="true">＋</span></button>
-              <button class="gallery-photo" type="button" data-caption="قراءة واكتشاف"><img src="assets/images/school-gallery-02.webp" width="960" height="540" alt="طالبة تقرأ الموسوعة في مكتبة المدرسة" loading="lazy" decoding="async"><span class="gallery-caption">قراءة واكتشاف</span><span class="gallery-zoom" aria-hidden="true">＋</span></button>
-              <button class="gallery-photo" type="button" data-caption="بحث مشترك"><img src="assets/images/school-gallery-03.webp" width="960" height="540" alt="طلاب يتشاركون البحث بين الكتب" loading="lazy" decoding="async"><span class="gallery-caption">بحث مشترك</span><span class="gallery-zoom" aria-hidden="true">＋</span></button>
-              <button class="gallery-photo" type="button" data-caption="التعلّم الرقمي"><img src="assets/images/school-gallery-04.webp" width="960" height="540" alt="طالبات يستخدمن جهازًا لوحيًا في نشاط تعليمي" loading="lazy" decoding="async"><span class="gallery-caption">التعلّم الرقمي</span><span class="gallery-zoom" aria-hidden="true">＋</span></button>
-              <button class="gallery-photo" type="button" data-caption="في رحاب المكتبة"><img src="assets/images/school-gallery-05.webp" width="960" height="540" alt="طالب يطالع كتب الموسوعة في المكتبة" loading="lazy" decoding="async"><span class="gallery-caption">في رحاب المكتبة</span><span class="gallery-zoom" aria-hidden="true">＋</span></button>
-              <button class="gallery-photo" type="button" data-caption="الموسوعة في البيئة الصفية"><img src="assets/images/school-gallery-06.webp" width="1200" height="675" alt="معلمة تعرض الموسوعة العُمانية للطالبات داخل الصف" loading="lazy" decoding="async"><span class="gallery-caption">الموسوعة في البيئة الصفية</span><span class="gallery-zoom" aria-hidden="true">＋</span></button>
+              <button class="gallery-photo" type="button" data-caption="تفاصيل من صفحات الموسوعة"><img src="assets/images/school-gallery-01.webp" srcset="assets/images/school-gallery-01-small.webp 640w, assets/images/school-gallery-01.webp 960w" sizes="(max-width: 600px) 78vw, (max-width: 960px) 32vw, 360px" width="960" height="540" alt="أيدٍ تتصفح صفحات الموسوعة وتدوّن الملاحظات" decoding="async"><span class="gallery-caption">تفاصيل من صفحات الموسوعة</span><span class="gallery-zoom" aria-hidden="true">＋</span></button>
+              <button class="gallery-photo" type="button" data-caption="قراءة واكتشاف"><img src="assets/images/school-gallery-02.webp" srcset="assets/images/school-gallery-02-small.webp 640w, assets/images/school-gallery-02.webp 960w" sizes="(max-width: 600px) 78vw, (max-width: 960px) 32vw, 360px" width="960" height="540" alt="طالبة تقرأ الموسوعة في مكتبة المدرسة" loading="lazy" decoding="async"><span class="gallery-caption">قراءة واكتشاف</span><span class="gallery-zoom" aria-hidden="true">＋</span></button>
+              <button class="gallery-photo" type="button" data-caption="بحث مشترك"><img src="assets/images/school-gallery-03.webp" srcset="assets/images/school-gallery-03-small.webp 640w, assets/images/school-gallery-03.webp 960w" sizes="(max-width: 600px) 78vw, (max-width: 960px) 32vw, 360px" width="960" height="540" alt="طلاب يتشاركون البحث بين الكتب" loading="lazy" decoding="async"><span class="gallery-caption">بحث مشترك</span><span class="gallery-zoom" aria-hidden="true">＋</span></button>
+              <button class="gallery-photo" type="button" data-caption="التعلّم الرقمي"><img src="assets/images/school-gallery-04.webp" srcset="assets/images/school-gallery-04-small.webp 640w, assets/images/school-gallery-04.webp 960w" sizes="(max-width: 600px) 78vw, (max-width: 960px) 32vw, 360px" width="960" height="540" alt="طالبات يستخدمن جهازًا لوحيًا في نشاط تعليمي" loading="lazy" decoding="async"><span class="gallery-caption">التعلّم الرقمي</span><span class="gallery-zoom" aria-hidden="true">＋</span></button>
+              <button class="gallery-photo" type="button" data-caption="في رحاب المكتبة"><img src="assets/images/school-gallery-05.webp" srcset="assets/images/school-gallery-05-small.webp 640w, assets/images/school-gallery-05.webp 960w" sizes="(max-width: 600px) 78vw, (max-width: 960px) 32vw, 360px" width="960" height="540" alt="طالب يطالع كتب الموسوعة في المكتبة" loading="lazy" decoding="async"><span class="gallery-caption">في رحاب المكتبة</span><span class="gallery-zoom" aria-hidden="true">＋</span></button>
+              <button class="gallery-photo" type="button" data-caption="الموسوعة في البيئة الصفية"><img src="assets/images/school-gallery-06.webp" srcset="assets/images/school-gallery-06-small.webp 640w, assets/images/school-gallery-06.webp 1200w" sizes="(max-width: 600px) 78vw, (max-width: 960px) 32vw, 360px" width="1200" height="675" alt="معلمة تعرض الموسوعة العُمانية للطالبات داخل الصف" loading="lazy" decoding="async"><span class="gallery-caption">الموسوعة في البيئة الصفية</span><span class="gallery-zoom" aria-hidden="true">＋</span></button>
             </div>
         </div>
         <dialog class="gallery-lightbox" id="galleryLightbox" aria-label="عرض صورة من معرض مدرسة غدو">
@@ -134,7 +135,7 @@
       </section>
       <section class="collections compact-collections section-shell" id="collections" aria-labelledby="collectionsTitle">
         <div class="section-heading-row"><div><p class="eyebrow">اختر ما يلهمك</p><h2 id="collectionsTitle">أبواب المعرفة</h2></div><p class="section-caption" id="sectionCaption">ثمانية أبواب للمعرفة والمشاركة.</p></div>
-        <div class="knowledge-grid" id="bays" role="list" aria-label="أقسام الموسوعة"></div>
+        <div class="knowledge-grid" id="bays" role="list" aria-label="أقسام الموسوعة" aria-busy="true"><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article></div>
       </section>
 
       <section class="about section-shell" id="about" aria-labelledby="aboutTitle">

@@ -54,6 +54,17 @@ const css = await text('styles.css');
 for (const m of css.matchAll(/url\(["']?([^\s)'";]+)["']?\)/g)) await checkRef(m[1]);
 for (const m of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)) new vm.Script(m[1]);
 new vm.Script(app); new vm.Script(registry);
+const imageContext={window:{}};
+const imageSource=await text('data/images.js');
+vm.runInNewContext(imageSource,imageContext);
+for(const [original,image] of Object.entries(imageContext.window.OMANI_IMAGES)){
+  await checkRef(original);await checkRef(image.src);
+  assert(Number.isInteger(image.width)&&image.width>0&&Number.isInteger(image.height)&&image.height>0,'Missing image dimensions');
+  for(const candidate of image.srcset.split(',').filter(Boolean))await checkRef(candidate.trim().split(/\s+/)[0]);
+}
+for(const match of html.matchAll(/\bsrcset="([^"]+)"/g)){
+  for(const candidate of match[1].split(','))await checkRef(candidate.trim().split(/\s+/)[0]);
+}
 for (const file of await readdir(path.join(root,'assets/content/games'))) {
   if (!file.endsWith('.html')) continue;
   const game = await text('assets/content/games/'+file);
@@ -88,6 +99,12 @@ const {createHash} = await import('node:crypto');
 const digest = value => createHash('sha256').update(value).digest('hex');
 assert.equal(digest(html.slice(html.indexOf('  <div class="splash"'), html.indexOf('\n  <header'))),baseline.markup);
 assert.equal(digest(app.slice(app.indexOf('function intro()'),app.indexOf('/* ---------- Scroll effects'))),baseline.logic);
+if(baseline.approvedVisualMarkup){
+  const originalMarkup=html.slice(html.indexOf('  <div class="splash"'),html.indexOf('\n  <header'))
+    .replace(' data-src=',' src=').replace(' data-srcset=',' srcset=')
+    .replace('alt="" decoding="async"','alt="" fetchpriority="high" decoding="async"');
+  assert.equal(digest(originalMarkup),baseline.approvedVisualMarkup,'Approved opening changed beyond conditional image loading');
+}
 async function compareDirectory(relative='') {
   for(const entry of await readdir(path.join(root,'dist',relative),{withFileTypes:true})) {
     assert(entry.name!=='.DS_Store','macOS metadata leaked into dist');

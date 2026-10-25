@@ -59,8 +59,13 @@ function toast(message, type = 'success') {
 
 /* ---------- Home: facade ---------- */
 const sectionImage = id => id === 'practice' ? 'assets/content/covers/omani-drum.webp' : `assets/images/${id}.webp`;
-const sectionImageSet = id => id === 'practice' ? '' : `srcset="assets/images/${id}-small.webp 640w, ${sectionImage(id)} 1280w" sizes="(max-width: 600px) 46vw, (max-width: 1000px) 30vw, 280px"`;
+const sectionImageSet = id => id === 'practice' ? '' : `srcset="assets/images/${id}-small.webp 640w, ${sectionImage(id)} ${id === 'student-presentations' ? 1600 : 1280}w" sizes="136px"`;
 const IMAGE_ALT = {practice:'لقطة من فيديو الطبل العربي في التراث العُماني', library:'طالب عُماني يقرأ كتابًا في مكتبة المدرسة', presentations:'طالبة تعرض درسًا على الشاشة الصفية', play:'طالبات يتعلمن معًا باستخدام جهاز لوحي', 'student-presentations':'طالبة عُمانية تحمل كتاب الموسوعة بين رفوف المكتبة', booklets:'كتب الموسوعة العُمانية مفتوحة على طاولة القراءة', school:'طالبة تشرح موضوعًا من الموسوعة أمام شاشة الصف'};
+function responsiveCover(source, sizes = '(max-width: 560px) calc(100vw - 32px), (max-width: 960px) 46vw, 370px') {
+  const image = window.OMANI_IMAGES?.[source];
+  if (!image) return `src="${esc(source)}" decoding="async"`;
+  return `src="${esc(image.src)}" ${image.srcset ? `srcset="${esc(image.srcset)}" sizes="${sizes}"` : ''} width="${image.width}" height="${image.height}" decoding="async"`;
+}
 function bindImageReveal(root = document) {
   $$('.hero-image, .collection-image, .resource-cover-image, .section-tile-image', root).forEach(img => {
     const finish = () => img.classList.add(img.naturalWidth ? 'is-loaded' : 'is-failed');
@@ -75,7 +80,7 @@ function podcastPortrait(item, imageClass) {
   const zoom = Math.min(3, Math.max(1, Number(item.coverCrop?.zoom) || 1.5));
   const y = Number(item.coverCrop?.y ?? 50);
   const position = Number.isFinite(y) ? Math.min(100, Math.max(0, y)) : 50;
-  return `<div class="podcast-portrait" style="--portrait-zoom:${zoom};--portrait-y:${position}%"><img class="${imageClass}" src="${esc(item.cover)}" width="764" height="1372" alt="صورة ضيفة حلقة ${esc(item.title)}" loading="lazy" decoding="async"></div>`;
+  return `<div class="podcast-portrait" style="--portrait-zoom:${zoom};--portrait-y:${position}%"><img class="${imageClass}" ${responsiveCover(item.cover, imageClass === 'section-tile-image' ? '54px' : '(max-width: 560px) 85vw, 315px')} alt="صورة ضيفة حلقة ${esc(item.title)}" loading="lazy"></div>`;
 }
 function renderBays() {
   $('#sectionCaption').textContent = `${num(SECTIONS.length)} أبواب · ${countLabel(content.length)}`;
@@ -83,8 +88,9 @@ function renderBays() {
     const total = inSection(s.id).length;
     const image = s.id === 'podcasts'
       ? `<div class="section-tile-portraits">${inSection(s.id).filter(item => item.cover).slice(0,2).map(item => podcastPortrait(item, 'section-tile-image')).join('')}</div>`
-      : `<img class="section-tile-image" src="${sectionImage(s.id)}" ${sectionImageSet(s.id)} width="1280" height="720" alt="${IMAGE_ALT[s.id]}" loading="lazy" decoding="async">`;
-    return `<article class="knowledge-item" style="--i:${i}" role="listitem">
+      : s.id === 'practice' ? `<img class="section-tile-image" ${responsiveCover(sectionImage(s.id),'136px')} alt="${IMAGE_ALT[s.id]}" loading="lazy">`
+      : `<img class="section-tile-image" src="${sectionImage(s.id)}" ${sectionImageSet(s.id)} width="${s.id === 'student-presentations' ? 1600 : 1280}" height="${s.id === 'student-presentations' ? 900 : 720}" alt="${IMAGE_ALT[s.id]}" loading="lazy" decoding="async">`;
+    return `<article class="knowledge-item reveal" style="--i:${i}" role="listitem">
       <a class="section-tile" href="#${s.id}" aria-label="${esc(s.title)} — ${countLabel(total)}">
         <div class="section-tile-media">${image}</div>
         <div class="section-tile-body"><div class="section-tile-meta"><span class="section-tile-icon">${ico(s.id)}</span><span>${countLabel(total)}</span></div>
@@ -92,6 +98,7 @@ function renderBays() {
         </div>
       </a></article>`;
   }).join('');
+  $('#bays').setAttribute('aria-busy','false');
   bindImageReveal($('#bays'));
   $('#footerNav').innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${s.title}</a>`).join('') + '<a href="#calendar">عُمان على مدار العام</a><a href="#image-credits">مصادر الصور</a>';
 }
@@ -143,7 +150,7 @@ function resourceCard(item, i = 0) {
   const s = byId(item.section);
   const seen = viewed.has(item.id);
   const cover = item.cover
-    ? item.section === 'podcasts' ? podcastPortrait(item, 'resource-cover-image') : `<img class="resource-cover-image" src="${esc(item.cover)}" alt="غلاف ${esc(item.title)}" loading="lazy">`
+    ? item.section === 'podcasts' ? podcastPortrait(item, 'resource-cover-image') : `<img class="resource-cover-image" ${responsiveCover(item.cover)} alt="غلاف ${esc(item.title)}" loading="lazy">`
     : `<div class="resource-cover" aria-hidden="true">${ico(s.id)}</div>`;
   const badges = `<span class="badge">${s.kind}</span>${seen ? `<span class="badge badge-seen">${ico('check')} اطّلعت</span>` : isNew(item) ? '<span class="badge badge-new">جديد</span>' : ''}`;
   const steps = item.section === 'school' && item.steps?.length
@@ -466,7 +473,30 @@ function closeMenu() {
   $('#menuToggle').setAttribute('aria-expanded', 'false');
   $('#menuToggle').setAttribute('aria-label', 'فتح قائمة الأقسام');
 }
+let routedOnce = false;
 function route() {
+  const {page} = parseHash(), section = byId(page);
+  const nextView = page === 'image-credits' ? 'credits' : section ? 'category' : 'home';
+  const previousView = $('.page.is-active')?.dataset.page;
+  const changed = nextView !== previousView || (section && state.section?.id !== section.id);
+  const animate = routedOnce && changed;
+  routedOnce = true;
+  const useSnapshot = animate && !reduceMotion() && document.startViewTransition && !document.documentElement.dataset.viewTransition;
+  const update = () => {
+    $$('.page').forEach(el=>el.classList.remove('is-route-entering'));
+    renderRoute();
+    const active = $('.page.is-active');
+    if (animate && !useSnapshot && !reduceMotion() && active) {
+      void active.offsetWidth; active.classList.add('is-route-entering');
+    }
+    if (nextView === 'home' && changed) {
+      const target = ['calendar','about','collections','schoolGallery'].includes(page) ? document.querySelector(`#${page} h2`) : $('.hero-title');
+      if (target) { target.setAttribute('tabindex','-1'); target.focus({preventScroll:true}); }
+    }
+  };
+  if (animate && window.OmaniMotion) window.OmaniMotion.run(update,'page'); else update();
+}
+function renderRoute() {
   const {page, rid} = parseHash();
   if (page === 'presentations' && rid === 'presentation-frankincense-tree-video') {
     history.replaceState(null, '', `#library/${rid}`); route(); return;
@@ -510,12 +540,24 @@ function route() {
     document.title = TITLE;
     if (page === 'calendar' && rid) window.OmaniCalendar?.selectEvent(rid);
     const anchor = homeAnchors.includes(page) && page !== 'home' ? document.getElementById(page) : null;
-    if (anchor) anchor.scrollIntoView({behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start'});
-    else scrollTo({top: 0, behavior: reduceMotion() ? 'auto' : 'smooth'});
+    if (anchor) {
+      anchor.scrollIntoView({behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start'});
+      const heading = anchor.querySelector('h2');
+      if (heading) { heading.setAttribute('tabindex','-1'); heading.focus({preventScroll:true}); }
+    } else scrollTo({top: 0, behavior: reduceMotion() ? 'auto' : 'smooth'});
   }
 }
 
 /* ---------- Intro (stays until the visitor enters) ---------- */
+function prepareSplashMedia() {
+  const deepLink = location.hash.length > 1 && location.hash !== '#home';
+  if (deepLink || !document.documentElement.classList.contains('splash-on')) return;
+  const image = $('.splash-landscape');
+  if (!image || image.getAttribute('src')) return;
+  image.fetchPriority = 'high';
+  image.srcset = image.dataset.srcset;
+  image.src = image.dataset.src;
+}
 function intro() {
   const splash = $('#splash'), root = document.documentElement, reduce = reduceMotion();
   let seen = false;
@@ -653,7 +695,7 @@ function initSchoolGallery() {
     if (!dialog || !dialogImage || !dialogCaption || typeof dialog.showModal !== 'function') return;
     selected = i; opener = card;
     const image = $('img', card);
-    dialogImage.src = image.currentSrc || image.src;
+    dialogImage.src = image.src;
     dialogImage.alt = image.alt;
     dialogCaption.textContent = card.dataset.caption || image.alt;
     dialog.showModal();
@@ -663,7 +705,7 @@ function initSchoolGallery() {
   const updateDialog = step => {
     selected = (selected + step + cards.length) % cards.length;
     const image = $('img', cards[selected]);
-    dialogImage.src = image.currentSrc || image.src;
+    dialogImage.src = image.src;
     dialogImage.alt = image.alt;
     dialogCaption.textContent = cards[selected].dataset.caption || image.alt;
   };
@@ -687,7 +729,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!dataOk) $('#dataError').hidden = false;
   renderBays(); renderRecent(); bindImageReveal(document); initStepper();
   window.OmaniCalendar?.init();
-  intro(); initScroll(); initReveal(); initSchoolGallery();
+  prepareSplashMedia(); intro(); initScroll(); initReveal(); initSchoolGallery();
   route();
   addEventListener('hashchange', route);
 

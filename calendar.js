@@ -14,7 +14,7 @@ let selectedMonth = currentMonth, selectedEvent = 0, ready = false, mediaReady =
 const warmed = new Set();
 const monthEntries = month => entries.filter(e => e.month === month);
 const chosen = () => monthEntries(selectedMonth)[selectedEvent];
-const sizes = '(max-width: 760px) calc(100vw - 32px), (max-width: 1100px) 58vw, 700px';
+const sizes = '(max-width: 960px) calc(100vw - 32px), (max-width: 1100px) 58vw, 700px';
 
 function calendarTabIndex(index,key,count) {
   if (key === 'Home') return 0;
@@ -49,8 +49,9 @@ function updateMarker() {
 }
 function keepTabVisible(button) {
   const bar = $('#calendarMonths'), rect = button.getBoundingClientRect(), view = bar.getBoundingClientRect();
-  const distance = rect.left < view.left ? rect.left-view.left-8 : rect.right > view.right ? rect.right-view.right+8 : 0;
-  if (distance) bar.scrollBy({left:distance,behavior:reduced()?'auto':'smooth'});
+  if (bar.scrollWidth <= bar.clientWidth) return;
+  const distance = rect.left+rect.width/2-view.left-view.width/2;
+  if (Math.abs(distance)>1) bar.scrollBy({left:distance,behavior:reduced()?'auto':'smooth'});
 }
 function updateImage(entry) {
   if (!mediaReady || !entry) return;
@@ -159,8 +160,9 @@ function init() {
     const observer=new IntersectionObserver(items=>{if(items.some(item=>item.isIntersecting)){mediaReady=true;updateImage(chosen());observer.disconnect();}},{rootMargin:'200px'});
     observer.observe(section);
   }else{mediaReady=true;updateImage(chosen());}
-  if('ResizeObserver' in window)new ResizeObserver(updateMarker).observe(bar);
-  document.fonts?.ready.then(updateMarker);
+  const reflowMonths=()=>{updateMarker();const tab=$(`#calendar-month-${selectedMonth}`);if(tab)keepTabVisible(tab);};
+  if('ResizeObserver' in window)new ResizeObserver(reflowMonths).observe(bar);
+  document.fonts?.ready.then(reflowMonths);
 }
 function selectEvent(id) {
   const entry=entries.find(e=>e.id===id);if(!entry)return false;
