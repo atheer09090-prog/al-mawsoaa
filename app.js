@@ -59,10 +59,10 @@ function toast(message, type = 'success') {
 
 /* ---------- Home: facade ---------- */
 const sectionImage = id => id === 'practice' ? 'assets/content/covers/omani-drum.webp' : `assets/images/${id}.webp`;
-const sectionImageSet = id => id === 'practice' ? '' : `srcset="assets/images/${id}-small.webp 640w, ${sectionImage(id)} 1280w" sizes="(max-width: 760px) 90vw, (max-width: 960px) 50vw, 40vw"`;
+const sectionImageSet = id => id === 'practice' ? '' : `srcset="assets/images/${id}-small.webp 640w, ${sectionImage(id)} 1280w" sizes="(max-width: 600px) 46vw, (max-width: 1000px) 30vw, 280px"`;
 const IMAGE_ALT = {practice:'لقطة من فيديو الطبل العربي في التراث العُماني', library:'طالب عُماني يقرأ كتابًا في مكتبة المدرسة', presentations:'طالبة تعرض درسًا على الشاشة الصفية', play:'طالبات يتعلمن معًا باستخدام جهاز لوحي', 'student-presentations':'طالبة عُمانية تحمل كتاب الموسوعة بين رفوف المكتبة', booklets:'كتب الموسوعة العُمانية مفتوحة على طاولة القراءة', school:'طالبة تشرح موضوعًا من الموسوعة أمام شاشة الصف'};
 function bindImageReveal(root = document) {
-  $$('.hero-image, .collection-image, .resource-cover-image', root).forEach(img => {
+  $$('.hero-image, .collection-image, .resource-cover-image, .section-tile-image', root).forEach(img => {
     const finish = () => img.classList.add(img.naturalWidth ? 'is-loaded' : 'is-failed');
     if (img.complete) finish();
     else {
@@ -78,64 +78,22 @@ function podcastPortrait(item, imageClass) {
   return `<div class="podcast-portrait" style="--portrait-zoom:${zoom};--portrait-y:${position}%"><img class="${imageClass}" src="${esc(item.cover)}" width="764" height="1372" alt="صورة ضيفة حلقة ${esc(item.title)}" loading="lazy" decoding="async"></div>`;
 }
 function renderBays() {
-  $('#sectionCaption').textContent = `${num(SECTIONS.length)} أبواب للمعرفة والمشاركة.`;
-  $('#bays').innerHTML = SECTIONS.map((s, i) => `<article class="bay reveal" style="--i:${i}" role="group" aria-roledescription="شريحة" aria-label="${num(i + 1)} من ${num(SECTIONS.length)}: ${s.title}">
-    <a class="collection-card${s.id === 'school' ? ' collection-card-school' : ''}" href="#${s.id}" aria-label="${s.title} — ${s.label}">${s.id === 'podcasts' ? `<div class="collection-photo collection-photo-podcasts"><div class="podcast-portraits">${inSection(s.id).filter(item => item.cover).slice(0,2).map(item => podcastPortrait(item, 'collection-image')).join('')}</div></div>` : `<div class="collection-photo${s.id === 'school' ? ' collection-photo-school' : ''}"><img class="collection-image" src="${sectionImage(s.id)}" ${sectionImageSet(s.id)} width="1280" height="720" alt="${IMAGE_ALT[s.id]}" loading="lazy" decoding="async"></div>`}
-    <div class="collection-body"><div class="collection-topline"><span class="collection-icon">${ico(s.id)}</span><span class="collection-kicker">القسم ${num(i + 1)}</span></div><div class="collection-text"><h3>${s.title}</h3><p>${s.short}</p></div><span class="collection-action"><span>اكتشف القسم</span><span class="collection-arrow">${ico('arrow')}</span></span></div></a></article>`).join('');
+  $('#sectionCaption').textContent = `${num(SECTIONS.length)} أبواب · ${countLabel(content.length)}`;
+  $('#bays').innerHTML = SECTIONS.map((s, i) => {
+    const total = inSection(s.id).length;
+    const image = s.id === 'podcasts'
+      ? `<div class="section-tile-portraits">${inSection(s.id).filter(item => item.cover).slice(0,2).map(item => podcastPortrait(item, 'section-tile-image')).join('')}</div>`
+      : `<img class="section-tile-image" src="${sectionImage(s.id)}" ${sectionImageSet(s.id)} width="1280" height="720" alt="${IMAGE_ALT[s.id]}" loading="lazy" decoding="async">`;
+    return `<article class="knowledge-item" style="--i:${i}" role="listitem">
+      <a class="section-tile" href="#${s.id}" aria-label="${esc(s.title)} — ${countLabel(total)}">
+        <div class="section-tile-media">${image}</div>
+        <div class="section-tile-body"><div class="section-tile-meta"><span class="section-tile-icon">${ico(s.id)}</span><span>${countLabel(total)}</span></div>
+          <h3>${s.title}</h3><p>${s.short}</p><span class="section-tile-action">${s.label}${ico('arrow')}</span>
+        </div>
+      </a></article>`;
+  }).join('');
   bindImageReveal($('#bays'));
-  initBaysCarousel();
   $('#footerNav').innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${s.title}</a>`).join('');
-}
-
-function initBaysCarousel() {
-  const rail = $('#bays'), slides = $$('.bay', rail), dots = $('#bayDots');
-  const previous = $('#bayPrev'), next = $('#bayNext'), current = $('#bayCurrent'), total = $('#bayTotal');
-  if (!rail || !slides.length || !dots || !previous || !next) return;
-  const arabic = n => String(n).padStart(2, '0').replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
-  let active = 0, frame = 0, hasActive = false;
-  dots.innerHTML = SECTIONS.map((section, i) => `<button class="carousel-dot" type="button" data-bay-index="${i}" aria-label="انتقل إلى ${section.title}" aria-current="${i === 0 ? 'true' : 'false'}"></button>`).join('');
-  total.textContent = arabic(slides.length);
-
-  const update = () => {
-    frame = 0;
-    const center = rail.getBoundingClientRect().left + rail.clientWidth / 2;
-    let closest = 0, distance = Infinity;
-    slides.forEach((slide, i) => {
-      const box = slide.getBoundingClientRect();
-      const d = Math.abs(box.left + box.width / 2 - center);
-      if (d < distance) { closest = i; distance = d; }
-    });
-    const changed = hasActive && closest !== active;
-    active = closest;
-    hasActive = true;
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('is-current', i === active);
-      if (changed && i === active && !reduceMotion()) {
-        slide.classList.remove('is-arriving');
-        void slide.offsetWidth;
-        slide.classList.add('is-arriving');
-        clearTimeout(slide.arrivalTimer);
-        slide.arrivalTimer = setTimeout(() => slide.classList.remove('is-arriving'), 1000);
-      }
-    });
-    [...dots.children].forEach((dot, i) => dot.setAttribute('aria-current', String(i === active)));
-    current.textContent = arabic(active + 1);
-    previous.disabled = active === 0;
-    next.disabled = active === slides.length - 1;
-  };
-  const goTo = index => {
-    const target = Math.max(0, Math.min(slides.length - 1, index));
-    slides[target].scrollIntoView({behavior: reduceMotion() ? 'auto' : 'smooth', block: 'nearest', inline: 'center'});
-  };
-  rail.addEventListener('scroll', () => { if (!frame) frame = requestAnimationFrame(update); }, {passive:true});
-  previous.addEventListener('click', () => goTo(active - 1));
-  next.addEventListener('click', () => goTo(active + 1));
-  dots.addEventListener('click', e => { const dot = e.target.closest('[data-bay-index]'); if (dot) goTo(Number(dot.dataset.bayIndex)); });
-  rail.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(active - 1); }
-    if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(active + 1); }
-  });
-  update();
 }
 
 function renderRecent() {
@@ -513,7 +471,7 @@ function route() {
     history.replaceState(null, '', `#library/${rid}`); route(); return;
   }
   const section = byId(page);
-  const homeAnchors = ['home', 'about', 'collections'];
+  const homeAnchors = ['home', 'schoolGallery', 'about', 'collections'];
   const isHome = !section;
   $('#siteHeader').dataset.view = isHome ? 'home' : 'category';
   if (!rid && viewer.open) viewer.close();

@@ -13,10 +13,10 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill='%2317384a' d='M4 36V17a16 16 0 0 1 32 0v19h-5V17a11 11 0 0 0-22 0v19z'/%3E%3Cpath fill='%23dba84a' d='M17 22h6v6h-6z'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/ibm-plex-sans-arabic-600.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/noto-sans-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261024-new-games">
+  <link rel="stylesheet" href="styles.css?v=20261025-home-refresh">
   <script>try{var q=sessionStorage.getItem('omani-intro-seen-v2'),f=/[?&]intro\b/.test(location.search),d=location.hash.length>1&&location.hash!=='#home';document.documentElement.classList.add((q&&!f)||d?'no-splash':'splash-on')}catch(e){document.documentElement.classList.add('splash-on')}</script>
   <script src="data/content.js" defer></script>
-  <script src="app.js?v=20261024-new-games" defer></script>
+  <script src="app.js?v=20261025-home-refresh" defer></script>
 </head>
 <body>
   <svg class="sprite" aria-hidden="true" focusable="false">
@@ -94,17 +94,14 @@
     </div>
 
     <section class="page is-active" id="page-home" data-page="home">
-      <div class="hero section-shell">
-        <div class="hero-head">
-          <div class="hero-copy">
-            <h1 class="hero-title">عُمان، تُكتشف.</h1>
-            <p class="hero-lead">موارد تعليمية تفتح أبواب المعرفة العُمانية.</p>
-            <div class="hero-actions"><a class="button button-primary" href="#collections">استكشف الموسوعة <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
-          </div>
-          <figure class="hero-visual"><img class="hero-image" src="assets/images/oman-hero.webp" srcset="assets/images/oman-hero-small.webp 640w, assets/images/oman-hero.webp 1600w" sizes="(max-width: 760px) 100vw, 52vw" width="1600" height="900" alt="طالبات عُمانيات يستكشفن الموسوعة على جهاز لوحي أمام مشهد من عُمان" fetchpriority="high"></figure>
+      <div class="home-welcome section-shell">
+        <div class="hero-copy">
+          <h1 class="hero-title">عُمان، تُكتشف.</h1>
+          <p class="hero-lead">موارد تعليمية تفتح أبواب المعرفة العُمانية.</p>
         </div>
+        <a class="button button-primary home-explore" href="#schoolGallery">استكشف الموسوعة <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
-      <section class="school-gallery section-shell" id="schoolGallery" aria-labelledby="schoolGalleryTitle">
+      <section class="school-gallery front-gallery section-shell" id="schoolGallery" aria-labelledby="schoolGalleryTitle">
         <div class="gallery-heading">
           <div><p class="eyebrow">من قلب المدرسة</p><h2 id="schoolGalleryTitle">لحظات من التعلّم</h2></div>
           <div class="gallery-tools">
@@ -131,21 +128,13 @@
           <div class="gallery-lightbox-nav"><button class="gallery-control" id="galleryLightboxPrev" type="button" aria-label="الصورة السابقة"><svg class="ico flip" aria-hidden="true"><use href="#i-arrow"/></svg></button><button class="gallery-control" id="galleryLightboxNext" type="button" aria-label="الصورة التالية"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
         </dialog>
       </section>
-      <section class="collections section-shell" id="collections" aria-labelledby="collectionsTitle">
-        <div class="section-heading-row"><div><p class="eyebrow">اختر ما يلهمك</p><h2 id="collectionsTitle">أبواب المعرفة</h2></div><p class="section-caption" id="sectionCaption">سبعة أبواب للمعرفة والمشاركة.</p></div>
-        <div class="collection-carousel">
-          <button class="carousel-control carousel-prev" id="bayPrev" type="button" aria-label="الشريحة السابقة" disabled><svg class="ico flip" aria-hidden="true"><use href="#i-arrow"/></svg></button>
-          <div class="bays" id="bays" role="region" aria-roledescription="معرض" aria-label="أقسام الموسوعة"></div>
-          <button class="carousel-control carousel-next" id="bayNext" type="button" aria-label="الشريحة التالية"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button>
-        </div>
-        <div class="carousel-meta">
-          <p class="carousel-count" aria-live="polite"><span id="bayCurrent">٠١</span><span aria-hidden="true"> / </span><span id="bayTotal">٠٨</span></p>
-          <div class="carousel-dots" id="bayDots" role="group" aria-label="اختيار القسم"></div>
-        </div>
+      <section class="collections compact-collections section-shell" id="collections" aria-labelledby="collectionsTitle">
+        <div class="section-heading-row"><div><p class="eyebrow">اختر ما يلهمك</p><h2 id="collectionsTitle">أبواب المعرفة</h2></div><p class="section-caption" id="sectionCaption">ثمانية أبواب للمعرفة والمشاركة.</p></div>
+        <div class="knowledge-grid" id="bays" role="list" aria-label="أقسام الموسوعة"></div>
       </section>
 
       <section class="about section-shell" id="about" aria-labelledby="aboutTitle">
-        <div class="section-heading reveal"><p class="eyebrow">عن الموسوعة</p><h2 id="aboutTitle">حكايةُ عُمان،<br>في مرجعٍ واحد.</h2></div>
+        <div class="section-heading reveal"><p class="eyebrow">عن الموسوعة</p><h2 id="aboutTitle">حكايةُ عُمان،<br>في مرجعٍ واحد.</h2><figure class="about-visual"><img class="hero-image" src="assets/images/oman-hero.webp" srcset="assets/images/oman-hero-small.webp 640w, assets/images/oman-hero.webp 1600w" sizes="(max-width: 760px) 80vw, 300px" width="1600" height="900" alt="طالبات عُمانيات يستكشفن الموسوعة على جهاز لوحي أمام مشهد من عُمان" loading="lazy" decoding="async"></figure></div>
         <div class="about-body reveal">
           <p>مرجع ثقافي وطني يوثّق الإنسان العُماني وأرضه؛ من التاريخ والمجتمع إلى الطبيعة. دُشّنت الموسوعة عام 2014، بمداخل مرتّبة أبجديًا وخرائط وصور ورسوم.</p>
           <div class="about-facts" aria-label="حقائق عن الموسوعة"><span><strong>١١</strong> مجلدًا</span><span><strong>٤٬٠٠٠+</strong> مدخل</span><span><strong>٩</strong> مجالات</span></div>
