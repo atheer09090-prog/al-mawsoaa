@@ -131,6 +131,10 @@ function init() {
     lazy.observe(ending);
   }
   document.addEventListener('click',event=>{
+    const anchor=event.target.closest('a[href^="#journey"]');
+    if(active&&anchor&&anchor.getAttribute('href')===location.hash){
+      event.preventDefault();jump(anchor.getAttribute('href').split('/').slice(1).join('/'));return;
+    }
     const button=event.target.closest('[data-journey-source]');
     if(!button)return;
     const entry=entries[Number(button.dataset.journeySource)];if(!entry)return;
