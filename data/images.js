@@ -1,5 +1,19 @@
 /* مقاسات مشتقة للعرض فقط؛ تبقى ملفات المحتوى الأصلية كما هي. */
 window.OMANI_IMAGES = {
+  "assets/content/student-presentations/frankincense-student-talk.webp": {
+    "src": "assets/content/student-presentations/frankincense-student-talk-640.webp",
+    "srcset": "assets/content/student-presentations/frankincense-student-talk-360.webp 360w, assets/content/student-presentations/frankincense-student-talk-640.webp 640w, assets/content/student-presentations/frankincense-student-talk.webp 832w",
+    "width": 832,
+    "height": 464,
+    "focal": "50% 50%"
+  },
+  "assets/content/student-presentations/omani-halwa-student-talk.webp": {
+    "src": "assets/content/student-presentations/omani-halwa-student-talk-640.webp",
+    "srcset": "assets/content/student-presentations/omani-halwa-student-talk-360.webp 360w, assets/content/student-presentations/omani-halwa-student-talk-640.webp 640w, assets/content/student-presentations/omani-halwa-student-talk.webp 832w",
+    "width": 832,
+    "height": 464,
+    "focal": "50% 50%"
+  },
   "assets/content/presentations/bahla-fort-slide-01.webp": {
     "src": "assets/content/previews/presentations-bahla-fort-slide-01-960.webp",
     "srcset": "assets/content/previews/presentations-bahla-fort-slide-01-360.webp 360w, assets/content/previews/presentations-bahla-fort-slide-01-640.webp 640w, assets/content/previews/presentations-bahla-fort-slide-01-960.webp 960w",

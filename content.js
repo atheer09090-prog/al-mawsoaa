@@ -5,6 +5,28 @@
  */
 window.OMANI_CONTENT = [
   {
+    "id": "student-frankincense-student-talk",
+    "section": "student-presentations",
+    "title": "شجرة اللبان العُمانية — عرض شفوي",
+    "description": "عرض شفوي تقدّمه طالبات المدرسة عن شجرة اللبان العُمانية وطرق جمع اللبان في ظفار.",
+    "cover": "assets/content/student-presentations/frankincense-student-talk.webp",
+    "file": "assets/content/student-presentations/frankincense-student-talk.mp4",
+    "category": "النباتات العُمانية",
+    "audience": "جميع المراحل",
+    "added": "2026-10-25"
+  },
+  {
+    "id": "student-omani-halwa-student-talk",
+    "section": "student-presentations",
+    "title": "الحلوى العُمانية: أصالة المذاق وعمق التراث",
+    "description": "عرض شفوي طلابي عن الحلوى العُمانية وأدوات صناعتها ومراحل إعدادها ومكانتها في الضيافة العُمانية.",
+    "cover": "assets/content/student-presentations/omani-halwa-student-talk.webp",
+    "file": "assets/content/student-presentations/omani-halwa-student-talk.mp4",
+    "category": "التراث العُماني",
+    "audience": "جميع المراحل",
+    "added": "2026-10-25"
+  },
+  {
     "id": "presentation-bahla-fort",
     "section": "presentations",
     "title": "قلعة بهلاء",

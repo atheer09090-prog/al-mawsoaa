@@ -110,8 +110,6 @@ function init() {
   const teaser=$('#journeyTeaser');
   teaser.href='#journey/'+current().id;
   teaser.innerHTML='<img src="'+esc(current().image.srcset.split(',')[0].trim().split(' ')[0])+'" width="640" height="360" loading="lazy" decoding="async" alt="'+esc(current().image.alt)+'"><span><small>هذا الشهر في عُمان · '+months[currentMonth-1]+'</small><b>'+esc(current().title)+'</b></span><span class="journey-teaser-arrow" aria-hidden="true">←</span>';
-  $('#journeySources').innerHTML=entries.map(e=>'<li><h3>'+months[e.month-1]+' · '+esc(e.title)+'</h3><p>'+esc(e.fact)+'</p>'+sourceBody(e)+'</li>').join('');
-  $('#journeyPhotoSources').innerHTML=uniquePhotos().map(e=>'<li><b>'+esc(e.image.credit.title)+'</b><p>'+photoCredit(e.image)+'</p><p>'+esc(e.image.credit.changes)+'</p><a href="'+esc(e.image.credit.licenseUrl)+'" target="_blank" rel="noopener noreferrer">نص الترخيص ↗</a></li>').join('');
   const intro=$('#journeyIntroImage');intro.dataset.src=entries[0].image.src;intro.dataset.srcset=entries[0].image.srcset;intro.alt=entries[0].image.alt;
   $('#journeyIntroCredit').innerHTML=photoCredit(entries[0].image);
   const ending=$('#journeyEndingImage');ending.dataset.src=entries.at(-1).image.src;ending.dataset.srcset=entries.at(-1).image.srcset;ending.alt=entries.at(-1).image.alt;

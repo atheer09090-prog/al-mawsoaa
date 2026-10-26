@@ -65,7 +65,8 @@ assert(context.window.OmaniJourney.search('الورد').some(e=>e.hash==='journe
 assert(context.window.OmaniJourney.search('').some(e=>e.hash==='journey'));
 assert(context.window.OmaniJourney.search('').some(e=>e.hash==='image-credits'));
 assert.equal(context.window.OmaniJourney.legacy('rose-water'),'rose-picking');
-for(const id of ['page-journey','journeyTeaser','journeySourceDialog','journeyCurrentLink','journeyRail','journeySources'])assert(html.includes('id="'+id+'"'));
+for(const id of ['page-journey','journeyTeaser','journeySourceDialog','journeyCurrentLink','journeyRail'])assert(html.includes('id="'+id+'"'));
+assert(!html.includes('id="journeySources"')&&!html.includes('journey-sources section-shell'),'Long source list must stay removed');
 assert(!html.includes('id="calendar"')&&!html.includes('data/calendar.js')&&!html.includes('src="calendar.js'));
 assert(app.includes("page === 'journey'")&&app.includes("page === 'calendar'")&&app.includes('OmaniJourney?.enter'));
 assert(html.includes('class="knowledge-grid"'),'Knowledge doors must remain a grid');

@@ -94,22 +94,12 @@
 .journey-ending-copy h2{font-size:clamp(32px,4vw,54px);line-height:1.4;margin:0 0 20px}
 .journey-ending-copy>p:not(.eyebrow){color:var(--muted);font-size:14px;margin-bottom:24px}
 .journey-ending-copy>.text-link{display:block;margin-top:18px;font-size:13px}
-.journey-sources{padding-block:70px;color:var(--khaki-soft)}
-.journey-sources h2{font-size:30px;color:var(--paper);margin-bottom:20px}
-.journey-sources .eyebrow{color:var(--khaki)}
-.journey-sources-note{font-size:13px;line-height:1.9;max-width:85ch;color:var(--khaki);margin-bottom:30px}
-.journey-sources ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;list-style:none;padding:0;margin:0 0 60px}
-.journey-sources li{min-width:0;padding:22px;border:1px solid color-mix(in srgb,var(--khaki) 25%,transparent);border-radius:14px}
-.journey-sources li h3{font-size:17px;color:var(--paper);margin:0 0 12px}
-.journey-sources li p{font-size:12px;line-height:1.9;margin:10px 0;color:var(--khaki)}
+
 .journey-source-kind{display:inline-block;font-size:10px;color:var(--olive);padding:3px 10px;border:1px solid var(--khaki);border-radius:99px;background:var(--khaki-soft);margin-bottom:12px}
-.journey-sources li dl,.journey-source-dialog dl{display:flex;gap:24px;margin:10px 0;font-size:11px}
-.journey-sources li dl>div,.journey-source-dialog dl>div{display:flex;gap:8px}
-.journey-sources dd,.journey-source-dialog dd{margin:0}
-.journey-sources .text-link,.journey-sources li>a{color:var(--paper);font-size:11px;text-decoration:underline;text-underline-offset:4px}
-.journey-photo-sources{padding:0;list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.journey-photo-sources b{font-family:var(--font-display);font-size:14px}
-.journey-sources-home{display:block;margin-top:30px;font-size:13px;text-decoration:underline;text-underline-offset:5px}
+.journey-source-dialog dl{display:flex;gap:24px;margin:10px 0;font-size:11px}
+.journey-source-dialog dl>div{display:flex;gap:8px}
+.journey-source-dialog dd{margin:0}
+
 .journey-source-dialog{width:min(540px,calc(100% - 28px));max-height:85dvh;padding:24px;border:1px solid var(--line);border-radius:20px;background:var(--paper);color:var(--sea);box-shadow:var(--shadow-soft)}
 .journey-source-dialog::backdrop{background:color-mix(in srgb,var(--sea-deep) 70%,transparent)}
 .journey-source-header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:20px}
@@ -134,7 +124,7 @@
 .journey-linear .journey-rail::before,.journey-linear .journey-rail::after{display:none}
 .journey-linear .journey-rail a{width:38px;height:38px}
 .journey-linear .journey-reading-label,.journey-linear .journey-stage-exit{display:none}
-@media(max-width:1000px){.home-actions{justify-content:flex-start}.journey-copy{width:39%;inset-inline-end:7%}.journey-detail{inset-inline-start:9%;width:130px}.journey-copy h2{font-size:32px}.journey-narrative{font-size:13px}.journey-photo-sources{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:1000px){.home-actions{justify-content:flex-start}.journey-copy{width:39%;inset-inline-end:7%}.journey-detail{inset-inline-start:9%;width:130px}.journey-copy h2{font-size:32px}.journey-narrative{font-size:13px}}
 @media(max-width:760px){
   .journey-header-entry{display:none}.primary-nav .journey-mobile-entry{display:flex;gap:10px;background:var(--khaki-soft);color:var(--sea)}
   .home-actions{gap:8px}.journey-hero-entry{font-size:12px;padding:9px 13px;min-height:42px;gap:6px}.journey-hero-entry small{font-size:8px}
@@ -156,7 +146,7 @@
   .journey-rail{inset-inline-start:5px;padding:8px 3px}.journey-rail a{width:23px;height:30px;font-size:8px}.journey-rail::before,.journey-rail::after{inset-inline-start:14px}
   .journey-reading-label{top:12px;inset-inline-end:22px;font-size:9px}.journey-stage-exit{inset-inline-end:22px;bottom:8px;font-size:8px}
   .journey-ending{grid-template-columns:1fr;padding:35px 22px;gap:30px}.journey-ending-copy h2{font-size:34px}.journey-ending-copy>p:not(.eyebrow){font-size:13px}
-  .journey-sources{padding-block:45px}.journey-sources h2{font-size:26px}.journey-sources ol,.journey-photo-sources{grid-template-columns:1fr}.journey-sources li{padding:18px}
+
   .journey-source-dialog{position:fixed;inset:auto 0 0;margin:0 auto;width:100%;max-height:85dvh;border-radius:22px 22px 0 0;padding:22px 20px calc(24px + env(safe-area-inset-bottom))}
   .journey-linear .journey-scene{min-height:700px}.journey-linear .journey-copy{padding-bottom:22px}
 }
