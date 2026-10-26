@@ -1,5 +1,19 @@
 /* مقاسات مشتقة للعرض فقط؛ تبقى ملفات المحتوى الأصلية كما هي. */
 window.OMANI_IMAGES = {
+  "assets/content/covers/sultan-majid-two-thrones.webp": {
+    "src": "assets/content/previews/sultan-majid-two-thrones-960.webp",
+    "srcset": "assets/content/previews/sultan-majid-two-thrones-360.webp 360w, assets/content/previews/sultan-majid-two-thrones-640.webp 640w, assets/content/previews/sultan-majid-two-thrones-960.webp 960w, assets/content/covers/sultan-majid-two-thrones.webp 1280w",
+    "width": 1280,
+    "height": 720,
+    "focal": "50% 50%"
+  },
+  "assets/content/covers/omani-subaia.webp": {
+    "src": "assets/content/covers/omani-subaia.webp",
+    "srcset": "assets/content/previews/omani-subaia-360.webp 360w, assets/content/covers/omani-subaia.webp 384w",
+    "width": 384,
+    "height": 848,
+    "focal": "50% 50%"
+  },
   "assets/content/student-presentations/frankincense-student-talk.webp": {
     "src": "assets/content/student-presentations/frankincense-student-talk-640.webp",
     "srcset": "assets/content/student-presentations/frankincense-student-talk-360.webp 360w, assets/content/student-presentations/frankincense-student-talk-640.webp 640w, assets/content/student-presentations/frankincense-student-talk.webp 832w",

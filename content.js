@@ -5,6 +5,28 @@
  */
 window.OMANI_CONTENT = [
   {
+    "id": "video-sultan-majid-two-thrones",
+    "section": "library",
+    "title": "حكاية عرشين: السلطان ماجد",
+    "description": "عرض مرئي عن السلطان ماجد والسياق التاريخي لحكمه.",
+    "cover": "assets/content/covers/sultan-majid-two-thrones.webp",
+    "file": "assets/content/videos/sultan-majid-two-thrones.mp4",
+    "category": "التاريخ العُماني",
+    "audience": "جميع المراحل",
+    "added": "2026-10-26"
+  },
+  {
+    "id": "video-omani-subaia",
+    "section": "library",
+    "title": "السباعية",
+    "description": "مقطع يعرّف بالسباعية ويعرض طريقة ارتدائها مع الزي العُماني.",
+    "cover": "assets/content/covers/omani-subaia.webp",
+    "file": "assets/content/videos/omani-subaia.mp4",
+    "category": "الزي العُماني",
+    "audience": "جميع المراحل",
+    "added": "2026-10-26"
+  },
+  {
     "id": "student-frankincense-student-talk",
     "section": "student-presentations",
     "title": "شجرة اللبان العُمانية — عرض شفوي",
