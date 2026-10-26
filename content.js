@@ -5,6 +5,79 @@
  */
 window.OMANI_CONTENT = [
   {
+    "id": "presentation-e-government",
+    "section": "presentations",
+    "title": "الحكومة الإلكترونية",
+    "description": "عرض تقديمي عن الحكومة الإلكترونية في سلطنة عُمان، مع معاينة الشرائح العشر كاملة وتنزيل ملف PDF الأصلي.",
+    "cover": "assets/content/presentations/e-government-slide-01.webp",
+    "file": "assets/content/presentations/e-government.pdf",
+    "pages": [
+      {
+        "src": "assets/content/presentations/e-government-slide-01.webp",
+        "label": "الشريحة 1",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/e-government-slide-02.webp",
+        "label": "الشريحة 2",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/e-government-slide-03.webp",
+        "label": "الشريحة 3",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/e-government-slide-04.webp",
+        "label": "الشريحة 4",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/e-government-slide-05.webp",
+        "label": "الشريحة 5",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/e-government-slide-06.webp",
+        "label": "الشريحة 6",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/e-government-slide-07.webp",
+        "label": "الشريحة 7",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/e-government-slide-08.webp",
+        "label": "الشريحة 8",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/e-government-slide-09.webp",
+        "label": "الشريحة 9",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "assets/content/presentations/e-government-slide-10.webp",
+        "label": "الشريحة 10",
+        "width": 1600,
+        "height": 900
+      }
+    ],
+    "category": "التحول الرقمي",
+    "audience": "جميع المراحل",
+    "added": "2026-10-26"
+  },
+  {
     "id": "video-sultan-majid-two-thrones",
     "section": "library",
     "title": "حكاية عرشين: السلطان ماجد",

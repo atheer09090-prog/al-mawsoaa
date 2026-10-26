@@ -1,5 +1,12 @@
 /* مقاسات مشتقة للعرض فقط؛ تبقى ملفات المحتوى الأصلية كما هي. */
 window.OMANI_IMAGES = {
+  "assets/content/presentations/e-government-slide-01.webp": {
+    "src": "assets/content/previews/presentations-e-government-slide-01-960.webp",
+    "srcset": "assets/content/previews/presentations-e-government-slide-01-360.webp 360w, assets/content/previews/presentations-e-government-slide-01-640.webp 640w, assets/content/previews/presentations-e-government-slide-01-960.webp 960w",
+    "width": 1600,
+    "height": 900,
+    "focal": "50% 50%"
+  },
   "assets/content/covers/sultan-majid-two-thrones.webp": {
     "src": "assets/content/previews/sultan-majid-two-thrones-960.webp",
     "srcset": "assets/content/previews/sultan-majid-two-thrones-360.webp 360w, assets/content/previews/sultan-majid-two-thrones-640.webp 640w, assets/content/previews/sultan-majid-two-thrones-960.webp 960w, assets/content/covers/sultan-majid-two-thrones.webp 1280w",
