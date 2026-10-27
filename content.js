@@ -544,6 +544,28 @@ window.OMANI_CONTENT = [
     "added": "2026-10-21"
   },
   {
+    "id": "activity-digital-content-grade-twelve",
+    "section": "school",
+    "title": "تفعيل المحتويات الرقمية للصف الثاني عشر",
+    "description": "مشاهدة طالبات الصف الثاني عشر محتويات مرئية لموضوعات الموسوعة العُمانية داخل الصف.",
+    "cover": "assets/content/activities/digital-content-grade-twelve.webp",
+    "file": "assets/content/activities/digital-content-grade-twelve.mp4",
+    "category": "التفعيل الصفي",
+    "audience": "جميع المراحل",
+    "added": "2026-10-27"
+  },
+  {
+    "id": "activity-plants-student-presentations-activity",
+    "section": "school",
+    "title": "عروض الطالبات عن النباتات العُمانية",
+    "description": "توظيف موضوع النباتات في سلطنة عُمان في عروض شفوية تقدّمها الطالبات داخل الصف.",
+    "cover": "assets/content/activities/plants-student-presentations-activity.webp",
+    "file": "assets/content/activities/plants-student-presentations-activity.mp4",
+    "category": "العروض الشفوية",
+    "audience": "جميع المراحل",
+    "added": "2026-10-27"
+  },
+  {
     "id": "activity-digital-content-cover-lessons",
     "section": "school",
     "title": "تفعيل المحتويات الرقمية في حصص الاحتياط",

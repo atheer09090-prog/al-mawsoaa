@@ -13,15 +13,15 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill='%2317384a' d='M4 36V17a16 16 0 0 1 32 0v19h-5V17a11 11 0 0 0-22 0v19z'/%3E%3Cpath fill='%23dba84a' d='M17 22h6v6h-6z'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/ibm-plex-sans-arabic-600.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/noto-sans-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261025-ambassadors-r1">
+  <link rel="stylesheet" href="styles.css?v=20261027-frankincense-r1">
   <script>try{var q=sessionStorage.getItem('omani-intro-seen-v2'),f=/[?&]intro\b/.test(location.search),d=location.hash.length>1&&location.hash!=='#home';document.documentElement.classList.add((q&&!f)||d?'no-splash':'splash-on')}catch(e){document.documentElement.classList.add('splash-on')}</script>
-  <script src="data/content.js?v=20261027-activities-r1" defer></script>
-  <script src="data/images.js?v=20261027-activities-r1" defer></script>
+  <script src="data/content.js?v=20261027-activities-r2" defer></script>
+  <script src="data/images.js?v=20261027-activities-r2" defer></script>
   <link rel="stylesheet" href="journey.css?v=20261025-ambassadors-r1">
   <script src="data/journey.js?v=20261026-encyclopedia-r1" defer></script>
   <script src="motion.js?v=20261025-ambassadors-r1" defer></script>
   <script src="journey.js?v=20261025-ambassadors-r1" defer></script>
-  <script src="app.js?v=20261027-activation-r1" defer></script>
+  <script src="app.js?v=20261027-frankincense-r1" defer></script>
 </head>
 <body>
   <svg class="sprite" aria-hidden="true" focusable="false">
@@ -138,6 +138,7 @@
           <div class="gallery-lightbox-nav"><button class="gallery-control" id="galleryLightboxPrev" type="button" aria-label="الصورة السابقة"><svg class="ico flip" aria-hidden="true"><use href="#i-arrow"/></svg></button><button class="gallery-control" id="galleryLightboxNext" type="button" aria-label="الصورة التالية"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
         </dialog>
       </section>
+      <section class="workshop-home-entry section-shell" aria-labelledby="craftEntryTitle"><div class="craft-entry-heading"><small>كيف تُصنع؟ · ورشة تفاعلية</small><h2 id="craftEntryTitle">جرّب حِرف عُمان بنفسك</h2><p>حرّك بيدك، وراقب أثر قراراتك.</p></div><div class="craft-entry-links"><a href="#workshop/halwa"><img src="assets/images/workshop/halwa/entry.webp" width="480" height="480" alt="حلوى عُمانية بالزعفران" loading="lazy"><span>صناعة الحلوى <b>ابدأ ←</b></span></a><a href="#workshop/frankincense"><img src="assets/images/workshop/frankincense/entry.webp" width="640" height="360" alt="أشجار اللبان في ظفار" loading="lazy"><span>استخراج اللبان <b>ابدأ ←</b></span></a></div></section>
       <section class="collections compact-collections section-shell" id="collections" aria-labelledby="collectionsTitle">
         <div class="section-heading-row"><div><p class="eyebrow">اختر ما يلهمك</p><h2 id="collectionsTitle">أبواب المعرفة</h2></div><p class="section-caption" id="sectionCaption">ثمانية أبواب للمعرفة والمشاركة.</p></div>
         <div class="knowledge-grid" id="bays" role="list" aria-label="أقسام الموسوعة" aria-busy="true"><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article><article class="knowledge-skeleton" aria-hidden="true"><span class="knowledge-skeleton-media"></span><span class="knowledge-skeleton-line"></span><span class="knowledge-skeleton-line short"></span></article></div>
@@ -180,6 +181,14 @@
       </section>
 
 
+    </section>
+
+    <section class="page section-shell workshop-page" id="page-workshop" data-page="workshop" aria-labelledby="workshopTitle">
+      <a class="back-link" href="#home"><svg class="ico flip" aria-hidden="true"><use href="#i-arrow"/></svg> العودة إلى الرئيسية</a>
+      <a href="#workshop" class="back-link" id="workshopBack" hidden>← العودة إلى الحِرف</a>
+      <div id="workshopHub" class="workshop-craft"><p class="eyebrow">كيف تُصنع؟ · المعرفة بين يديك</p><h1 id="workshopHubTitle" tabindex="-1">ورشة الحِرف</h1><p class="workshop-hub-lead">اختر حرفة، وجرّبها بنفسك. لكل قرار أثر، ولكل تجربة حكاية.</p><div class="workshop-hub-grid"><a class="workshop-hub-card" href="#workshop/halwa"><img src="assets/images/workshop/halwa/entry.webp" width="480" height="480" alt="حلوى عُمانية في وعاء معدني" loading="lazy"><div><small>المذاق والضيافة</small><h2>صناعة الحلوى العُمانية</h2><p>حرّك، واضبط النار، واكتشف سر القوام.</p><span>ادخل التجربة ←</span></div></a><a class="workshop-hub-card" href="#workshop/frankincense"><img src="assets/images/workshop/frankincense/entry.webp" width="640" height="360" alt="أشجار اللبان في وادي دوكة" loading="lazy"><div><small>الشجرة والاستدامة</small><h2>استخراج اللبان العُماني</h2><p>من النقش إلى المحصول، مع إبقاء الشجرة بخير.</p><span>ادخل التجربة ←</span></div></a></div><p class="workshop-hub-note">محاكاة تعليمية داخل الموقع، مع مصادر المعلومات وحدود كل نموذج. لا تتطلب تنزيلًا.</p></div>
+      <div id="workshopRoot" class="workshop-craft" hidden><div class="ws-loading"><h1 id="workshopTitle" tabindex="-1">الحلوى العُمانية</h1><p role="status">جارٍ تجهيز مساحة التجربة…</p></div></div>
+      <div id="frankincenseRoot" class="workshop-craft" hidden><div class="ws-loading"><h1 id="frTitle" tabindex="-1">استخراج اللبان العُماني</h1><p role="status">جارٍ تجهيز مساحة التجربة…</p></div></div>
     </section>
 
     <section class="page journey-page" id="page-journey" data-page="journey" aria-labelledby="journeyTitle">

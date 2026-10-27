@@ -1,5 +1,19 @@
 /* مقاسات مشتقة للعرض فقط؛ تبقى ملفات المحتوى الأصلية كما هي. */
 window.OMANI_IMAGES = {
+  "assets/content/activities/digital-content-grade-twelve.webp": {
+    "src": "assets/content/activities/digital-content-grade-twelve.webp",
+    "srcset": "assets/content/previews/digital-content-grade-twelve-360.webp 360w, assets/content/activities/digital-content-grade-twelve.webp 576w",
+    "width": 576,
+    "height": 1024,
+    "focal": "50% 50%"
+  },
+  "assets/content/activities/plants-student-presentations-activity.webp": {
+    "src": "assets/content/previews/plants-student-presentations-activity-640.webp",
+    "srcset": "assets/content/previews/plants-student-presentations-activity-360.webp 360w, assets/content/previews/plants-student-presentations-activity-640.webp 640w, assets/content/activities/plants-student-presentations-activity.webp 880w",
+    "width": 880,
+    "height": 528,
+    "focal": "50% 50%"
+  },
   "assets/content/activities/digital-content-cover-lessons.webp": {
     "src": "assets/content/previews/digital-content-cover-lessons-640.webp",
     "srcset": "assets/content/previews/digital-content-cover-lessons-360.webp 360w, assets/content/previews/digital-content-cover-lessons-640.webp 640w, assets/content/previews/digital-content-cover-lessons-960.webp 960w, assets/content/activities/digital-content-cover-lessons.webp 1280w",

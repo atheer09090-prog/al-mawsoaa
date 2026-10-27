@@ -1,0 +1,14 @@
+{
+  "id": "halwa-slywire",
+  "author": "Slywire",
+  "title": "Omani Halwa with saffron",
+  "url": "https://commons.wikimedia.org/wiki/File:Omani_Halwa_with_saffron.jpg",
+  "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Omani_Halwa_with_saffron.jpg",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "changes": "تصحيح اتجاه EXIF، واقتصاص مربع، وتصغير وتحويل إلى WebP. النسختان المشتقتان متاحتان بالرخصة نفسها.",
+  "files": [
+    "assets/images/workshop/halwa/reference.webp",
+    "assets/images/workshop/halwa/entry.webp"
+  ]
+}
