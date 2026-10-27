@@ -10,7 +10,7 @@ const SECTIONS = [
   {id:'practice', title:'من المعرفة إلى التطبيق', desc:'تجارب وممارسات مصوّرة من التراث والحياة العُمانية، في فيديوهات غير مصنوعة بالذكاء الاصطناعي.', short:'فيديوهات واقعية تصل المعرفة بالتجربة والممارسة.', kind:'تطبيق عملي', label:'شاهد التطبيق'},
   {id:'student-presentations', title:'سفراء المعرفة', desc:'عروض شفوية يقدّمها طلاب المدرسة عن كنوز عُمان ومعارفها.', short:'عروض شفوية من طلاب المدرسة.', kind:'عرض شفهي', label:'شاهد عروض الطلاب'},
   {id:'booklets', title:'المطويات', desc:'مواد تعريفية مختصرة للقراءة والمعاينة والتنزيل، مصممة لتكون قريبة من المتعلم.', short:'مطويات ومواد تعريفية للقراءة والتنزيل.', kind:'مطوية', label:'اقرأ المطويات'},
-  {id:'school', title:'الموسوعة في المدرسة', desc:'مساحة للورش والمبادرات والمسابقات والأفكار الصفية التي تفعّل موارد الموسوعة في المدرسة.', short:'أنشطة ومبادرات لتفعيل الموسوعة في البيئة المدرسية.', kind:'نشاط', label:'فعّل المعرفة'}
+  {id:'school', title:'أنشطة التفعيل', desc:'مساحة للورش والمبادرات والمسابقات والأفكار الصفية التي تفعّل موارد الموسوعة في المدرسة.', short:'أنشطة ومبادرات لتفعيل الموسوعة في البيئة المدرسية.', kind:'نشاط', label:'فعّل المعرفة'}
 ];
 const STEPS = [
   {lead:'اختر ما يناسب درسك:', sections:['library','podcasts','presentations','booklets']},
@@ -506,6 +506,9 @@ function renderRoute() {
   const {page, rid} = parseHash();
   if (page === 'presentations' && rid === 'presentation-frankincense-tree-video') {
     history.replaceState(null, '', `#library/${rid}`); route(); return;
+  }
+  if (page === 'practice' && rid === 'video-omani-womens-dress-workshop') {
+    history.replaceState(null, '', `#school/${rid}`); route(); return;
   }
   const section = byId(page);
   if (page !== 'journey') window.OmaniJourney?.leave();

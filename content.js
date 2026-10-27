@@ -545,7 +545,7 @@ window.OMANI_CONTENT = [
   },
   {
     "id": "video-omani-womens-dress-workshop",
-    "section": "practice",
+    "section": "school",
     "title": "الزي النسائي العُماني — تطبيق عملي",
     "description": "نشاط مدرسي يستلهم الموسوعة العُمانية لتجسيد الزي النسائي العُماني باستخدام الأقمشة والخامات.",
     "cover": "assets/content/covers/omani-womens-dress-workshop.webp",
