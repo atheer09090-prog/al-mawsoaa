@@ -1,5 +1,26 @@
 /* مقاسات مشتقة للعرض فقط؛ تبقى ملفات المحتوى الأصلية كما هي. */
 window.OMANI_IMAGES = {
+  "assets/content/activities/digital-content-cover-lessons.webp": {
+    "src": "assets/content/previews/digital-content-cover-lessons-640.webp",
+    "srcset": "assets/content/previews/digital-content-cover-lessons-360.webp 360w, assets/content/previews/digital-content-cover-lessons-640.webp 640w, assets/content/previews/digital-content-cover-lessons-960.webp 960w, assets/content/activities/digital-content-cover-lessons.webp 1280w",
+    "width": 1280,
+    "height": 720,
+    "focal": "50% 50%"
+  },
+  "assets/content/activities/printing-booklets.webp": {
+    "src": "assets/content/previews/printing-booklets-640.webp",
+    "srcset": "assets/content/previews/printing-booklets-360.webp 360w, assets/content/previews/printing-booklets-640.webp 640w, assets/content/activities/printing-booklets.webp 720w",
+    "width": 720,
+    "height": 1280,
+    "focal": "50% 50%"
+  },
+  "assets/content/activities/digital-content-activity-class.webp": {
+    "src": "assets/content/activities/digital-content-activity-class.webp",
+    "srcset": "assets/content/previews/digital-content-activity-class-360.webp 360w, assets/content/activities/digital-content-activity-class.webp 576w",
+    "width": 576,
+    "height": 1024,
+    "focal": "50% 50%"
+  },
   "assets/content/student-presentations/haboot-student-talk.webp": {
     "src": "assets/content/previews/haboot-student-talk-640.webp",
     "srcset": "assets/content/previews/haboot-student-talk-360.webp 360w, assets/content/previews/haboot-student-talk-640.webp 640w, assets/content/student-presentations/haboot-student-talk.webp 832w",

@@ -544,6 +544,39 @@ window.OMANI_CONTENT = [
     "added": "2026-10-21"
   },
   {
+    "id": "activity-digital-content-cover-lessons",
+    "section": "school",
+    "title": "تفعيل المحتويات الرقمية في حصص الاحتياط",
+    "description": "توظيف موارد الموسوعة والألعاب الرقمية في حصص الاحتياط، بمشاركة الطالبات داخل الصف.",
+    "cover": "assets/content/activities/digital-content-cover-lessons.webp",
+    "file": "assets/content/activities/digital-content-cover-lessons.mp4",
+    "category": "حصص الاحتياط",
+    "audience": "جميع المراحل",
+    "added": "2026-10-27"
+  },
+  {
+    "id": "activity-printing-booklets",
+    "section": "school",
+    "title": "طباعة المطويات الرقمية وتوزيعها",
+    "description": "طباعة مطويات الموسوعة وتوزيعها على الطلبة وقراءتها ضمن حصص الاحتياط.",
+    "cover": "assets/content/activities/printing-booklets.webp",
+    "file": "assets/content/activities/printing-booklets.mp4",
+    "category": "المطويات التعليمية",
+    "audience": "جميع المراحل",
+    "added": "2026-10-27"
+  },
+  {
+    "id": "activity-digital-content-activity-class",
+    "section": "school",
+    "title": "تفعيل المحتويات الرقمية في حصة النشاط",
+    "description": "مشاركة صفية في حصة النشاط باستخدام المحتويات الرقمية ولعبة متحف عُمان.",
+    "cover": "assets/content/activities/digital-content-activity-class.webp",
+    "file": "assets/content/activities/digital-content-activity-class.mp4",
+    "category": "حصة النشاط",
+    "audience": "جميع المراحل",
+    "added": "2026-10-27"
+  },
+  {
     "id": "video-omani-womens-dress-workshop",
     "section": "school",
     "title": "الزي النسائي العُماني — تطبيق عملي",
