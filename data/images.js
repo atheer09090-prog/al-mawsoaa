@@ -1,5 +1,12 @@
 /* مقاسات مشتقة للعرض فقط؛ تبقى ملفات المحتوى الأصلية كما هي. */
 window.OMANI_IMAGES = {
+  "assets/content/covers/omani-womens-dress-workshop.webp": {
+    "src": "assets/content/covers/omani-womens-dress-workshop.webp",
+    "srcset": "assets/content/previews/omani-womens-dress-workshop-360.webp 360w, assets/content/covers/omani-womens-dress-workshop.webp 464w",
+    "width": 464,
+    "height": 832,
+    "focal": "50% 50%"
+  },
   "assets/content/presentations/e-government-slide-01.webp": {
     "src": "assets/content/previews/presentations-e-government-slide-01-960.webp",
     "srcset": "assets/content/previews/presentations-e-government-slide-01-360.webp 360w, assets/content/previews/presentations-e-government-slide-01-640.webp 640w, assets/content/previews/presentations-e-government-slide-01-960.webp 960w",

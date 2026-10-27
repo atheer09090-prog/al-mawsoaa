@@ -519,6 +519,17 @@ window.OMANI_CONTENT = [
     "added": "2026-10-21"
   },
   {
+    "id": "video-omani-womens-dress-workshop",
+    "section": "practice",
+    "title": "الزي النسائي العُماني — تطبيق عملي",
+    "description": "نشاط مدرسي يستلهم الموسوعة العُمانية لتجسيد الزي النسائي العُماني باستخدام الأقمشة والخامات.",
+    "cover": "assets/content/covers/omani-womens-dress-workshop.webp",
+    "file": "assets/content/videos/omani-womens-dress-workshop.mp4",
+    "category": "الزي العُماني",
+    "audience": "جميع المراحل",
+    "added": "2026-10-27"
+  },
+  {
     "id": "video-omani-drum",
     "section": "practice",
     "title": "الطبل العربي في التراث العُماني",
