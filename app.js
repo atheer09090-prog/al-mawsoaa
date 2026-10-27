@@ -200,8 +200,8 @@ function renderSection(animate = false) {
   const grid = $('#categoryGrid');
   grid.classList.toggle('is-entering', animate);
   const crafts = [
-    {id:'halwa',title:'اصنع الحلوى العُمانية بنفسك',words:'الحلوى العمانية طبخ محاكاة',image:'halwa/entry.webp',width:480,height:480,alt:'حلوى عُمانية بالزعفران',description:'حرّك الخليط، واضبط النار، واكتشف أثر قراراتك.'},
-    {id:'frankincense',title:'من الشجرة إلى حبات اللبان',words:'اللبان العماني شجرة ظفار استدامة استخراج',image:'frankincense/entry.webp',width:640,height:360,alt:'أشجار لبان في وادي دوكة',description:'اختر شجرة، وانقش برفق، ووازن بين المحصول وصحتها.'}
+    {id:'halwa',title:'اصنع الحلوى العُمانية بنفسك',words:'الحلوى العمانية طبخ محاكاة',image:'halwa/entry.webp',width:480,height:480,alt:'حلوى عُمانية بالزعفران',description:'أضف المكونات، وحرّك، ثم قدّم الحلوى.'},
+    {id:'frankincense',title:'من الشجرة إلى حبات اللبان',words:'اللبان العماني شجرة ظفار استدامة استخراج',image:'frankincense/entry.webp',width:640,height:360,alt:'أشجار لبان في وادي دوكة',description:'انقش برفق، وانتظر، ثم اجمع اللبان.'}
   ].filter(c=>['play','practice'].includes(s.id)&&!state.cat&&(!norm(state.q.trim())||norm('ورشة الحرف كيف تصنع محاكاة تفاعلية '+c.title+' '+c.words).includes(norm(state.q.trim()))));
   grid.innerHTML = crafts.map(c=>`<article class="resource-card workshop-resource-entry"><a href="#workshop/${c.id}"><img src="assets/images/workshop/${c.image}" width="${c.width}" height="${c.height}" alt="${c.alt}" loading="lazy" decoding="async"><div class="resource-body"><span class="resource-meta">كيف تُصنع؟ · تجربة داخل الموقع</span><h3>${c.title}</h3><p>${c.description}</p><span class="resource-action">ابدأ الورشة ${ico('arrow')}</span></div></a></article>`).join('') + items.map((x, i) => resourceCard(x, i)).join('');
   if (crafts.length) $('#resultCount').textContent = (items.length ? $('#resultCount').textContent+' + ' : '')+(crafts.length===1?'ورشة تفاعلية':'ورشتان تفاعليتان');
@@ -414,8 +414,8 @@ function renderPalette() {
     : [...content].sort((a, b) => (b.added || '').localeCompare(a.added || '')).slice(0, 3);
   pItems = [
     ...secs.map(s => ({type: 'section', hash: s.id, icon: s.id, title: s.title, sub: s.short})),
-    ...(!q || norm('اللبان العماني شجرة ظفار استخراج استدامة ورشة الحرف').includes(q) ? [{type:'feature',hash:'workshop/frankincense',icon:'practice',title:'ورشة الحِرف: استخراج اللبان',sub:'من الشجرة إلى المحصول، مع الحفاظ على صحتها'}] : []),
-    ...(!q || norm('ورشة الحرف الحلوى العمانية كيف تصنع طبخ محاكاة').includes(q) ? [{type:'feature',hash:'workshop/halwa',icon:'practice',title:'ورشة الحِرف: الحلوى العُمانية',sub:'حرّك، واضبط النار، وتعلّم بالممارسة'}] : []),
+    ...(!q || norm('اللبان العماني شجرة ظفار استخراج استدامة ورشة الحرف').includes(q) ? [{type:'feature',hash:'workshop/frankincense',icon:'practice',title:'ورشة الحِرف: استخراج اللبان',sub:'انقش، وانتظر، واجمع في ثلاث خطوات'}] : []),
+    ...(!q || norm('ورشة الحرف الحلوى العمانية كيف تصنع طبخ محاكاة').includes(q) ? [{type:'feature',hash:'workshop/halwa',icon:'practice',title:'ورشة الحِرف: الحلوى العُمانية',sub:'أضف، وحرّك، وقدّم في ثلاث خطوات'}] : []),
     ...(window.OmaniJourney?.search(q) || []),
     ...res.map(x => ({type: 'item', hash: `${x.section}/${encodeURIComponent(x.id)}`, icon: x.section, title: x.title, sub: `${byId(x.section).title}${x.category ? ' · ' + x.category : ''}`}))
   ];
@@ -469,7 +469,7 @@ document.addEventListener('keydown', e => {
 const workshopLoading = new Map(),workshopAssets = new Map();
 function loadWorkshop(craft='hub') {
   if (workshopLoading.has(craft)) return workshopLoading.get(craft);
-  const version='20261027-frankincense-r1';
+  const version='20261027-simple-crafts-r1';
   const load=(file,css=false)=>{
     if(workshopAssets.has(file))return workshopAssets.get(file);
     const promise=new Promise((resolve,reject)=>{
@@ -483,8 +483,12 @@ function loadWorkshop(craft='hub') {
     await load('workshop.css',true);
     if(craft==='hub')return;
     await load('workshop-shared.js');
-    if(craft==='halwa')for(const file of ['data/halwa.js','data/halwa-media.js','halwa-engine.js','workshop.js'])await load(file);
-    else {await load('frankincense.css',true);for(const file of ['data/frankincense.js','data/frankincense-media.js','frankincense-engine.js','frankincense.js'])await load(file);}
+    await load('workshop-simple.css',true);
+    await load('workshop-simple-engine.js');
+    await load('data/simple-crafts.js');
+    await load('workshop-simple.js');
+    if(craft==='halwa')for(const file of ['data/halwa.js','workshop.js'])await load(file);
+    else {for(const file of ['data/frankincense.js','frankincense.js'])await load(file);}
   })().catch(error=>{workshopLoading.delete(craft);throw error;});
   workshopLoading.set(craft,pending);return pending;
 }

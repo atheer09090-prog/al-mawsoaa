@@ -38,19 +38,18 @@ const html=await read('index.html'),app=await read('app.js'),js=await read('work
 for(const f of ['workshop.js','halwa-engine.js','data/halwa.js','data/halwa-media.js'])new vm.Script(await read(f),{filename:f});
 assert(html.includes('data-page="workshop"'));assert(app.includes("page === 'workshop'"));assert(app.includes("['play','practice'].includes(s.id)"));assert(app.includes("hash:'workshop/halwa'"));assert(app.includes("hash:'workshop/frankincense'"));assert(app.includes('href="#workshop">ورشة الحِرف'));
 assert(!html.includes('<script src="workshop.js'),'Workshop must remain lazy');assert(!html.includes('<link rel="stylesheet" href="workshop.css'),'Workshop CSS must remain lazy');
-const shared=await read('workshop-shared.js');assert(js.includes('visibilitychange')&&js.includes('S.createLoop')&&shared.includes('requestAnimationFrame')&&shared.includes('while(acc>=step)'));assert(shared.includes('document.hidden'));
-assert(shared.includes('try{return JSON.parse(localStorage')&&js.includes('aria-live="polite"'));assert(js.includes('S.sources')&&js.includes('S.stars')&&js.includes('S.saveBest'));
-assert(css.includes('prefers-reduced-motion:reduce'));assert(!js.includes('new Audio('));
-// Regression: revisiting a completed session must not create a paused overlay.
-const completed={game:{state:{done:true}},paused:false};
-vm.runInNewContext(js.slice(js.indexOf('function setPaused('),js.indexOf('function loopStart('))+'\nsetPaused(true);',completed);
-assert.equal(completed.paused,false,'Completed sessions must not become paused on return');
+const shared=await read('workshop-shared.js'),simpleUI=await read('workshop-simple.js'),simpleCSS=await read('workshop-simple.css');
+assert(simpleUI.includes('visibilitychange')&&simpleUI.includes('S.createLoop')&&shared.includes('while(acc>=step)')&&shared.includes('document.hidden'));
+assert(shared.includes('try{return JSON.parse(localStorage')&&simpleUI.includes('aria-live="polite"'));
+assert(simpleUI.includes('S.sources')&&simpleUI.includes('compact:true'));assert(simpleCSS.includes('prefers-reduced-motion:reduce'));
+assert(!simpleUI.includes('wsHeat')&&!simpleUI.includes('frDepth')&&!simpleUI.includes('ws-modes'),'Keep the guided interface simple');
+assert(js.includes('WorkshopSimple.mount'));assert(!simpleUI.includes('new Audio('));
 const credit=JSON.parse(await read('data/halwa-image-credits.json'));assert.equal(credit.license,'CC BY-SA 4.0');assert(credit.author&&credit.url&&credit.changes);
 for(const name of await readdir(new URL('../assets/images/workshop/halwa/',import.meta.url))){
  const file=new URL('../assets/images/workshop/halwa/'+name,import.meta.url);assert((await stat(file)).size<=153600,'Image budget exceeded');
  assert.equal((await readFile(file)).toString('ascii',8,12),'WEBP');
 }
-for(const name of ['workshop.js','workshop.css','workshop-shared.js','halwa-engine.js','data/halwa.js','data/halwa-media.js','data/halwa-image-credits.json','frankincense.js','frankincense.css','frankincense-engine.js','data/frankincense.js','data/frankincense-media.js','data/frankincense-image-credits.json'])assert((await readFile(new URL('../'+name,import.meta.url))).equals(await readFile(new URL('../dist/'+name,import.meta.url))),'dist mismatch: '+name);
+for(const name of ['workshop.js','workshop.css','workshop-simple.js','workshop-simple.css','workshop-simple-engine.js','data/simple-crafts.js','workshop-shared.js','halwa-engine.js','data/halwa.js','data/halwa-media.js','data/halwa-image-credits.json','frankincense.js','frankincense.css','frankincense-engine.js','data/frankincense.js','data/frankincense-media.js','data/frankincense-image-credits.json'])assert((await readFile(new URL('../'+name,import.meta.url))).equals(await readFile(new URL('../dist/'+name,import.meta.url))),'dist mismatch: '+name);
 console.log(`PASS: ${C.facts.length} sourced facts; successful session, burning, irreversible burn, unmixed starch, order, weak heat, real input, time ratio, lazy routes, image license and dist.`);
 console.log('LIMITS: temperatures, quantities and stage times are game units; encyclopedia and field calibration pending.');
 
@@ -79,8 +78,25 @@ let pending=new Map(),nowId=0,ticks=0;const ctx={window:{},document:{hidden:fals
 vm.runInNewContext(shared,ctx);const loop=ctx.window.WorkshopShared.createLoop({step:.01,maxFrame:.1,canRun:()=>true,onStep:()=>ticks++,onDraw:()=>{},onUI:()=>{}});
 const frame=t=>{const entry=pending.entries().next().value;assert(entry);pending.delete(entry[0]);entry[1](t);};loop.start();frame(1);frame(51);assert(ticks>=4&&ticks<=5);ctx.document.hidden=true;frame(101);assert.equal(pending.size,0);loop.start();assert.equal(pending.size,0);ctx.document.hidden=false;loop.start();loop.stop();assert.equal(pending.size,0);
 const blocked={window:{},localStorage:{getItem(){throw Error('blocked');},setItem(){throw Error('blocked');}},Intl};vm.runInNewContext(shared,blocked);assert.equal(blocked.window.WorkshopShared.storage('test').get(),null);assert.equal(blocked.window.WorkshopShared.storage('test').set({score:100}),false);
-const frankJS=await read('frankincense.js');assert(frankJS.includes('S.createLoop')&&frankJS.includes('S.sources')&&frankJS.includes('S.saveBest')&&frankJS.includes('S.stars'));assert(frankJS.includes('prefers-reduced-motion')&&frankJS.includes('if(!reduced())'));
+assert((await read('frankincense.js')).includes('WorkshopSimple.mount'));assert(simpleUI.includes('prefers-reduced-motion')&&simpleUI.includes('reduced()'));
 const frankCredits=JSON.parse(await read('data/frankincense-image-credits.json'));for(const file of await readdir(new URL('../assets/images/workshop/frankincense/',import.meta.url))){assert(frankCredits.some(c=>c.file===file&&c.author&&c.license&&c.url));const data=await readFile(new URL('../assets/images/workshop/frankincense/'+file,import.meta.url));assert(data.length<=153600);assert.equal(data.toString('ascii',8,12),'WEBP');}
 console.log(`PASS: frankincense ${F.facts.length} sourced facts; healthy/deep/shallow/young/close/excess/early/late/repeated/incorrect-sort outcomes; real input required; shared loop and blocked storage; credits and dist.`);
 
 assert(!app.includes('showWorkshop'),'Remove the old single-craft empty-state flag');
+
+for(const f of ['data/simple-crafts.js','workshop-simple-engine.js','workshop-simple.js'])new vm.Script(await read(f),{filename:f});
+for(const f of ['data/simple-crafts.js','workshop-simple-engine.js'])vm.runInNewContext(await read(f),c,{filename:f});
+const guided=c.window.OMANI_SIMPLE_CRAFTS,SE=c.window.SimpleCraftEngine;
+for(const [kind,data]of Object.entries(guided)){
+ assert.equal(data.steps.length,3);assert(data.steps.every(st=>st.title&&st.text&&st.action));
+ const facts=kind==='halwa'?C.facts:F.facts;for(const id of data.sourceIds)assert(facts.some(f=>f.id===id));
+ for(const m of Object.values(data.media)){assert(m.src&&m.author&&m.license&&m.licenseUrl&&m.url);assert((await stat(new URL('../'+m.src,import.meta.url))).size>0);}
+}
+const quickH=SE.create(guided.halwa);quickH.tick(30);assert.equal(quickH.state.stage,0,'Idle cannot add ingredients');quickH.act();quickH.tick(30);assert.equal(quickH.state.progress,0,'Idle cannot stir');quickH.stir(NaN);assert.equal(quickH.state.progress,0);
+for(let i=0;i<5;i++)quickH.act();assert.equal(quickH.state.stage,2);assert(quickH.state.aromas);quickH.act();assert(quickH.state.busy);assert(!quickH.act(),'Repeated input cannot skip pouring');quickH.tick(guided.halwa.transitionSeconds);assert(quickH.state.done);assert(!quickH.act());
+const quickF=SE.create(guided.frankincense);quickF.act();assert.equal(quickF.state.stage,1);quickF.tick(20);assert.equal(quickF.state.progress,0,'Waiting starts with an actual action');quickF.act();assert(quickF.state.busy);quickF.tick(1);assert.equal(quickF.state.stage,1);assert(!quickF.act());quickF.tick(2);assert.equal(quickF.state.stage,2);assert(!quickF.state.done);quickF.act();assert(quickF.state.done);
+console.log('PASS: both guided crafts have three sourced steps; real stirring required, accelerated waiting, pouring, completion guards, licensed real tree/bark photographs and shared accessibility/lifecycle.');
+
+// A timed completion must flush its final UI even between paint/UI intervals.
+let running=true,finalUI=0,finalPaint=0;
+const finishing=ctx.window.WorkshopShared.createLoop({step:.01,uiInterval:10,canRun:()=>running,onStep:()=>{running=false;},onDraw:()=>finalPaint++,onUI:()=>finalUI++});finishing.start();frame(1);frame(12);assert.equal(finalUI,1);assert.equal(finalPaint,1);assert.equal(pending.size,0);
