@@ -336,6 +336,20 @@ window.OMANI_CONTENT = [
     "added": "2026-10-24"
   },
   {
+    "id": "podcast-majlis-al-shura-fatima",
+    "section": "podcasts",
+    "title": "مجلس الشورى — حوار مع فاطمة سالم أحمد",
+    "description": "حلقة بودكاست مصوّرة عن مجلس الشورى من تقديم سارة المطروشي، وضيفة البرنامج فاطمة سالم أحمد.",
+    "cover": "assets/content/podcasts/majlis-al-shura-fatima.webp",
+    "coverCrop": {
+      "zoom": 1.5,
+      "y": 49
+    },
+    "file": "assets/content/podcasts/majlis-al-shura-fatima.mp4",
+    "category": "المجتمع العُماني",
+    "added": "2026-10-27"
+  },
+  {
     "id": "podcast-majlis-al-shura",
     "section": "podcasts",
     "title": "مجلس الشورى",

@@ -1,5 +1,12 @@
 /* مقاسات مشتقة للعرض فقط؛ تبقى ملفات المحتوى الأصلية كما هي. */
 window.OMANI_IMAGES = {
+  "assets/content/podcasts/majlis-al-shura-fatima.webp": {
+    "src": "assets/content/podcasts/majlis-al-shura-fatima.webp",
+    "srcset": "assets/content/previews/majlis-al-shura-fatima-360.webp 360w, assets/content/podcasts/majlis-al-shura-fatima.webp 576w",
+    "width": 576,
+    "height": 1248,
+    "focal": "50% 49%"
+  },
   "assets/content/covers/omani-womens-dress-workshop.webp": {
     "src": "assets/content/covers/omani-womens-dress-workshop.webp",
     "srcset": "assets/content/previews/omani-womens-dress-workshop-360.webp 360w, assets/content/covers/omani-womens-dress-workshop.webp 464w",
