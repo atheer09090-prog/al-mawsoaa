@@ -1,5 +1,12 @@
 /* مقاسات مشتقة للعرض فقط؛ تبقى ملفات المحتوى الأصلية كما هي. */
 window.OMANI_IMAGES = {
+  "assets/content/student-presentations/haboot-student-talk.webp": {
+    "src": "assets/content/previews/haboot-student-talk-640.webp",
+    "srcset": "assets/content/previews/haboot-student-talk-360.webp 360w, assets/content/previews/haboot-student-talk-640.webp 640w, assets/content/student-presentations/haboot-student-talk.webp 832w",
+    "width": 832,
+    "height": 464,
+    "focal": "50% 50%"
+  },
   "assets/content/podcasts/majlis-al-shura-fatima.webp": {
     "src": "assets/content/podcasts/majlis-al-shura-fatima.webp",
     "srcset": "assets/content/previews/majlis-al-shura-fatima-360.webp 360w, assets/content/podcasts/majlis-al-shura-fatima.webp 576w",

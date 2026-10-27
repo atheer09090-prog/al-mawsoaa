@@ -100,6 +100,17 @@ window.OMANI_CONTENT = [
     "added": "2026-10-26"
   },
   {
+    "id": "student-haboot-student-talk",
+    "section": "student-presentations",
+    "title": "فن الهبوت — عرض شفوي",
+    "description": "عرض شفوي طلابي عن فن الهبوت، يتناول التعريف به وأنواعه ومكانته في التراث العُماني.",
+    "cover": "assets/content/student-presentations/haboot-student-talk.webp",
+    "file": "assets/content/student-presentations/haboot-student-talk.mp4",
+    "category": "التراث العُماني",
+    "audience": "جميع المراحل",
+    "added": "2026-10-27"
+  },
+  {
     "id": "student-frankincense-student-talk",
     "section": "student-presentations",
     "title": "شجرة اللبان العُمانية — عرض شفوي",
