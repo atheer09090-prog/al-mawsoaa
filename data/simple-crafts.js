@@ -29,5 +29,31 @@ window.OMANI_SIMPLE_CRAFTS={
    bark:{src:'assets/images/workshop/frankincense/bark-real.webp',width:885,height:900,alt:'صورة حقيقية للحاء شجرة اللبان في ظفار وآثار نقش وقطرات راتنج',author:'Akkbula',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Boswellia_sacra_bark.jpg',licenseUrl:'https://creativecommons.org/licenses/by-sa/4.0/'},
    resin:{src:'assets/images/workshop/frankincense/resin.webp',width:800,height:555,alt:'حبات لبان حقيقية جُمعت في ظفار',author:'Gaius Cornelius (منسوب في Commons)',license:'Public domain',url:'https://commons.wikimedia.org/wiki/File:Frankincense.JPG',licenseUrl:'https://commons.wikimedia.org/wiki/File:Frankincense.JPG#Licensing'}
   }
+ },
+ sadu:{
+  kind:'sadu',title:'غزل السدو ونسجه',titleId:'saduTitle',other:'pottery',otherLabel:'صناعة الفخار',completionKey:'omani-sadu-simple-v1',tapWork:.25,holdWork:.7,
+  interactionLabel:'اغزل بحركة دائرية، ثم مرّر الخيط أفقيًا للنسج. يمكنك استخدام المسافة أو الزر أيضًا.',
+  safety:'محاكاة تعليمية مبسّطة لحرفة السدو المشتركة في الجزيرة العربية.',
+  doneTitle:'اكتملت قطعة السدو!',doneText:'من الصوف إلى الخيط، ثم إلى نسيج تتداخل خيوطه.',doneNote:'النقش توضيحي مستوحى من السدو؛ لا يُنسب إلى ولاية أو قبيلة.',
+  sourceIds:['prepare','spin','weave'],
+  steps:[
+   {short:'جهّز',title:'جهّز الصوف',text:'نبدأ بصوف نظيف وممشّط، جاهز للغزل.',action:'جهّز الصوف',note:'فرز الصوف وتنظيفه يسبقان الغزل.'},
+   {short:'اغزل',title:'اغزل الخيط',text:'حرّك في دوائر، أو اضغط زر الغزل.',action:'اغزل الخيط',note:'يلتفّ الصوف بالمغزل ليصبح خيطًا.'},
+   {short:'انسج',title:'انسج السدو',text:'اسحب أفقيًا بين خيوط النول، أو اضغط زر النسج.',action:'مرّر الخيط',note:'جهّزنا خيوطًا ملوّنة للنول بعد الغزل.'}
+  ],
+  media:{reference:{src:'assets/images/workshop/sadu/reference.webp',width:1024,height:518,alt:'مثال لنقوش السدو في مفروشات مجلس في الإمارات',author:'Ashley Columbus',license:'CC0 1.0',url:'https://commons.wikimedia.org/wiki/File:Majlis_in_Sadu_style.jpg',licenseUrl:'https://creativecommons.org/publicdomain/zero/1.0/',changes:'تصغير دون قص',caption:'صورة مرجعية لمفروشات بنقوش السدو في الإمارات؛ ليست منتج المحاكاة أو توثيقًا لموقع عُماني.'}}
+ },
+ pottery:{
+  kind:'pottery',title:'اصنع قطعتك الفخارية',titleId:'potteryTitle',other:'sadu',otherLabel:'غزل السدو',completionKey:'omani-pottery-simple-v1',tapWork:.25,holdWork:.7,transitionSeconds:3,
+  interactionLabel:'اسحب للأعلى لتشكيل الطين، أو استخدم المسافة أو زر التشكيل.',
+  safety:'محاكاة تعليمية؛ الحرق الحقيقي في فرن مختص وبإشراف حرفي.',
+  doneTitle:'قطعتك الفخارية جاهزة!',doneText:'شكّلت الطين، ثم جفّفته وحرقته وتركته يبرد.',doneNote:'اختصرنا أوقات التجفيف والحرق والتبريد للعرض.',
+  sourceIds:['prepare','shape','fire'],
+  steps:[
+   {short:'اعجن',title:'اعجن الطين',text:'نجهّز طينًا لينًا ومتجانسًا للتشكيل.',action:'اعجن الطين',note:'الطين والماء مجهّزان لك.'},
+   {short:'شكّل',title:'شكّل الوعاء',text:'اسحب للأعلى برفق، أو اضغط زر التشكيل.',action:'شكّل الوعاء',note:'يرتفع الطين فوق الدولاب ليأخذ شكل الوعاء.'},
+   {short:'أكمل',title:'جفّف، ثم احرق',text:'يجفّ الوعاء أولًا، ثم يُحرق في الفرن ويُترك ليبرد.',action:'جفّف واحرق',busy:'نُكمل القطعة…',note:'نسرّع الوقت هنا؛ هذه المراحل أطول في الواقع.'}
+  ],
+  media:{reference:{src:'assets/images/workshop/pottery/reference.webp',width:1024,height:683,alt:'صورة حقيقية ليدَي حرفي يشكّل وعاءً فخاريًا في سلطنة عُمان',author:'Muzn alabri',license:'CC BY 4.0',url:'https://commons.wikimedia.org/wiki/File:Pottery_in_the_Sultanate_of_Oman.jpg',licenseUrl:'https://creativecommons.org/licenses/by/4.0/',changes:'تصغير دون قص',caption:'حرفي يشكّل الفخار في سلطنة عُمان؛ صورة مرجعية مستقلة عن المشهد التفاعلي.'}}
  }
 };

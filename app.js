@@ -12,6 +12,12 @@ const SECTIONS = [
   {id:'booklets', title:'المطويات', desc:'مواد تعريفية مختصرة للقراءة والمعاينة والتنزيل، مصممة لتكون قريبة من المتعلم.', short:'مطويات ومواد تعريفية للقراءة والتنزيل.', kind:'مطوية', label:'اقرأ المطويات'},
   {id:'school', title:'أنشطة التفعيل', desc:'مساحة للورش والمبادرات والمسابقات والأفكار الصفية التي تفعّل موارد الموسوعة في المدرسة.', short:'أنشطة ومبادرات لتفعيل الموسوعة في البيئة المدرسية.', kind:'نشاط', label:'فعّل المعرفة'}
 ];
+const CRAFTS = [
+  {id:'halwa',hash:'workshop/halwa',root:'workshopRoot',heading:'workshopTitle',api:'OmaniWorkshop',title:'صناعة الحلوى العُمانية',short:'صناعة الحلوى',kicker:'المذاق والضيافة',words:'حلوى طبخ محاكاة',image:'halwa/entry.webp',width:480,height:480,alt:'حلوى عُمانية بالزعفران',description:'أضف المكونات، وحرّك، ثم قدّم الحلوى.',files:['data/halwa.js','workshop.js']},
+  {id:'frankincense',hash:'workshop/frankincense',root:'frankincenseRoot',heading:'frTitle',api:'OmaniFrankincense',title:'استخراج اللبان العُماني',short:'استخراج اللبان',kicker:'الشجرة والاستدامة',words:'لبان شجرة ظفار استدامة',image:'frankincense/entry.webp',width:640,height:360,alt:'أشجار لبان في وادي دوكة',description:'انقش برفق، وانتظر، ثم اجمع اللبان.',files:['data/frankincense.js','frankincense.js']},
+  {id:'sadu',hash:'workshop/sadu',root:'saduRoot',heading:'saduTitle',api:'OmaniSadu',title:'غزل السدو ونسجه',short:'غزل السدو',kicker:'الصوف والنسيج',words:'صوف مغزل نول حياكة نسج سدو',image:'sadu/reference.webp',width:1024,height:518,alt:'نقوش السدو في مفروشات مجلس في الإمارات',description:'جهّز الصوف، واغزل الخيط، ثم انسج السدو.',files:['data/textile-pottery.js','workshop-craft-draw.js','textile-pottery.js']},
+  {id:'pottery',hash:'workshop/pottery',root:'potteryRoot',heading:'potteryTitle',api:'OmaniPottery',title:'صناعة الفخار',short:'صناعة الفخار',kicker:'الطين والإبداع',words:'طين خزف دولاب بهلاء تشكيل فخار',image:'pottery/reference.webp',width:1024,height:683,alt:'حرفي يشكّل وعاءً فخاريًا في سلطنة عُمان',description:'اعجن الطين، وشكّل الوعاء، ثم جفّف واحرق.',files:['data/textile-pottery.js','workshop-craft-draw.js','textile-pottery.js']}
+];
 const STEPS = [
   {lead:'اختر ما يناسب درسك:', sections:['library','podcasts','presentations','booklets']},
   {lead:'تعلّم وشارك المعرفة:', sections:['play','practice','student-presentations']},
@@ -100,7 +106,14 @@ function renderBays() {
   }).join('');
   $('#bays').setAttribute('aria-busy','false');
   bindImageReveal($('#bays'));
-  $('#footerNav').innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${s.title}</a>`).join('') + '<a href="#workshop">ورشة الحِرف</a><a href="#workshop/halwa">صناعة الحلوى العُمانية</a><a href="#workshop/frankincense">استخراج اللبان</a><a href="#journey">رحلة عام في عُمان</a><a href="#image-credits">مصادر الصور</a>';
+  $('#footerNav').innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${s.title}</a>`).join('') + '<a href="#workshop">ورشة الحِرف</a>'+CRAFTS.map(c=>`<a href="#${c.hash}">${c.title}</a>`).join('')+'<a href="#journey">رحلة عام في عُمان</a><a href="#image-credits">مصادر الصور</a>';
+  renderCraftLinks();
+}
+
+function renderCraftLinks(){
+  const image=c=>`<img src="assets/images/workshop/${c.image}" width="${c.width}" height="${c.height}" alt="${esc(c.alt)}" loading="lazy" decoding="async">`;
+  $('#craftEntryLinks').innerHTML=CRAFTS.map(c=>`<a href="#${c.hash}">${image(c)}<span>${c.short}<b>ابدأ ←</b></span></a>`).join('');
+  $('#workshopHubGrid').innerHTML=CRAFTS.map(c=>`<a class="workshop-hub-card" data-craft="${c.id}" href="#${c.hash}">${image(c)}<div><small>${c.kicker}</small><h2>${c.title}</h2><p>${c.description}</p><span>ادخل التجربة ←</span></div></a>`).join('');
 }
 
 function renderRecent() {
@@ -199,12 +212,9 @@ function renderSection(animate = false) {
   // grid + empty states
   const grid = $('#categoryGrid');
   grid.classList.toggle('is-entering', animate);
-  const crafts = [
-    {id:'halwa',title:'اصنع الحلوى العُمانية بنفسك',words:'الحلوى العمانية طبخ محاكاة',image:'halwa/entry.webp',width:480,height:480,alt:'حلوى عُمانية بالزعفران',description:'أضف المكونات، وحرّك، ثم قدّم الحلوى.'},
-    {id:'frankincense',title:'من الشجرة إلى حبات اللبان',words:'اللبان العماني شجرة ظفار استدامة استخراج',image:'frankincense/entry.webp',width:640,height:360,alt:'أشجار لبان في وادي دوكة',description:'انقش برفق، وانتظر، ثم اجمع اللبان.'}
-  ].filter(c=>['play','practice'].includes(s.id)&&!state.cat&&(!norm(state.q.trim())||norm('ورشة الحرف كيف تصنع محاكاة تفاعلية '+c.title+' '+c.words).includes(norm(state.q.trim()))));
+  const crafts = CRAFTS.filter(c=>['play','practice'].includes(s.id)&&!state.cat&&(!norm(state.q.trim())||norm('ورشة الحرف كيف تصنع محاكاة تفاعلية '+c.title+' '+c.words).includes(norm(state.q.trim()))));
   grid.innerHTML = crafts.map(c=>`<article class="resource-card workshop-resource-entry"><a href="#workshop/${c.id}"><img src="assets/images/workshop/${c.image}" width="${c.width}" height="${c.height}" alt="${c.alt}" loading="lazy" decoding="async"><div class="resource-body"><span class="resource-meta">كيف تُصنع؟ · تجربة داخل الموقع</span><h3>${c.title}</h3><p>${c.description}</p><span class="resource-action">ابدأ الورشة ${ico('arrow')}</span></div></a></article>`).join('') + items.map((x, i) => resourceCard(x, i)).join('');
-  if (crafts.length) $('#resultCount').textContent = (items.length ? $('#resultCount').textContent+' + ' : '')+(crafts.length===1?'ورشة تفاعلية':'ورشتان تفاعليتان');
+  if (crafts.length) $('#resultCount').textContent = (items.length ? $('#resultCount').textContent+' + ' : '')+(crafts.length===1?'ورشة تفاعلية':crafts.length===2?'ورشتان تفاعليتان':num(crafts.length)+' ورش تفاعلية');
   bindImageReveal(grid);
   const empty = $('#emptyState');
   empty.hidden = items.length > 0 || crafts.length > 0;
@@ -414,8 +424,7 @@ function renderPalette() {
     : [...content].sort((a, b) => (b.added || '').localeCompare(a.added || '')).slice(0, 3);
   pItems = [
     ...secs.map(s => ({type: 'section', hash: s.id, icon: s.id, title: s.title, sub: s.short})),
-    ...(!q || norm('اللبان العماني شجرة ظفار استخراج استدامة ورشة الحرف').includes(q) ? [{type:'feature',hash:'workshop/frankincense',icon:'practice',title:'ورشة الحِرف: استخراج اللبان',sub:'انقش، وانتظر، واجمع في ثلاث خطوات'}] : []),
-    ...(!q || norm('ورشة الحرف الحلوى العمانية كيف تصنع طبخ محاكاة').includes(q) ? [{type:'feature',hash:'workshop/halwa',icon:'practice',title:'ورشة الحِرف: الحلوى العُمانية',sub:'أضف، وحرّك، وقدّم في ثلاث خطوات'}] : []),
+    ...CRAFTS.filter(c=>!q||norm('ورشة الحرف كيف تصنع محاكاة تفاعلية '+c.title+' '+c.words).includes(q)).map(c=>({type:'feature',hash:c.hash,icon:'practice',title:'ورشة الحِرف: '+c.title,sub:c.description})),
     ...(window.OmaniJourney?.search(q) || []),
     ...res.map(x => ({type: 'item', hash: `${x.section}/${encodeURIComponent(x.id)}`, icon: x.section, title: x.title, sub: `${byId(x.section).title}${x.category ? ' · ' + x.category : ''}`}))
   ];
@@ -469,7 +478,7 @@ document.addEventListener('keydown', e => {
 const workshopLoading = new Map(),workshopAssets = new Map();
 function loadWorkshop(craft='hub') {
   if (workshopLoading.has(craft)) return workshopLoading.get(craft);
-  const version='20261027-simple-crafts-r1';
+  const version='20261028-four-crafts-r1';
   const load=(file,css=false)=>{
     if(workshopAssets.has(file))return workshopAssets.get(file);
     const promise=new Promise((resolve,reject)=>{
@@ -487,8 +496,7 @@ function loadWorkshop(craft='hub') {
     await load('workshop-simple-engine.js');
     await load('data/simple-crafts.js');
     await load('workshop-simple.js');
-    if(craft==='halwa')for(const file of ['data/halwa.js','workshop.js'])await load(file);
-    else {for(const file of ['data/frankincense.js','frankincense.js'])await load(file);}
+    for(const file of CRAFTS.find(c=>c.id===craft).files)await load(file);
   })().catch(error=>{workshopLoading.delete(craft);throw error;});
   workshopLoading.set(craft,pending);return pending;
 }
@@ -547,25 +555,24 @@ function renderRoute() {
   }
   const section = byId(page);
   if (page !== 'journey') window.OmaniJourney?.leave();
-  const craft=rid==='halwa'?'halwa':rid==='frankincense'?'frankincense':'hub';
-  if (page !== 'workshop'||craft!=='halwa') window.OmaniWorkshop?.leave();
-  if (page !== 'workshop'||craft!=='frankincense') window.OmaniFrankincense?.leave();
+  const selectedCraft=CRAFTS.find(c=>c.id===rid),craft=selectedCraft?.id||'hub';
+  for(const c of CRAFTS)if(page!=='workshop'||craft!==c.id)window[c.api]?.leave();
   if (page === 'workshop') {
     closeViewer(); closeMenu(); state.section = null;
     $$('[data-page]').forEach(x=>x.classList.toggle('is-active',x.dataset.page==='workshop'));
     $$('.primary-nav a').forEach(a=>a.removeAttribute('aria-current'));
     $('#siteHeader').dataset.view='workshop';
-    const heading=craft==='hub'?'workshopHubTitle':craft==='halwa'?'workshopTitle':'frTitle';
+    const heading=selectedCraft?.heading||'workshopHubTitle';
     $('#page-workshop').setAttribute('aria-labelledby',heading);
-    $('#workshopHub').hidden=craft!=='hub';$('#workshopRoot').hidden=craft!=='halwa';$('#frankincenseRoot').hidden=craft!=='frankincense';
+    $('#workshopHub').hidden=craft!=='hub';for(const c of CRAFTS)$('#'+c.root).hidden=craft!==c.id;
     $('#workshopBack').hidden=craft==='hub';
-    document.title=(craft==='hub'?'ورشة الحِرف':craft==='halwa'?'صناعة الحلوى العُمانية':'استخراج اللبان العُماني')+' | الموسوعة العُمانية';
+    document.title=(selectedCraft?.title||'ورشة الحِرف')+' | الموسوعة العُمانية';
     scrollTo({top:0,behavior:'auto'});
     loadWorkshop(craft).then(()=>{
       const current=parseHash();if(current.page!=='workshop'||current.rid!==rid)return;
-      if(craft==='halwa')window.OmaniWorkshop.enter();else if(craft==='frankincense')window.OmaniFrankincense.enter();else $('#workshopHubTitle').focus({preventScroll:true});
+      if(selectedCraft)window[selectedCraft.api].enter();else $('#workshopHubTitle').focus({preventScroll:true});
     }).catch(()=>{
-      const host=craft==='halwa'?$('#workshopRoot'):craft==='frankincense'?$('#frankincenseRoot'):$('#workshopHub');
+      const host=selectedCraft?$('#'+selectedCraft.root):$('#workshopHub');
       host.innerHTML='<div class="ws-loading"><h1 tabindex="-1">تعذّر تجهيز الورشة</h1><p>تحقق من الاتصال، ثم أعد المحاولة.</p><button class="button button-primary" type="button" id="workshopRetry">أعد المحاولة</button></div>';
       $('#workshopRetry').onclick=()=>route();
     });

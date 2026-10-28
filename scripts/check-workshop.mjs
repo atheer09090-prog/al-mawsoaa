@@ -49,7 +49,7 @@ for(const name of await readdir(new URL('../assets/images/workshop/halwa/',impor
  const file=new URL('../assets/images/workshop/halwa/'+name,import.meta.url);assert((await stat(file)).size<=153600,'Image budget exceeded');
  assert.equal((await readFile(file)).toString('ascii',8,12),'WEBP');
 }
-for(const name of ['workshop.js','workshop.css','workshop-simple.js','workshop-simple.css','workshop-simple-engine.js','data/simple-crafts.js','workshop-shared.js','halwa-engine.js','data/halwa.js','data/halwa-media.js','data/halwa-image-credits.json','frankincense.js','frankincense.css','frankincense-engine.js','data/frankincense.js','data/frankincense-media.js','data/frankincense-image-credits.json'])assert((await readFile(new URL('../'+name,import.meta.url))).equals(await readFile(new URL('../dist/'+name,import.meta.url))),'dist mismatch: '+name);
+for(const name of ['workshop.js','workshop.css','workshop-simple.js','workshop-simple.css','workshop-simple-engine.js','workshop-craft-draw.js','textile-pottery.js','data/textile-pottery.js','data/textile-pottery-image-credits.json','data/simple-crafts.js','workshop-shared.js','halwa-engine.js','data/halwa.js','data/halwa-media.js','data/halwa-image-credits.json','frankincense.js','frankincense.css','frankincense-engine.js','data/frankincense.js','data/frankincense-media.js','data/frankincense-image-credits.json'])assert((await readFile(new URL('../'+name,import.meta.url))).equals(await readFile(new URL('../dist/'+name,import.meta.url))),'dist mismatch: '+name);
 console.log(`PASS: ${C.facts.length} sourced facts; successful session, burning, irreversible burn, unmixed starch, order, weak heat, real input, time ratio, lazy routes, image license and dist.`);
 console.log('LIMITS: temperatures, quantities and stage times are game units; encyclopedia and field calibration pending.');
 
@@ -84,19 +84,34 @@ console.log(`PASS: frankincense ${F.facts.length} sourced facts; healthy/deep/sh
 
 assert(!app.includes('showWorkshop'),'Remove the old single-craft empty-state flag');
 
-for(const f of ['data/simple-crafts.js','workshop-simple-engine.js','workshop-simple.js'])new vm.Script(await read(f),{filename:f});
-for(const f of ['data/simple-crafts.js','workshop-simple-engine.js'])vm.runInNewContext(await read(f),c,{filename:f});
+for(const f of ['data/simple-crafts.js','workshop-simple-engine.js','workshop-simple.js','workshop-craft-draw.js','textile-pottery.js','data/textile-pottery.js'])new vm.Script(await read(f),{filename:f});
+for(const f of ['data/simple-crafts.js','workshop-simple-engine.js','data/textile-pottery.js'])vm.runInNewContext(await read(f),c,{filename:f});
 const guided=c.window.OMANI_SIMPLE_CRAFTS,SE=c.window.SimpleCraftEngine;
 for(const [kind,data]of Object.entries(guided)){
  assert.equal(data.steps.length,3);assert(data.steps.every(st=>st.title&&st.text&&st.action));
- const facts=kind==='halwa'?C.facts:F.facts;for(const id of data.sourceIds)assert(facts.some(f=>f.id===id));
+ const facts=kind==='halwa'?C.facts:kind==='frankincense'?F.facts:c.window.OMANI_TEXTILE_POTTERY[kind].facts;for(const id of data.sourceIds)assert(facts.some(f=>f.id===id));
  for(const m of Object.values(data.media)){assert(m.src&&m.author&&m.license&&m.licenseUrl&&m.url);assert((await stat(new URL('../'+m.src,import.meta.url))).size>0);}
 }
 const quickH=SE.create(guided.halwa);quickH.tick(30);assert.equal(quickH.state.stage,0,'Idle cannot add ingredients');quickH.act();quickH.tick(30);assert.equal(quickH.state.progress,0,'Idle cannot stir');quickH.stir(NaN);assert.equal(quickH.state.progress,0);
 for(let i=0;i<5;i++)quickH.act();assert.equal(quickH.state.stage,2);assert(quickH.state.aromas);quickH.act();assert(quickH.state.busy);assert(!quickH.act(),'Repeated input cannot skip pouring');quickH.tick(guided.halwa.transitionSeconds);assert(quickH.state.done);assert(!quickH.act());
 const quickF=SE.create(guided.frankincense);quickF.act();assert.equal(quickF.state.stage,1);quickF.tick(20);assert.equal(quickF.state.progress,0,'Waiting starts with an actual action');quickF.act();assert(quickF.state.busy);quickF.tick(1);assert.equal(quickF.state.stage,1);assert(!quickF.act());quickF.tick(2);assert.equal(quickF.state.stage,2);assert(!quickF.state.done);quickF.act();assert(quickF.state.done);
-console.log('PASS: both guided crafts have three sourced steps; real stirring required, accelerated waiting, pouring, completion guards, licensed real tree/bark photographs and shared accessibility/lifecycle.');
+console.log('PASS: four guided crafts have three sourced steps; original stirring, accelerated waiting, pouring and licensed tree/bark photographs preserved.');
 
 // A timed completion must flush its final UI even between paint/UI intervals.
 let running=true,finalUI=0,finalPaint=0;
 const finishing=ctx.window.WorkshopShared.createLoop({step:.01,uiInterval:10,canRun:()=>running,onStep:()=>{running=false;},onDraw:()=>finalPaint++,onUI:()=>finalUI++});finishing.start();frame(1);frame(12);assert.equal(finalUI,1);assert.equal(finalPaint,1);assert.equal(pending.size,0);
+
+// New crafts must require input at each boundary and preserve the material sequence.
+assert.equal(Object.keys(guided).length,4);
+const catalog=vm.runInNewContext(app.match(/const CRAFTS = (\[[\s\S]*?\n\]);/)[1]);
+assert.equal(new Set(catalog.map(v=>v.id)).size,4);assert.equal(new Set(catalog.map(v=>v.api)).size,4);
+for(const craft of catalog){assert(html.includes('id="'+craft.root+'"'));assert(html.includes('id="'+craft.heading+'"'));assert.equal(craft.hash,'workshop/'+craft.id);await stat(new URL('../assets/images/workshop/'+craft.image,import.meta.url));for(const file of craft.files)await stat(new URL('../'+file,import.meta.url));}
+for(const kind of ['sadu','pottery'])for(const fact of c.window.OMANI_TEXTILE_POTTERY[kind].facts)sourceRequired(fact);
+const textile=SE.create(guided.sadu);textile.work(1);textile.tick(20);assert.equal(textile.state.stage,0);textile.act();textile.tick(20);assert.equal(textile.state.progress,0);textile.work(NaN);assert.equal(textile.state.progress,0);
+for(let i=0;i<4;i++)textile.act();assert.equal(textile.state.stage,2);assert.equal(textile.state.progress,0);assert(!textile.state.done,'Spinning must not complete weaving');textile.tick(20);assert.equal(textile.state.progress,0);for(let i=0;i<4;i++)textile.act();assert(textile.state.done);assert(!textile.act());
+const pot=SE.create(guided.pottery);pot.act();pot.tick(20);assert.equal(pot.state.progress,0);pot.work(100);assert.equal(pot.state.progress,.25,'A single input cannot skip shaping');for(let i=0;i<3;i++)pot.act();assert.equal(pot.state.stage,2);assert(!pot.state.done);pot.act();assert(pot.state.busy);assert(!pot.act());pot.tick(.9);assert(pot.state.progress<1/3);pot.tick(.2);assert(pot.state.progress>1/3&&pot.state.progress<2/3);const progress=pot.state.progress;pot.tick(-10);assert.equal(pot.state.progress,progress);pot.tick(3);assert(pot.state.done);assert(!pot.act());
+const extraCredits=JSON.parse(await read('data/textile-pottery-image-credits.json'));
+for(const kind of ['sadu','pottery']){const media=guided[kind].media.reference,credit=extraCredits.find(c=>c.craft===kind);assert.equal(credit.src,media.src);assert.equal(credit.license,media.license);assert(credit.author&&credit.caption&&credit.changes);assert((await stat(new URL('../'+media.src,import.meta.url))).size<=153600);}
+assert(guided.sadu.media.reference.caption.includes('الإمارات'),'Do not mislabel the reference photograph as Omani');
+assert(simpleUI.includes('!e.repeat'),'Held keys must stop at a stage boundary');
+console.log('PASS: Sadu preparation → spinning → weaving; pottery preparation → shaping → drying/firing/cooling; real input, timing guards, four routes, sources, licensed photographs and dist.');

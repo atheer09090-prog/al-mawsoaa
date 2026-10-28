@@ -6,7 +6,11 @@ function create(config){
  const clamp=v=>Math.max(0,Math.min(1,v));
  function act(){
   if(s.done||s.busy)return false;
-  if(config.kind==='halwa'){
+  if(config.kind==='sadu'||config.kind==='pottery'){
+   if(s.stage===0){s.stage=1;s.progress=0;}
+   else if(s.stage===1||config.kind==='sadu')work(config.tapWork);
+   else{s.busy=true;s.progress=0;}
+  }else if(config.kind==='halwa'){
    if(s.stage===0){s.stage=1;s.progress=0;}
    else if(s.stage===1)stir(config.tapTurn);
    else{s.busy=true;s.progress=0;}
@@ -22,12 +26,17 @@ function create(config){
   if(s.progress>=config.aromasAt)s.aromas=true;
   if(s.progress===1){s.stage=2;s.progress=0;}
  }
- function tick(dt){
-  if(s.done||!Number.isFinite(dt))return;s.elapsed+=dt;
-  if(!s.busy)return;s.progress=clamp(s.progress+dt/config.transitionSeconds);
-  if(s.progress===1){s.busy=false;if(config.kind==='halwa')s.done=true;else{s.stage=2;s.progress=0;}}
+ function work(amount){
+  if(!['sadu','pottery'].includes(config.kind)||s.done||s.busy||!Number.isFinite(amount)||s.stage===0||config.kind==='pottery'&&s.stage!==1)return;
+  const effort=Math.min(Math.abs(amount),.25);s.progress=clamp(s.progress+effort);s.angle+=effort*Math.PI*4;
+  if(s.progress===1){if(s.stage===1){s.stage=2;s.progress=0;}else s.done=true;}
  }
- return {state:s,act,stir,tick};
+ function tick(dt){
+  if(s.done||!Number.isFinite(dt)||dt<=0)return;s.elapsed+=dt;
+  if(!s.busy)return;s.progress=clamp(s.progress+dt/config.transitionSeconds);
+  if(s.progress===1){s.busy=false;if(config.kind==='halwa'||config.kind==='pottery')s.done=true;else{s.stage=2;s.progress=0;}}
+ }
+ return {state:s,act,stir,work,tick};
 }
 window.SimpleCraftEngine={create};
 })();

@@ -1,0 +1,28 @@
+[
+  {
+    "craft": "sadu",
+    "src": "assets/images/workshop/sadu/reference.webp",
+    "width": 1024,
+    "height": 518,
+    "alt": "مثال لنقوش السدو في مفروشات مجلس في الإمارات",
+    "author": "Ashley Columbus",
+    "license": "CC0 1.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Majlis_in_Sadu_style.jpg",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "changes": "تصغير دون قص",
+    "caption": "صورة مرجعية لمفروشات بنقوش السدو في الإمارات؛ ليست منتج المحاكاة أو توثيقًا لموقع عُماني."
+  },
+  {
+    "craft": "pottery",
+    "src": "assets/images/workshop/pottery/reference.webp",
+    "width": 1024,
+    "height": 683,
+    "alt": "صورة حقيقية ليدَي حرفي يشكّل وعاءً فخاريًا في سلطنة عُمان",
+    "author": "Muzn alabri",
+    "license": "CC BY 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Pottery_in_the_Sultanate_of_Oman.jpg",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "changes": "تصغير دون قص",
+    "caption": "حرفي يشكّل الفخار في سلطنة عُمان؛ صورة مرجعية مستقلة عن المشهد التفاعلي."
+  }
+]
