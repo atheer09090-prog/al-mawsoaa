@@ -62,7 +62,7 @@ window.OMANI_HALWA={
   colours:{empty:['#23342f','#182b27'],pale:['#e4c58a','#b69862'],gold:['#cc842f','#9d5623'],amber:['#a75520','#6d2e13'],burnt:['#30251e','#171916']}
  },
  media:{
-  reference:'assets/images/workshop/halwa/reference.webp',
+  reference:'assets/images/workshop/halwa/served.webp',
   directory:'assets/images/workshop/halwa/',
   // يحاول تحميل الملفات عند وجودها في manifest فقط؛ لا طلبات 404 لصور لم تصل بعد.
   available:[],

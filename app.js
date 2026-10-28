@@ -13,10 +13,11 @@ const SECTIONS = [
   {id:'school', title:'أنشطة التفعيل', desc:'مساحة للورش والمبادرات والمسابقات والأفكار الصفية التي تفعّل موارد الموسوعة في المدرسة.', short:'أنشطة ومبادرات لتفعيل الموسوعة في البيئة المدرسية.', kind:'نشاط', label:'فعّل المعرفة'}
 ];
 const CRAFTS = [
-  {id:'halwa',hash:'workshop/halwa',root:'workshopRoot',heading:'workshopTitle',api:'OmaniWorkshop',title:'صناعة الحلوى العُمانية',short:'صناعة الحلوى',kicker:'المذاق والضيافة',words:'حلوى طبخ محاكاة',image:'halwa/entry.webp',width:480,height:480,alt:'حلوى عُمانية بالزعفران',description:'أضف المكونات، وحرّك، ثم قدّم الحلوى.',files:['data/halwa.js','workshop.js']},
+  {id:'halwa',hash:'workshop/halwa',root:'workshopRoot',heading:'workshopTitle',api:'OmaniWorkshop',title:'صناعة الحلوى العُمانية',short:'صناعة الحلوى',kicker:'المذاق والضيافة',words:'حلوى طبخ محاكاة',image:'halwa/served-entry.webp',width:480,height:360,alt:'حلوى عُمانية داكنة مزيّنة بالمكسرات في وعاء التقديم',description:'أضف المكونات، وحرّك، ثم قدّم الحلوى.',files:['data/halwa.js','workshop.js']},
   {id:'frankincense',hash:'workshop/frankincense',root:'frankincenseRoot',heading:'frTitle',api:'OmaniFrankincense',title:'استخراج اللبان العُماني',short:'استخراج اللبان',kicker:'الشجرة والاستدامة',words:'لبان شجرة ظفار استدامة',image:'frankincense/entry.webp',width:640,height:360,alt:'أشجار لبان في وادي دوكة',description:'انقش برفق، وانتظر، ثم اجمع اللبان.',files:['data/frankincense.js','frankincense.js']},
   {id:'sadu',hash:'workshop/sadu',root:'saduRoot',heading:'saduTitle',api:'OmaniSadu',title:'غزل السدو ونسجه',short:'غزل السدو',kicker:'الصوف والنسيج',words:'صوف مغزل نول حياكة نسج سدو',image:'sadu/reference.webp',width:1024,height:518,alt:'نقوش السدو في مفروشات مجلس في الإمارات',description:'جهّز الصوف، واغزل الخيط، ثم انسج السدو.',files:['data/textile-pottery.js','workshop-craft-draw.js','textile-pottery.js']},
-  {id:'pottery',hash:'workshop/pottery',root:'potteryRoot',heading:'potteryTitle',api:'OmaniPottery',title:'صناعة الفخار',short:'صناعة الفخار',kicker:'الطين والإبداع',words:'طين خزف دولاب بهلاء تشكيل فخار',image:'pottery/reference.webp',width:1024,height:683,alt:'حرفي يشكّل وعاءً فخاريًا في سلطنة عُمان',description:'اعجن الطين، وشكّل الوعاء، ثم جفّف واحرق.',files:['data/textile-pottery.js','workshop-craft-draw.js','textile-pottery.js']}
+  {id:'pottery',hash:'workshop/pottery',root:'potteryRoot',heading:'potteryTitle',api:'OmaniPottery',title:'صناعة الفخار',short:'صناعة الفخار',kicker:'الطين والإبداع',words:'طين خزف دولاب بهلاء تشكيل فخار',image:'pottery/reference.webp',width:1024,height:683,alt:'حرفي يشكّل وعاءً فخاريًا في سلطنة عُمان',description:'اعجن الطين، وشكّل الوعاء، ثم جفّف واحرق.',files:['data/textile-pottery.js','workshop-craft-draw.js','textile-pottery.js']},
+  {id:'sandalwood',hash:'workshop/sandalwood',root:'sandalwoodRoot',heading:'sandalwoodTitle',api:'OmaniSandalwood',title:'تحضير الصندل',short:'تحضير الصندل',kicker:'العطر والضيافة',words:'صندل عطر ماء الورد حجر خشب دعك',image:'sandalwood/entry.svg',width:640,height:480,alt:'رسم توضيحي لخشب الصندل والحجر وماء الورد',description:'أضف ماء الورد، وادعك الخشب، ثم اجمع الخلاصة.',files:['workshop-craft-draw.js','sandalwood.js']}
 ];
 const STEPS = [
   {lead:'اختر ما يناسب درسك:', sections:['library','podcasts','presentations','booklets']},
@@ -478,7 +479,7 @@ document.addEventListener('keydown', e => {
 const workshopLoading = new Map(),workshopAssets = new Map();
 function loadWorkshop(craft='hub') {
   if (workshopLoading.has(craft)) return workshopLoading.get(craft);
-  const version='20261028-four-crafts-r1';
+  const version='20261028-craft-knowledge-r1';
   const load=(file,css=false)=>{
     if(workshopAssets.has(file))return workshopAssets.get(file);
     const promise=new Promise((resolve,reject)=>{
@@ -495,6 +496,7 @@ function loadWorkshop(craft='hub') {
     await load('workshop-simple.css',true);
     await load('workshop-simple-engine.js');
     await load('data/simple-crafts.js');
+    await load('data/craft-knowledge.js');
     await load('workshop-simple.js');
     for(const file of CRAFTS.find(c=>c.id===craft).files)await load(file);
   })().catch(error=>{workshopLoading.delete(craft);throw error;});

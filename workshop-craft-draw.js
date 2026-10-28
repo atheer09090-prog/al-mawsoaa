@@ -55,5 +55,25 @@ function pottery(x,s,reduced){
  ellipse(x,320,top,neck+3,17,'#b68b63');ellipse(x,320,top+2,neck-8,10,'#4c3829');x.strokeStyle='#dec09b';x.lineWidth=3;x.beginPath();x.ellipse(320,top,neck,16,0,Math.PI,TAU);x.stroke();
  if(fire){const glow=x.createRadialGradient(320,320,100,320,320,290);glow.addColorStop(0,'#d7822c00');glow.addColorStop(1,'#c8892a22');x.fillStyle=glow;x.fillRect(0,0,640,640);}
 }
-window.WorkshopCraftDraw={draw(canvas,kind,state,reduced){const x=canvas.getContext('2d');x.clearRect(0,0,640,640);if(kind==='sadu')sadu(x,state,reduced);else pottery(x,state,reduced);}};
+function sandalwood(x,s,reduced){
+ x.fillStyle='#ece3d4';x.fillRect(0,0,640,640);
+ for(let i=0;i<640;i+=17){x.strokeStyle='#8b735c0b';x.beginPath();x.moveTo(i,0);x.lineTo(i+40,640);x.stroke();}
+ // A flat grinding stone viewed from above; texture stays still between inputs.
+ ellipse(x,320,369,238,148,'#5a4b3824');ellipse(x,320,350,231,141,'#73736b');
+ const stone=x.createRadialGradient(270,290,15,320,325,240);stone.addColorStop(0,'#aaa99c');stone.addColorStop(1,'#7a7c72');ellipse(x,320,330,232,139,stone);
+ x.save();x.beginPath();x.ellipse(320,330,230,137,0,0,TAU);x.clip();
+ for(let i=0;i<1600;i++){x.fillStyle=i%3?'#fff2':'#26332c30';const px=90+(i*71)%460,py=190+(i*47)%280;x.fillRect(px,py,i%4+1,1.5);}
+ if(s.stage>0){ellipse(x,320,335,116,65,'#e6d5ae55');const p=s.done?0:s.stage===2?1:s.progress;if(p>0){const cream=x.createRadialGradient(295,313,8,320,335,130);cream.addColorStop(0,'#dbc393');cream.addColorStop(1,'#b69b6b');ellipse(x,320,335,35+p*80,18+p*40,cream);for(let i=0;i<6;i++){x.strokeStyle='#f5dfb233';x.lineWidth=2;x.beginPath();x.ellipse(320,335,24+i*13,12+i*6,0,0,TAU);x.stroke();}}}
+ x.restore();
+ const offset=s.stage===1&&!reduced?Math.sin(s.angle)*62:0;
+ x.save();x.translate(s.done?190:320+offset,s.done?175:292);x.rotate(-.32);
+ wood(x,-104,-28,218,58);ellipse(x,-104,1,15,29,'#d1af78');ellipse(x,114,1,15,29,'#ac8050');
+ x.strokeStyle='#78552d66';x.lineWidth=1.5;for(let i=0;i<6;i++){x.beginPath();x.ellipse(-104,1,3+i*2,5+i*4,0,0,TAU);x.stroke();}x.restore();
+ // Rosewater bottle and a small receiving bowl are ready from the first step.
+ x.save();x.translate(496,119);wood(x,-13,-39,26,23);const glass=x.createLinearGradient(-36,0,36,0);glass.addColorStop(0,'#789e8b66');glass.addColorStop(.4,'#e5f2e5bb');glass.addColorStop(1,'#62847288');x.fillStyle=glass;x.beginPath();x.moveTo(-13,-16);x.lineTo(13,-16);x.lineTo(16,2);x.quadraticCurveTo(40,15,37,30);x.lineTo(34,81);x.quadraticCurveTo(0,96,-34,81);x.lineTo(-37,30);x.quadraticCurveTo(-40,15,-16,2);x.closePath();x.fill();ellipse(x,0,50,22,16,'#f1e8cd');for(let i=0;i<5;i++){const a=i*TAU/5;ellipse(x,Math.cos(a)*5,50+Math.sin(a)*5,6,4,'#b78375');}ellipse(x,0,50,3,3,'#e8c693');x.restore();
+ const bowlY=s.done?345:529,bowlR=s.done?139:95;
+ ellipse(x,320,bowlY+38,bowlR+6,29,'#70573925');const bowl=x.createLinearGradient(320,bowlY,320,bowlY+54);bowl.addColorStop(0,'#9f663d');bowl.addColorStop(.5,'#c5976e');bowl.addColorStop(1,'#825436');x.fillStyle=bowl;x.beginPath();x.moveTo(320-bowlR,bowlY);x.bezierCurveTo(320-bowlR+12,bowlY+83,320+bowlR-12,bowlY+83,320+bowlR,bowlY);x.closePath();x.fill();ellipse(x,320,bowlY,bowlR,42,'#d2ab7c');ellipse(x,320,bowlY,bowlR-10,34,s.done?'#c8af7e':'#765638');
+ if(s.done){for(let i=0;i<5;i++){x.strokeStyle='#e9d3a555';x.lineWidth=2;x.beginPath();x.ellipse(320,bowlY,20+i*19,5+i*5,0,0,TAU);x.stroke();}}
+}
+window.WorkshopCraftDraw={draw(canvas,kind,state,reduced){const x=canvas.getContext('2d');x.clearRect(0,0,640,640);if(kind==='sadu')sadu(x,state,reduced);else if(kind==='sandalwood')sandalwood(x,state,reduced);else pottery(x,state,reduced);}};
 })();

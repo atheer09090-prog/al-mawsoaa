@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480" role="img" aria-labelledby="title">
+<title id="title">رسم توضيحي لخشب الصندل وحجر الدعك وماء الورد</title>
+<defs>
+ <radialGradient id="stone"><stop stop-color="#b4b2a2"/><stop offset="1" stop-color="#767c70"/></radialGradient>
+ <linearGradient id="wood" x2="0" y2="1"><stop stop-color="#ddbc84"/><stop offset=".5" stop-color="#b48a55"/><stop offset="1" stop-color="#825b35"/></linearGradient>
+ <linearGradient id="glass"><stop stop-color="#8aa592"/><stop offset=".4" stop-color="#e9eee0"/><stop offset="1" stop-color="#769282"/></linearGradient>
+ <pattern id="grain" width="27" height="19" patternUnits="userSpaceOnUse"><circle cx="4" cy="6" r="1" fill="#fff" opacity=".25"/><circle cx="17" cy="14" r="1.5" fill="#35483a" opacity=".18"/></pattern>
+</defs>
+<path fill="#ede5d5" d="M0 0h640v480H0z"/><ellipse cx="292" cy="320" rx="222" ry="109" fill="#7b6951" opacity=".12"/>
+<ellipse cx="292" cy="298" rx="220" ry="112" fill="#74796f"/><ellipse cx="292" cy="283" rx="220" ry="111" fill="url(#stone)"/><ellipse cx="292" cy="283" rx="220" ry="111" fill="url(#grain)"/>
+<ellipse cx="294" cy="290" rx="91" ry="47" fill="#c8b181"/><g fill="none" stroke="#e2d0a4" opacity=".5"><ellipse cx="294" cy="290" rx="62" ry="32"/><ellipse cx="294" cy="290" rx="42" ry="22"/></g>
+<g transform="rotate(-18 278 239)"><rect x="156" y="210" width="244" height="58" rx="9" fill="url(#wood)"/><ellipse cx="156" cy="239" rx="16" ry="29" fill="#d0ad75"/><ellipse cx="400" cy="239" rx="16" ry="29" fill="#a47949"/><g fill="none" stroke="#8e683e" opacity=".6"><ellipse cx="156" cy="239" rx="12" ry="22"/><ellipse cx="156" cy="239" rx="8" ry="15"/><path d="M178 220h202m-201 10h204m-204 10h204m-204 10h202"/></g></g>
+<g transform="translate(485 113)"><rect x="-14" y="-34" width="28" height="25" rx="4" fill="#a47c48"/><path d="M-14-9h28l3 20q29 10 27 32l-4 71q-40 19-80 0l-4-71q-2-22 27-32z" fill="url(#glass)"/><ellipse cy="64" rx="25" ry="22" fill="#f2e8cf"/><g fill="#bd8476"><ellipse cy="58" rx="7" ry="10"/><ellipse cx="7" cy="64" rx="10" ry="7"/><ellipse cy="71" rx="7" ry="10"/><ellipse cx="-7" cy="64" rx="10" ry="7"/></g><circle cy="64" r="5" fill="#ead8ad"/></g>
+<ellipse cx="350" cy="403" rx="106" ry="23" fill="#8d7152" opacity=".16"/><path d="M252 367q0 70 98 70t98-70" fill="#ac7951"/><ellipse cx="350" cy="367" rx="98" ry="33" fill="#d2ad7c"/><ellipse cx="350" cy="367" rx="87" ry="26" fill="#c4a873"/><path d="M293 369q58-27 114-1" fill="none" stroke="#e4cca0" stroke-width="3"/>
+</svg>
