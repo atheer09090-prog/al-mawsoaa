@@ -5,6 +5,25 @@
  */
 window.OMANI_CONTENT = [
   {
+    "id": "booklet-rocks-earth-treasures",
+    "section": "booklets",
+    "title": "الصخور — كنوز الأرض",
+    "description": "مطوية تُعرّف بأنواع الصخور ودورة تكوّنها وأهميتها واستخداماتها، مع الصورة الأصلية للقراءة والتنزيل.",
+    "cover": "assets/content/booklets/rocks-earth-treasures.webp",
+    "file": "assets/content/booklets/rocks-earth-treasures-original.jpg",
+    "pages": [
+      {
+        "src": "assets/content/booklets/rocks-earth-treasures-original.jpg",
+        "label": "مطوية الصخور — كنوز الأرض",
+        "width": 1491,
+        "height": 1055
+      }
+    ],
+    "category": "علوم الأرض",
+    "audience": "جميع المراحل",
+    "added": "2026-10-28"
+  },
+  {
     "id": "presentation-e-government",
     "section": "presentations",
     "title": "الحكومة الإلكترونية",

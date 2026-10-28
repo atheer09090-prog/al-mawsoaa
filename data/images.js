@@ -251,5 +251,12 @@ window.OMANI_IMAGES = {
     "width": 960,
     "height": 600,
     "focal": "50% 50%"
+  },
+  "assets/content/booklets/rocks-earth-treasures.webp": {
+    "src": "assets/content/previews/booklets-rocks-earth-treasures-640.webp",
+    "srcset": "assets/content/previews/booklets-rocks-earth-treasures-360.webp 360w, assets/content/previews/booklets-rocks-earth-treasures-640.webp 640w, assets/content/booklets/rocks-earth-treasures.webp 960w",
+    "width": 960,
+    "height": 679,
+    "focal": "50% 50%"
   }
 };
