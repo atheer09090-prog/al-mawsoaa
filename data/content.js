@@ -100,6 +100,17 @@ window.OMANI_CONTENT = [
     "added": "2026-10-26"
   },
   {
+    "id": "student-e-government-student-talk",
+    "section": "student-presentations",
+    "title": "الحكومة الإلكترونية في سلطنة عُمان — عرض شفوي",
+    "description": "عرض شفوي طلابي عن الحكومة الإلكترونية في سلطنة عُمان، يتناول تعريفها ونشأتها وتطورها وخدماتها.",
+    "cover": "assets/content/student-presentations/e-government-student-talk.webp",
+    "file": "assets/content/student-presentations/e-government-student-talk.mp4",
+    "category": "التحول الرقمي",
+    "audience": "جميع المراحل",
+    "added": "2026-10-28"
+  },
+  {
     "id": "student-haboot-student-talk",
     "section": "student-presentations",
     "title": "فن الهبوت — عرض شفوي",
