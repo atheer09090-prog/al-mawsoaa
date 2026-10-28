@@ -107,7 +107,7 @@ function renderBays() {
   }).join('');
   $('#bays').setAttribute('aria-busy','false');
   bindImageReveal($('#bays'));
-  $('#footerNav').innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${s.title}</a>`).join('') + '<a href="#workshop">ورشة الحِرف</a>'+CRAFTS.map(c=>`<a href="#${c.hash}">${c.title}</a>`).join('')+'<a href="#journey">رحلة عام في عُمان</a><a href="#image-credits">مصادر الصور</a>';
+  $('#footerNav').innerHTML = SECTIONS.map(s => `<a href="#${s.id}">${s.title}</a>`).join('') + '<a href="#workshop">كيف تُصنع؟</a>'+CRAFTS.map(c=>`<a href="#${c.hash}">${c.title}</a>`).join('')+'<a href="#journey">رحلة عام في عُمان</a><a href="#image-credits">مصادر الصور</a>';
   renderCraftLinks();
 }
 
@@ -213,13 +213,11 @@ function renderSection(animate = false) {
   // grid + empty states
   const grid = $('#categoryGrid');
   grid.classList.toggle('is-entering', animate);
-  const crafts = CRAFTS.filter(c=>['play','practice'].includes(s.id)&&!state.cat&&(!norm(state.q.trim())||norm('ورشة الحرف كيف تصنع محاكاة تفاعلية '+c.title+' '+c.words).includes(norm(state.q.trim()))));
-  grid.innerHTML = crafts.map(c=>`<article class="resource-card workshop-resource-entry"><a href="#workshop/${c.id}"><img src="assets/images/workshop/${c.image}" width="${c.width}" height="${c.height}" alt="${c.alt}" loading="lazy" decoding="async"><div class="resource-body"><span class="resource-meta">كيف تُصنع؟ · تجربة داخل الموقع</span><h3>${c.title}</h3><p>${c.description}</p><span class="resource-action">ابدأ الورشة ${ico('arrow')}</span></div></a></article>`).join('') + items.map((x, i) => resourceCard(x, i)).join('');
-  if (crafts.length) $('#resultCount').textContent = (items.length ? $('#resultCount').textContent+' + ' : '')+(crafts.length===1?'ورشة تفاعلية':crafts.length===2?'ورشتان تفاعليتان':num(crafts.length)+' ورش تفاعلية');
+  grid.innerHTML = items.map((x, i) => resourceCard(x, i)).join('');
   bindImageReveal(grid);
   const empty = $('#emptyState');
-  empty.hidden = items.length > 0 || crafts.length > 0;
-  if (!items.length && !crafts.length) {
+  empty.hidden = items.length > 0;
+  if (!items.length) {
     const actions = $('#emptyActions');
     if (!dataOk) {
       $('#emptyTitle').textContent = 'تعذّر تحميل المحتوى';
@@ -425,7 +423,7 @@ function renderPalette() {
     : [...content].sort((a, b) => (b.added || '').localeCompare(a.added || '')).slice(0, 3);
   pItems = [
     ...secs.map(s => ({type: 'section', hash: s.id, icon: s.id, title: s.title, sub: s.short})),
-    ...CRAFTS.filter(c=>!q||norm('ورشة الحرف كيف تصنع محاكاة تفاعلية '+c.title+' '+c.words).includes(q)).map(c=>({type:'feature',hash:c.hash,icon:'practice',title:'ورشة الحِرف: '+c.title,sub:c.description})),
+    ...CRAFTS.filter(c=>!q||norm('ورشة الحرف كيف تصنع محاكاة تفاعلية '+c.title+' '+c.words).includes(q)).map(c=>({type:'feature',hash:c.hash,icon:'practice',title:'كيف تُصنع؟ '+c.title,sub:c.description})),
     ...(window.OmaniJourney?.search(q) || []),
     ...res.map(x => ({type: 'item', hash: `${x.section}/${encodeURIComponent(x.id)}`, icon: x.section, title: x.title, sub: `${byId(x.section).title}${x.category ? ' · ' + x.category : ''}`}))
   ];
@@ -479,7 +477,7 @@ document.addEventListener('keydown', e => {
 const workshopLoading = new Map(),workshopAssets = new Map();
 function loadWorkshop(craft='hub') {
   if (workshopLoading.has(craft)) return workshopLoading.get(craft);
-  const version='20261028-craft-knowledge-r1';
+  const version='20261028-crafts-separate-r1';
   const load=(file,css=false)=>{
     if(workshopAssets.has(file))return workshopAssets.get(file);
     const promise=new Promise((resolve,reject)=>{
@@ -563,12 +561,13 @@ function renderRoute() {
     closeViewer(); closeMenu(); state.section = null;
     $$('[data-page]').forEach(x=>x.classList.toggle('is-active',x.dataset.page==='workshop'));
     $$('.primary-nav a').forEach(a=>a.removeAttribute('aria-current'));
+    $('.primary-nav [data-route="workshop"]').setAttribute('aria-current','page');
     $('#siteHeader').dataset.view='workshop';
     const heading=selectedCraft?.heading||'workshopHubTitle';
     $('#page-workshop').setAttribute('aria-labelledby',heading);
     $('#workshopHub').hidden=craft!=='hub';for(const c of CRAFTS)$('#'+c.root).hidden=craft!==c.id;
     $('#workshopBack').hidden=craft==='hub';
-    document.title=(selectedCraft?.title||'ورشة الحِرف')+' | الموسوعة العُمانية';
+    document.title=(selectedCraft?.title||'كيف تُصنع؟')+' | الموسوعة العُمانية';
     scrollTo({top:0,behavior:'auto'});
     loadWorkshop(craft).then(()=>{
       const current=parseHash();if(current.page!=='workshop'||current.rid!==rid)return;

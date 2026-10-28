@@ -5,6 +5,17 @@
  */
 window.OMANI_CONTENT = [
   {
+    "id": "game-oman-rocks",
+    "section": "play",
+    "title": "لعبة الصخور",
+    "description": "لعبة تعليمية عن الصخور على Canva، تُفتح في تبويب جديد لبدء اللعب.",
+    "cover": "assets/content/games/cover-oman-rocks.svg",
+    "url": "https://rocksoman.my.canva.site/",
+    "category": "علوم الأرض",
+    "audience": "جميع المراحل",
+    "added": "2026-10-28"
+  },
+  {
     "id": "booklet-rocks-earth-treasures",
     "section": "booklets",
     "title": "الصخور — كنوز الأرض",

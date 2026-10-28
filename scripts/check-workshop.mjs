@@ -36,7 +36,7 @@ const still=E.create(C);tick(still,5,false);assert.equal(still.state.starchDisso
 const faster=E.create(C);tick(faster,3,false,2);assert(Math.abs(faster.state.elapsed-3)<.01);assert(Math.abs(faster.state.virtual-6)<.01);
 const html=await read('index.html'),app=await read('app.js'),js=await read('workshop.js'),css=await read('workshop.css');
 for(const f of ['workshop.js','halwa-engine.js','data/halwa.js','data/halwa-media.js'])new vm.Script(await read(f),{filename:f});
-assert(html.includes('data-page="workshop"'));assert(app.includes("page === 'workshop'"));assert(app.includes("['play','practice'].includes(s.id)"));assert(app.includes("hash:'workshop/halwa'"));assert(app.includes("hash:'workshop/frankincense'"));assert(app.includes('href="#workshop">ورشة الحِرف'));
+assert(html.includes('data-page="workshop"'));assert(app.includes("page === 'workshop'"));assert(!app.includes("['play','practice'].includes(s.id)"));assert(app.includes("hash:'workshop/halwa'"));assert(app.includes("hash:'workshop/frankincense'"));assert(app.includes('href="#workshop">كيف تُصنع؟'));
 assert(!html.includes('<script src="workshop.js'),'Workshop must remain lazy');assert(!html.includes('<link rel="stylesheet" href="workshop.css'),'Workshop CSS must remain lazy');
 const shared=await read('workshop-shared.js'),simpleUI=await read('workshop-simple.js'),simpleCSS=await read('workshop-simple.css');
 assert(simpleUI.includes('visibilitychange')&&simpleUI.includes('S.createLoop')&&shared.includes('while(acc>=step)')&&shared.includes('document.hidden'));
@@ -131,3 +131,10 @@ assert.equal(guided.halwa.media.reference.src,'assets/images/workshop/halwa/serv
 assert(credit.files.includes(guided.halwa.media.reference.src));
 assert(!catalog.find(c=>c.id==='halwa').image.includes('halwa/entry.webp'));
 console.log('PASS: five concise completion cards from supplied encyclopedia pages, known-page-only citations, sandalwood rubbing → explicit collection, replacement halwa photograph and credits.');
+
+// The craft experience has its own navigation and never enters a resource grid.
+const sectionRenderer=app.slice(app.indexOf('function renderSection('),app.indexOf('function renderPager('));
+assert(!sectionRenderer.includes('CRAFTS'),'Crafts must remain outside games and practice resource grids');
+assert(html.includes('href="#workshop" data-route="workshop">كيف تُصنع؟</a>'));
+assert(html.includes('id="craftEntryLinks"')&&html.includes('id="workshopHubGrid"'));
+console.log('PASS: independent craft entry in home and navigation; category grids contain their own resources only.');
