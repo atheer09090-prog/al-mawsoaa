@@ -552,8 +552,8 @@ function renderRoute() {
   if (page === 'presentations' && rid === 'presentation-frankincense-tree-video') {
     history.replaceState(null, '', `#library/${rid}`); route(); return;
   }
-  if (page === 'practice' && rid === 'video-omani-womens-dress-workshop') {
-    history.replaceState(null, '', `#school/${rid}`); route(); return;
+  if (page === 'school' && rid === 'video-omani-womens-dress-workshop') {
+    history.replaceState(null, '', `#practice/${rid}`); route(); return;
   }
   const section = byId(page);
   if (page !== 'journey') window.OmaniJourney?.leave();
