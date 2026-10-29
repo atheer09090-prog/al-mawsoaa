@@ -5,6 +5,17 @@
  */
 window.OMANI_CONTENT = [
   {
+    "id": "activity-encyclopedia-reading-cover-lessons",
+    "section": "school",
+    "title": "قراءة الموسوعة في حصص الاحتياط",
+    "description": "قراءة الطلبة موضوعات من الموسوعة العُمانية ومشاركة زملائهم بها ضمن تفعيل حصص الاحتياط.",
+    "cover": "assets/content/activities/encyclopedia-reading-cover-lessons.webp",
+    "file": "assets/content/activities/encyclopedia-reading-cover-lessons.mp4",
+    "category": "حصص الاحتياط",
+    "audience": "جميع المراحل",
+    "added": "2026-10-29"
+  },
+  {
     "id": "game-omani-rocks-adventure",
     "section": "play",
     "title": "مغامرة الصخور العُمانية",

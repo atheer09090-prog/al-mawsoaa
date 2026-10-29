@@ -1,5 +1,12 @@
 /* مقاسات مشتقة للعرض فقط؛ تبقى ملفات المحتوى الأصلية كما هي. */
 window.OMANI_IMAGES = {
+  "assets/content/activities/encyclopedia-reading-cover-lessons.webp": {
+    "src": "assets/content/previews/encyclopedia-reading-cover-lessons-640.webp",
+    "srcset": "assets/content/previews/encyclopedia-reading-cover-lessons-360.webp 360w, assets/content/previews/encyclopedia-reading-cover-lessons-640.webp 640w, assets/content/activities/encyclopedia-reading-cover-lessons.webp 720w",
+    "width": 720,
+    "height": 1280,
+    "focal": "50% 50%"
+  },
   "assets/content/student-presentations/e-government-student-talk.webp": {
     "src": "assets/content/previews/e-government-student-talk-640.webp",
     "srcset": "assets/content/previews/e-government-student-talk-360.webp 360w, assets/content/previews/e-government-student-talk-640.webp 640w, assets/content/student-presentations/e-government-student-talk.webp 704w",
