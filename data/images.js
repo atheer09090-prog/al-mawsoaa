@@ -1,5 +1,19 @@
 /* مقاسات مشتقة للعرض فقط؛ تبقى ملفات المحتوى الأصلية كما هي. */
 window.OMANI_IMAGES = {
+  "assets/content/activities/omani-heritage-history-classroom.webp": {
+    "src": "assets/content/previews/omani-heritage-history-classroom-640.webp",
+    "srcset": "assets/content/previews/omani-heritage-history-classroom-360.webp 360w, assets/content/previews/omani-heritage-history-classroom-640.webp 640w, assets/content/previews/omani-heritage-history-classroom-960.webp 960w, assets/content/activities/omani-heritage-history-classroom.webp 1280w",
+    "width": 1280,
+    "height": 720,
+    "focal": "50% 50%"
+  },
+  "assets/content/activities/desertification-classroom-activity.webp": {
+    "src": "assets/content/previews/desertification-classroom-activity-640.webp",
+    "srcset": "assets/content/previews/desertification-classroom-activity-360.webp 360w, assets/content/previews/desertification-classroom-activity-640.webp 640w, assets/content/previews/desertification-classroom-activity-960.webp 960w, assets/content/activities/desertification-classroom-activity.webp 1280w",
+    "width": 1280,
+    "height": 720,
+    "focal": "50% 50%"
+  },
   "assets/content/activities/encyclopedia-reading-cover-lessons.webp": {
     "src": "assets/content/previews/encyclopedia-reading-cover-lessons-640.webp",
     "srcset": "assets/content/previews/encyclopedia-reading-cover-lessons-360.webp 360w, assets/content/previews/encyclopedia-reading-cover-lessons-640.webp 640w, assets/content/activities/encyclopedia-reading-cover-lessons.webp 720w",

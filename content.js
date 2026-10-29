@@ -5,6 +5,28 @@
  */
 window.OMANI_CONTENT = [
   {
+    "id": "activity-omani-heritage-history-classroom",
+    "section": "school",
+    "title": "التراث والتاريخ العُماني في الصف",
+    "description": "تفعيل المحتوى الرقمي عن الخنجر العُماني والتاريخ، مع مشاركة الطلبة في العرض والمناقشة داخل الصف.",
+    "cover": "assets/content/activities/omani-heritage-history-classroom.webp",
+    "file": "assets/content/activities/omani-heritage-history-classroom.mp4",
+    "category": "التفعيل الصفي",
+    "audience": "جميع المراحل",
+    "added": "2026-10-29"
+  },
+  {
+    "id": "activity-desertification-classroom-activity",
+    "section": "school",
+    "title": "التصحّر — نشاط تعلّم تفاعلي",
+    "description": "مشاركة الطالبات في استكشاف مفهوم التصحّر وأسبابه عبر المحتوى الرقمي والأنشطة داخل الصف.",
+    "cover": "assets/content/activities/desertification-classroom-activity.webp",
+    "file": "assets/content/activities/desertification-classroom-activity.mp4",
+    "category": "التفعيل الصفي",
+    "audience": "جميع المراحل",
+    "added": "2026-10-29"
+  },
+  {
     "id": "activity-encyclopedia-reading-cover-lessons",
     "section": "school",
     "title": "قراءة الموسوعة في حصص الاحتياط",
