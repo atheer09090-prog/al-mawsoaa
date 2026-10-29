@@ -1,5 +1,12 @@
 /* مقاسات مشتقة للعرض فقط؛ تبقى ملفات المحتوى الأصلية كما هي. */
 window.OMANI_IMAGES = {
+  "assets/content/covers/omani-dress-art-project.webp": {
+    "src": "assets/content/covers/omani-dress-art-project.webp",
+    "srcset": "assets/content/previews/omani-dress-art-project-360.webp 360w, assets/content/covers/omani-dress-art-project.webp 464w",
+    "width": 464,
+    "height": 832,
+    "focal": "50% 50%"
+  },
   "assets/content/activities/omani-heritage-history-classroom.webp": {
     "src": "assets/content/previews/omani-heritage-history-classroom-640.webp",
     "srcset": "assets/content/previews/omani-heritage-history-classroom-360.webp 360w, assets/content/previews/omani-heritage-history-classroom-640.webp 640w, assets/content/previews/omani-heritage-history-classroom-960.webp 960w, assets/content/activities/omani-heritage-history-classroom.webp 1280w",

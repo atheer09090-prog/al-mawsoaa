@@ -5,6 +5,17 @@
  */
 window.OMANI_CONTENT = [
   {
+    "id": "video-omani-dress-art-project",
+    "section": "practice",
+    "title": "الزي النسائي العُماني — من القراءة إلى التصميم",
+    "description": "تطبيق فني ينطلق من قراءة الموسوعة العُمانية لإنجاز مجسّم مستوحى من الزي النسائي العُماني.",
+    "cover": "assets/content/covers/omani-dress-art-project.webp",
+    "file": "assets/content/videos/omani-dress-art-project.mp4",
+    "category": "الزي العُماني",
+    "audience": "جميع المراحل",
+    "added": "2026-10-29"
+  },
+  {
     "id": "activity-omani-heritage-history-classroom",
     "section": "school",
     "title": "التراث والتاريخ العُماني في الصف",
