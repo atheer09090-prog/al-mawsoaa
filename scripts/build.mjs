@@ -17,7 +17,7 @@ await writeFile(path.join(root,'data/frankincense-media.js'),'window.OMANI_FRANK
 await writeFile(path.join(root, 'content.js'), await readFile(path.join(root, 'data/content.js')));
 await rm(destination, {recursive:true, force:true});
 await mkdir(destination, {recursive:true});
-for (const entry of ['index.html','app.js','journey.js','motion.js','halwa-engine.js','workshop-shared.js','workshop-simple-engine.js','workshop-simple.js','workshop-craft-draw.js','textile-pottery.js','sandalwood.js','workshop-simple.css','workshop.js','workshop.css','frankincense-engine.js','frankincense.js','frankincense.css','journey.css','styles.css','data','assets']) {
+for (const entry of ['index.html','home.css','home.js','app.js','journey.js','motion.js','halwa-engine.js','workshop-shared.js','workshop-simple-engine.js','workshop-simple.js','workshop-craft-draw.js','textile-pottery.js','sandalwood.js','workshop-simple.css','workshop.js','workshop.css','frankincense-engine.js','frankincense.js','frankincense.css','journey.css','styles.css','data','assets']) {
   await cp(path.join(root, entry), path.join(destination, entry), {
     recursive:true, filter:source => !['.DS_Store','Thumbs.db'].includes(path.basename(source))
   });

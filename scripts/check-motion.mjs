@@ -3,11 +3,12 @@ import vm from 'node:vm';
 import assert from 'node:assert/strict';
 const app = await readFile(new URL('../app.js',import.meta.url),'utf8');
 const source = app.slice(app.indexOf('function initSchoolGallery()'), app.indexOf('/* ---------- Boot'));
-function fixture(reduced) {
+function fixture(reduced,grid=false) {
   const callbacks = new Map(); let nextId=0;
   const node = () => ({events:{},attributes:{},addEventListener(k,f){this.events[k]=f},setAttribute(k,v){this.attributes[k]=v},querySelector(){return {textContent:'',innerHTML:''}},contains(){return false}});
   const names = ['schoolGallery','galleryViewport','galleryTrack','galleryPause','galleryPrev','galleryNext'];
   const nodes = Object.fromEntries(names.map(k=>[k,node()]));
+  nodes.schoolGallery.dataset={layout:grid?'grid':'ribbon'};
   Object.assign(nodes.galleryViewport,{scrollLeft:0,scrollWidth:1800,clientWidth:600});
   const card = node(); const preference = {matches:reduced,addEventListener(type,f){this.change=f}};
   const context = {window:{},document:{hidden:false,addEventListener(){}},performance:{now:()=>0},setTimeout(){},
@@ -18,6 +19,7 @@ function fixture(reduced) {
   return {nodes,callbacks,preference,tick(time){const [id,f]=callbacks.entries().next().value;callbacks.delete(id);f(time)}};
 }
 const reduced=fixture(true);assert.equal(reduced.callbacks.size,0,'Reduced motion must stop autoplay');
+const grid=fixture(false,true);assert.equal(grid.callbacks.size,0,'The home photo grid must never start a scrolling loop');
 assert.equal(reduced.nodes.schoolGallery.attributes['data-motion'],'paused','Reduced motion must pause the glow');
 const active=fixture(false);assert.equal(active.callbacks.size,1);
 assert.equal(active.nodes.schoolGallery.attributes['data-motion'],'running');

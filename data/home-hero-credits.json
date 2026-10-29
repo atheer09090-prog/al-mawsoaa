@@ -1,0 +1,36 @@
+{
+  "id": "home-nizwa",
+  "title": "قلعة نزوى وجامع السلطان قابوس",
+  "author": "Adhilaslam",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "url": "https://commons.wikimedia.org/wiki/File:Nizwa_Fort_Oman.jpg",
+  "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Nizwa_Fort_Oman.jpg",
+  "changes": "قصّ إلى ١٦:٩ وتغيير الحجم والتحويل إلى WebP. تحتفظ النسخ المشتقة برخصة الأصل.",
+  "originalSha256": "0d5fbe0a3e1e9fd30fa0d733b59085cbde32f84ca16a7d89459869797d3a0425",
+  "files": [
+    {
+      "src": "assets/images/home/nizwa-640.webp",
+      "width": 640,
+      "height": 360,
+      "bytes": 44646
+    },
+    {
+      "src": "assets/images/home/nizwa-1200.webp",
+      "width": 1200,
+      "height": 675,
+      "bytes": 137278
+    },
+    {
+      "src": "assets/images/home/nizwa-1800.webp",
+      "width": 1800,
+      "height": 1012,
+      "bytes": 282498
+    }
+  ],
+  "reusedJourneyCreditIds": [
+    "palms",
+    "khareef",
+    "dunes"
+  ]
+}

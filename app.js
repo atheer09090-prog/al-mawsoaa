@@ -449,11 +449,12 @@ function chooseItem(i) {
   palette.close();
   goTo('#' + it.hash);
 }
-function openPalette() {
+function openPalette(initialQuery = '') {
   if (palette.open) return;
   closeMenu();
-  pInput.value = ''; renderPalette(); palette.showModal(); pInput.focus();
+  pInput.value = typeof initialQuery === 'string' ? initialQuery : ''; renderPalette(); palette.showModal(); pInput.focus();
 }
+document.addEventListener('omani:search', e => openPalette(e.detail?.query || ''));
 pInput.addEventListener('input', renderPalette);
 pInput.addEventListener('keydown', e => {
   if (e.key === 'ArrowDown') { e.preventDefault(); movePalette(1); }
@@ -534,6 +535,7 @@ function route() {
   const update = () => {
     $$('.page').forEach(el=>el.classList.remove('is-route-entering'));
     renderRoute();
+    document.dispatchEvent(new CustomEvent('omani:routechange', {detail:{page}}));
     const active = $('.page.is-active');
     if (animate && !useSnapshot && !reduceMotion() && active) {
       void active.offsetWidth; active.classList.add('is-route-entering');
@@ -709,7 +711,7 @@ function initSchoolGallery() {
     if (previous) previous.disabled = viewport.scrollLeft <= 1;
     if (next) next.disabled = viewport.scrollLeft >= maxScroll() - 1;
   };
-  const shouldPause = () => reduced || userPaused || focusPaused || hovering || !inView || document.hidden || Boolean(dialog?.open);
+  const shouldPause = () => gallery.dataset?.layout === 'grid' || reduced || userPaused || focusPaused || hovering || !inView || document.hidden || Boolean(dialog?.open);
   const stop = () => { if (raf) cancelAnimationFrame(raf); raf = 0; lastTime = 0; gallery.setAttribute('data-motion', 'paused'); };
   const tick = now => {
     raf = 0;
