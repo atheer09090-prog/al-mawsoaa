@@ -5,6 +5,17 @@
  */
 window.OMANI_CONTENT = [
   {
+    "id": "game-omani-rocks-adventure",
+    "section": "play",
+    "title": "مغامرة الصخور العُمانية",
+    "description": "لعبة تعليمية تفاعلية عن الصخور العُمانية على Canva، تُفتح في تبويب جديد لبدء اللعب.",
+    "cover": "assets/content/games/cover-omani-rocks-adventure.svg",
+    "url": "https://moeom.my.canva.site/cp8403m1t6z404db",
+    "category": "علوم الأرض",
+    "audience": "جميع المراحل",
+    "added": "2026-10-29"
+  },
+  {
     "id": "game-oman-rocks",
     "section": "play",
     "title": "لعبة الصخور",
