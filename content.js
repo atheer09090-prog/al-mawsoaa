@@ -653,7 +653,7 @@ window.OMANI_CONTENT = [
   {
     "id": "activity-plants-student-presentations-activity",
     "section": "school",
-    "title": "عروض الطالبات عن النباتات العُمانية",
+    "title": "تفعيل المحتويات الرقمية",
     "description": "توظيف موضوع النباتات في سلطنة عُمان في عروض شفوية تقدّمها الطالبات داخل الصف.",
     "cover": "assets/content/activities/plants-student-presentations-activity.webp",
     "file": "assets/content/activities/plants-student-presentations-activity.mp4",
