@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-labelledby="title">
+  <title id="title">Super Mario — لعبة منصات</title>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#1e5da8"/><stop offset="1" stop-color="#8ad8ef"/></linearGradient>
+    <linearGradient id="ground" x2="1"><stop stop-color="#663e23"/><stop offset="1" stop-color="#a76a31"/></linearGradient>
+  </defs>
+  <rect width="960" height="600" fill="url(#sky)"/>
+  <g fill="#fff" opacity=".86"><path d="M142 130c16-34 73-34 90 0 33-10 59 12 59 39H82c0-27 27-49 60-39z"/><path d="M694 101c12-27 58-28 73 0 27-8 48 10 48 33H648c0-23 21-41 46-33z"/></g>
+  <g fill="#f8d462" stroke="#b58126" stroke-width="7"><rect x="126" y="274" width="78" height="78" rx="9"/><rect x="615" y="225" width="78" height="78" rx="9"/><rect x="714" y="335" width="78" height="78" rx="9"/></g>
+  <g fill="url(#ground)" stroke="#4c2d19" stroke-width="7"><rect x="0" y="457" width="960" height="143"/><rect x="256" y="401" width="218" height="40" rx="8"/><rect x="545" y="347" width="184" height="40" rx="8"/></g>
+  <path d="M365 368c0-35 28-63 63-63s63 28 63 63v29H365z" fill="#2b994f" stroke="#155b2b" stroke-width="8"/><path d="M388 372c0-22 18-40 40-40s40 18 40 40" fill="none" stroke="#e2f5e1" stroke-width="8"/>
+  <circle cx="512" cy="405" r="30" fill="#ef5c38" stroke="#8d2a24" stroke-width="7"/><path d="M512 382v46m-23-23h46" stroke="#ffe8c5" stroke-width="8" stroke-linecap="round"/>
+  <text x="480" y="105" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="58" font-weight="700">Super Mario</text>
+  <text x="480" y="157" text-anchor="middle" fill="#eaf8ff" font-family="Arial,sans-serif" font-size="28">مغامرة منصّات تفاعلية</text>
+</svg>

@@ -1,5 +1,19 @@
 /* مقاسات مشتقة للعرض فقط؛ تبقى ملفات المحتوى الأصلية كما هي. */
 window.OMANI_IMAGES = {
+  "assets/content/covers/frankincense-tree-field-lesson.webp": {
+    "src": "assets/content/previews/frankincense-tree-field-lesson-640.webp",
+    "srcset": "assets/content/previews/frankincense-tree-field-lesson-360.webp 360w, assets/content/previews/frankincense-tree-field-lesson-640.webp 640w, assets/content/covers/frankincense-tree-field-lesson.webp 832w",
+    "width": 832,
+    "height": 464,
+    "focal": "50% 50%"
+  },
+  "assets/content/games/cover-super-mario.svg": {
+    "src": "assets/content/games/cover-super-mario.svg",
+    "srcset": "",
+    "width": 960,
+    "height": 600,
+    "focal": "50% 50%"
+  },
   "assets/content/covers/omani-dress-art-project.webp": {
     "src": "assets/content/covers/omani-dress-art-project.webp",
     "srcset": "assets/content/previews/omani-dress-art-project-360.webp 360w, assets/content/covers/omani-dress-art-project.webp 464w",

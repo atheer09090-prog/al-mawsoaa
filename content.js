@@ -5,6 +5,28 @@
  */
 window.OMANI_CONTENT = [
   {
+    "id": "video-frankincense-tree-field-lesson",
+    "section": "library",
+    "title": "شجرة اللبان — مشاهدة ميدانية",
+    "description": "مشاهدة ميدانية لشجرة اللبان والتعرّف إلى موطنها وطريقة استخراج اللبان منها.",
+    "cover": "assets/content/covers/frankincense-tree-field-lesson.webp",
+    "file": "assets/content/videos/frankincense-tree-field-lesson.mp4",
+    "category": "التراث الطبيعي",
+    "audience": "جميع المراحل",
+    "added": "2026-11-08"
+  },
+  {
+    "id": "game-super-mario-instaplay",
+    "section": "play",
+    "title": "Super Mario — مغامرة المنصّات",
+    "description": "لعبة منصّات تفاعلية تُفتح في موقعها الخارجي لبدء اللعب.",
+    "cover": "assets/content/games/cover-super-mario.svg",
+    "url": "https://www.instaplay.ai/play/560fd669?ref=rapidyeti613",
+    "category": "ألعاب تفاعلية",
+    "audience": "جميع المراحل",
+    "added": "2026-11-08"
+  },
+  {
     "id": "video-omani-dress-art-project",
     "section": "practice",
     "title": "الزي النسائي العُماني — من القراءة إلى التصميم",
